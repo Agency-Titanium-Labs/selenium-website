@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center gap-12 min-h-screen">
       <h1 className="text-6xl font-bold text-center">
-        L'alliage parfait du
+        L&apos;alliage parfait du
         <br />
         <span
           className="text-transparent"
