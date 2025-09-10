@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
+
+const orbitron = localFont({
+  src: "../public/fonts/Orbitron-VariableFont_wght.ttf",
+  variable: "--font-orbitron",
+});
 
 export const metadata: Metadata = {
   title: "Selenium - Agence web",
@@ -14,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`antialiased`}>{children}</body>
+      <body className={`${orbitron.variable} antialiased`}>{children}</body>
     </html>
   );
 }

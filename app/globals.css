@@ -20,7 +20,7 @@
 
   /* Font families */
   --font-outfit: "Outfit", sans-serif;
-  --font-orbitron: "Orbitron", sans-serif;
+  --font-orbitron: var(--font-orbitron), "Orbitron", sans-serif;
 }
 
 body {
