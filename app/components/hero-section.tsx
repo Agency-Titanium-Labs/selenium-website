@@ -3,7 +3,7 @@ import Button from "./ui/button";
 export default function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center gap-12 min-h-screen px-4">
-      <h1 className="text-6xl font-bold text-center max-w-xl">
+      <h1 className="text-7xl font-bold leading-tight text-center max-w-2xl">
         L&apos;alliage parfait du{" "}
         <span
           className="text-transparent"
