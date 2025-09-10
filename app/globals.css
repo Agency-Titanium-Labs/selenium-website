@@ -10,7 +10,10 @@
   --color-grey-lightest: #ffffff;
 
   /* Accents */
+  --color-primary-lighter: #fff0c7;
   --color-primary: #fcca46;
+  --color-primary-dark: #7e682d;
+  --color-primary-darker: #261e0a;
   --color-secondary: #9bd5eb;
   --color-tertiary: #e279a3;
   --color-quaternary: #bad6a9;
