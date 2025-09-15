@@ -10,7 +10,7 @@ const navigation = [
 export default function Nav() {
   return (
     <nav
-      className="fixed top-8 left-1/2 transform -translate-x-1/2 w-max flex justify-between items-center gap-4 pl-16 pr-8 py-4 min-w-2/3 z-50 bg-grey-lightest/5 backdrop-blur-md"
+      className="fixed top-8 left-1/2 transform -translate-x-1/2 w-max flex justify-between items-center gap-8 pl-10 sm:pl-16 pr-4 sm:pr-8 py-4 min-w-2/3 z-50 bg-grey-lightest/5 backdrop-blur-md"
       style={
         {
           "--corner-size": "30px",
@@ -55,9 +55,9 @@ export default function Nav() {
         alt="Selenium Logo"
         width={100}
         height={100}
-        className="h-14 w-auto"
+        className="h-10 sm:h-12 md:h-14 w-auto"
       />
-      <ul className="flex items-center gap-6">
+      <ul className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
         {navigation.map((item) => (
           <li key={item.name}>
             <Button variant="transparent" href={item.href}>
