@@ -37,7 +37,7 @@ export default function HeroSection() {
         alt=""
         width={800}
         height={800}
-        className="absolute top-0 left-0"
+        className="absolute top-0 left-0 pointer-events-none select-none"
       />
       <h1 className="relative text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center max-w-sm sm:max-w-lg md:max-w-2xl">
         L&apos;alliage parfait du{" "}
