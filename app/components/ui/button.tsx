@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 const buttonDefaultClasses =
-  "relative px-4 py-2 font-orbitron font-bold cursor-pointer [clip-path:polygon(20px_0,_100%_0,_100%_100%,_0_100%,_0_12px)] before:content-[''] before:absolute before:inset-[2px] before:bg-primary before:-z-1 before:[clip-path:polygon(18.5px_0,_100%_0,_100%_100%,_0_100%,_0_11px)] before:transition-all before:duration-300";
+  "relative px-4 py-2 text-sm font-orbitron font-bold cursor-pointer [clip-path:polygon(20px_0,_100%_0,_100%_100%,_0_100%,_0_12px)] before:content-[''] before:absolute before:inset-[2px] before:bg-primary before:-z-1 before:[clip-path:polygon(18.5px_0,_100%_0,_100%_100%,_0_100%,_0_11px)] before:transition-all before:duration-300";
 
 const buttonVariants = {
   default:
@@ -16,10 +16,20 @@ export default function Button({
   variant = "default",
   className,
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+}: React.ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement> & {
   variant?: keyof typeof buttonVariants;
+  href?: string;
 }) {
-  return (
+  return props.href ? (
+    <a
+      className={twMerge(
+        buttonDefaultClasses,
+        buttonVariants[variant],
+        className
+      )}
+      {...props}
+    ></a>
+  ) : (
     <button
       type="button"
       className={twMerge(
