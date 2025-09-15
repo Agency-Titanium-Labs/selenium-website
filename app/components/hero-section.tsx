@@ -1,10 +1,38 @@
+"use client";
+
 import Button from "./ui/button";
 import Image from "next/image";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
+  const backgroundLightContainerRef = useRef<HTMLDivElement>(null);
+  const backgroundLightRef = useRef<HTMLImageElement>(null);
+
+  useGSAP(() => {
+    gsap.to(backgroundLightRef.current, {
+      yPercent: 50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: backgroundLightContainerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
+
   return (
-    <section className="flex flex-col items-center justify-center gap-12 min-h-screen px-4">
+    <section
+      ref={backgroundLightContainerRef}
+      className="flex flex-col items-center justify-center gap-12 min-h-screen px-4"
+    >
       <Image
+        ref={backgroundLightRef}
         src="/top background light.svg"
         alt=""
         width={800}

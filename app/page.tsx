@@ -7,6 +7,7 @@ export default function Home() {
       <Nav />
       <HeroSection />
       <div className="min-h-screen"></div>
+      <div className="min-h-screen"></div>
     </div>
   );
 }
