@@ -28,7 +28,7 @@ const teamMembers = [
     description:
       "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
     role: "Dev frontend",
-    imageUrl: "/team/antoine.png",
+    imageUrl: "/team/athena.png",
     portfolioUrl: "https://antoinefavereau.fr/",
     tools: [
       {
@@ -50,7 +50,7 @@ const teamMembers = [
     description:
       "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
     role: "Dev frontend",
-    imageUrl: "/team/antoine.png",
+    imageUrl: "/team/anatholy.png",
     portfolioUrl: "https://antoinefavereau.fr/",
     tools: [
       {
@@ -72,7 +72,7 @@ const teamMembers = [
     description:
       "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
     role: "Dev frontend",
-    imageUrl: "/team/antoine.png",
+    imageUrl: "/team/remi.png",
     portfolioUrl: "https://antoinefavereau.fr/",
     tools: [
       {
