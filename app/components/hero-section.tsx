@@ -34,7 +34,7 @@ export default function HeroSection() {
       <Image
         ref={backgroundLightRef}
         src="/top background light.svg"
-        alt=""
+        alt="Élément décoratif lumineux en arrière-plan"
         width={800}
         height={800}
         className="absolute top-0 left-0 pointer-events-none select-none"
@@ -50,8 +50,8 @@ export default function HeroSection() {
         & du <span className="text-primary">dev</span>
       </h1>
       <div className="relative flex flex-col sm:flex-row items-center gap-4">
-        <Button>Nous contacter</Button>
-        <Button variant="outline">Proute</Button>
+        <Button href="#contact">Nous contacter</Button>
+        <Button variant="outline" href="#projects">Nos projets</Button>
       </div>
     </section>
   );

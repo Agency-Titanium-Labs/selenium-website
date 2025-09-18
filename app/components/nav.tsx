@@ -2,9 +2,9 @@ import Button from "./ui/button";
 import Image from "next/image";
 
 const navigation = [
-  { name: "À propos", href: "#" },
-  { name: "Nos projets", href: "#" },
-  { name: "Nous contacter", href: "#" },
+  { name: "À propos", href: "#about" },
+  { name: "Nos projets", href: "#projects" },
+  { name: "Nous contacter", href: "#contact" },
 ];
 
 export default function Nav() {

@@ -27,10 +27,10 @@ const teamMembers = [
   {
     name: "Athéna",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
-    role: "Dev frontend",
+      "Experte en UX/UI, elle conçoit des expériences utilisateur intuitives et engageantes.\nFigma, prototypage, recherche utilisateur... elle maîtrise tout l'écosystème design.",
+    role: "UX/UI Designer",
     imageUrl: "/team/athena.png",
-    portfolioUrl: "https://antoinefavereau.fr/",
+    portfolioUrl: "#",
     tools: [
       {
         name: "Visual Studio Code",
@@ -49,10 +49,10 @@ const teamMembers = [
   {
     name: "Anatholy",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
-    role: "Dev frontend",
+      "Architecte backend passionné, il construit des APIs robustes et scalables.\nNode.js, Python, bases de données... il optimise chaque ligne de code pour la performance.",
+    role: "Dev backend",
     imageUrl: "/team/anatholy.png",
-    portfolioUrl: "https://antoinefavereau.fr/",
+    portfolioUrl: "#",
     tools: [
       {
         name: "Visual Studio Code",
@@ -71,10 +71,10 @@ const teamMembers = [
   {
     name: "Rémi",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
-    role: "Dev frontend",
+      "Spécialiste full-stack, il navigue avec aisance entre frontend et backend.\nVue.js, Laravel, DevOps... il apporte une vision globale à chaque projet.",
+    role: "Dev full-stack",
     imageUrl: "/team/remi.png",
-    portfolioUrl: "https://antoinefavereau.fr/",
+    portfolioUrl: "#",
     tools: [
       {
         name: "Visual Studio Code",
@@ -94,7 +94,7 @@ const teamMembers = [
 
 export default function TeamSection() {
   return (
-    <section className="flex flex-col items-center gap-12 p-12 min-h-screen">
+    <section id="about" className="flex flex-col items-center gap-12 p-12 min-h-screen">
       <h2 className="text-3xl font-bold mb-8 text-center">Notre équipe</h2>
       <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12">
         {teamMembers.map((member) => (
@@ -140,7 +140,7 @@ export default function TeamSection() {
             ></div>
             <Image
               src="/background dots.svg"
-              alt=""
+              alt="Motif décoratif de points"
               width={100}
               height={100}
               className="absolute top-40 left-6 w-16 h-auto pointer-events-none select-none"
@@ -161,7 +161,10 @@ export default function TeamSection() {
             <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest">
               {member.role}
             </p>
-            <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
+            <ul 
+              className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100"
+              aria-label={`Outils utilisés par ${member.name}`}
+            >
               {member.tools.map((tool) => (
                 <li key={tool.name} title={tool.name}>
                   <Image
@@ -226,7 +229,11 @@ export default function TeamSection() {
               ></div>
               <h3 className="text-primary font-bold">{member.name}</h3>
               <p className="text-base">{member.description}</p>
-              <Button variant="outline" href={member.portfolioUrl}>
+              <Button 
+                variant="outline" 
+                href={member.portfolioUrl}
+                aria-label={`Voir le portfolio de ${member.name}`}
+              >
                 Portfolio{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -235,6 +242,7 @@ export default function TeamSection() {
                   width="24px"
                   fill="currentColor"
                   className="inline"
+                  aria-hidden="true"
                 >
                   <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z" />
                 </svg>
