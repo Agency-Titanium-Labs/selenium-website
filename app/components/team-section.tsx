@@ -27,10 +27,10 @@ const teamMembers = [
   {
     name: "Athéna",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
-    role: "Dev frontend",
+      "La créative de l'équipe, elle conçoit des designs modernes et intuitifs qui captivent les utilisateurs. Branding, UI/UX, prototypage... elle maîtrise tout.",
+    role: "Design UX/UI",
     imageUrl: "/team/athena.png",
-    portfolioUrl: "https://antoinefavereau.fr/",
+    portfolioUrl: "https://graine2pain.fr/",
     tools: [
       {
         name: "Visual Studio Code",
@@ -49,10 +49,10 @@ const teamMembers = [
   {
     name: "Anatholy",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
-    role: "Dev frontend",
+      "Le magicien des serveurs et des bases de données. Il construit des API robustes et sécurisées, et optimise les performances backend pour une expérience utilisateur fluide.",
+    role: "Dev backend",
     imageUrl: "/team/anatholy.png",
-    portfolioUrl: "https://antoinefavereau.fr/",
+    portfolioUrl: "https://anatholyb1.github.io/",
     tools: [
       {
         name: "Visual Studio Code",
@@ -71,10 +71,10 @@ const teamMembers = [
   {
     name: "Rémi",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
-    role: "Dev frontend",
+      "Le commercial de l'équipe, il déniche les opportunités et construit des relations solides avec les clients. Stratégie, négociation, CRM... il sait tout faire.",
+    role: "Business developer",
     imageUrl: "/team/remi.png",
-    portfolioUrl: "https://antoinefavereau.fr/",
+    portfolioUrl: "https://www.linkedin.com/in/remicostes/",
     tools: [
       {
         name: "Visual Studio Code",
@@ -158,7 +158,7 @@ export default function TeamSection() {
                 maskSize: "cover",
               }}
             />
-            <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest">
+            <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest">
               {member.role}
             </p>
             <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
