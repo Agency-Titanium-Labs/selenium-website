@@ -49,9 +49,9 @@ export default function HeroSection() {
         </span>{" "}
         & du <span className="text-primary">dev</span>
       </h1>
-      <div className="relative flex flex-col sm:flex-row items-center gap-4">
+      <div className="relative grid sm:grid-cols-2 gap-4">
         <Button>Nous contacter</Button>
-        <Button variant="outline">Proute</Button>
+        <Button variant="outline">Nos projets</Button>
       </div>
     </section>
   );
