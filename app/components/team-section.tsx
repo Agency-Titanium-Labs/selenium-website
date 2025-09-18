@@ -100,7 +100,7 @@ export default function TeamSection() {
         {teamMembers.map((member) => (
           <li
             key={member.name}
-            className="group relative bg-grey-lightest/5 backdrop-blur-md max-w-3xs"
+            className="group team-member-card relative bg-grey-lightest/5 backdrop-blur-md max-w-3xs"
             style={
               {
                 "--corner-size": "30px",
@@ -187,11 +187,15 @@ export default function TeamSection() {
               }
             >
               <div
-                className="absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 bg-[auto_200%] bg-position-[center_bottom_calc(-100%-2rem-1.2em)] group-hover:bg-position-[center_100%] -z-1 transition-[background-position] duration-500 ease-in-out group-hover:delay-50"
+                className="team-member-bg absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 bg-[auto_200%] -z-1 transition-[background-position] duration-500 ease-in-out group-hover:delay-50"
                 style={
                   {
                     "--corner-size": "20px",
                     "--border-width": "2px",
+                    "--bg-pos-normal":
+                      "center bottom calc(-100% - 2rem - 1.2em)",
+                    "--bg-pos-hover": "center 100%",
+                    backgroundPosition: "var(--bg-pos-normal)",
                     clipPath: `polygon(
                       0 var(--corner-size),
                       20% var(--corner-size),
