@@ -41,3 +41,9 @@ body {
 .team-member-card:hover .team-member-bg {
   background-position: var(--bg-pos-hover) !important;
 }
+
+@media (hover: none) {
+  .team-member-bg {
+    background-position: var(--bg-pos-hover) !important;
+  }
+}
