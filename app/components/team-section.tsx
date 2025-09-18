@@ -15,12 +15,12 @@ const teamMembers = [
         iconUrl: "/tools/vscode.svg",
       },
       {
-        name: "Figma",
-        iconUrl: "/tools/figma.svg",
+        name: "Node.js",
+        iconUrl: "/tools/nodejs.svg",
       },
       {
-        name: "React",
-        iconUrl: "/tools/react.svg",
+        name: "Chrome DevTools",
+        iconUrl: "/tools/chrome.svg",
       },
     ],
   },
@@ -37,12 +37,12 @@ const teamMembers = [
         iconUrl: "/tools/vscode.svg",
       },
       {
-        name: "Figma",
-        iconUrl: "/tools/figma.svg",
+        name: "Node.js",
+        iconUrl: "/tools/nodejs.svg",
       },
       {
-        name: "React",
-        iconUrl: "/tools/react.svg",
+        name: "Chrome DevTools",
+        iconUrl: "/tools/chrome.svg",
       },
     ],
   },
@@ -59,12 +59,12 @@ const teamMembers = [
         iconUrl: "/tools/vscode.svg",
       },
       {
-        name: "Figma",
-        iconUrl: "/tools/figma.svg",
+        name: "Node.js",
+        iconUrl: "/tools/nodejs.svg",
       },
       {
-        name: "React",
-        iconUrl: "/tools/react.svg",
+        name: "Chrome DevTools",
+        iconUrl: "/tools/chrome.svg",
       },
     ],
   },
@@ -81,12 +81,12 @@ const teamMembers = [
         iconUrl: "/tools/vscode.svg",
       },
       {
-        name: "Figma",
-        iconUrl: "/tools/figma.svg",
+        name: "Node.js",
+        iconUrl: "/tools/nodejs.svg",
       },
       {
-        name: "React",
-        iconUrl: "/tools/react.svg",
+        name: "Chrome DevTools",
+        iconUrl: "/tools/chrome.svg",
       },
     ],
   },
@@ -100,7 +100,7 @@ export default function TeamSection() {
         {teamMembers.map((member) => (
           <li
             key={member.name}
-            className="group relative bg-grey-lightest/5 backdrop-blur-md max-w-3xs"
+            className="group team-member-card relative bg-grey-lightest/5 backdrop-blur-md w-full sm:max-w-3xs"
             style={
               {
                 "--corner-size": "30px",
@@ -150,7 +150,7 @@ export default function TeamSection() {
               alt={member.name}
               width={500}
               height={500}
-              className="relative w-full h-auto mt-8 scale-110 group-hover:scale-85 origin-top transition-transform duration-500 ease-in-out delay-100 group-hover:delay-0"
+              className="relative w-full h-auto mt-8 scale-110 group-hover:scale-85 origin-top transition-transform duration-500 ease-in-out delay-100 group-hover:delay-0 [&]:[@media(hover:none)]:scale-85"
               style={{
                 WebkitMaskImage:
                   "linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
@@ -161,15 +161,20 @@ export default function TeamSection() {
             <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest">
               {member.role}
             </p>
-            <ul className="absolute top-2 right-2 flex flex-col gap-2">
+            <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
               {member.tools.map((tool) => (
-                <li key={tool.name}>
-                  {/* <img src={tool.iconUrl} alt={tool.name} /> */}
+                <li key={tool.name} title={tool.name}>
+                  <Image
+                    src={tool.iconUrl}
+                    alt={tool.name}
+                    width={32}
+                    height={32}
+                  />
                 </li>
               ))}
             </ul>
             <div
-              className="absolute bottom-0 left-0 w-full flex flex-col items-center gap-4 p-4 bg-grey-darkest/60 backdrop-blur-xs text-xl transform translate-y-[calc(100%-2rem-1.2em)] group-hover:translate-y-0 transition-transform duration-500 ease-in-out group-hover:delay-50"
+              className="absolute bottom-0 left-0 w-full flex flex-col items-center gap-4 p-4 bg-grey-darkest/60 backdrop-blur-xs text-xl transform translate-y-[calc(100%-2rem-1.2em)] group-hover:translate-y-0 transition-transform duration-500 ease-in-out group-hover:delay-50 [&]:[@media(hover:none)]:translate-y-0"
               style={
                 {
                   "--corner-size": "20px",
@@ -187,11 +192,15 @@ export default function TeamSection() {
               }
             >
               <div
-                className="absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 bg-[auto_200%] bg-position-[center_bottom_calc(-100%-2rem-1.2em)] group-hover:bg-position-[center_100%] -z-1 transition-[background-position] duration-500 ease-in-out group-hover:delay-50"
+                className="team-member-bg absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 bg-[auto_200%] -z-1 transition-[background-position] duration-500 ease-in-out group-hover:delay-50"
                 style={
                   {
                     "--corner-size": "20px",
                     "--border-width": "2px",
+                    "--bg-pos-normal":
+                      "center bottom calc(-100% - 2rem - 1.2em)",
+                    "--bg-pos-hover": "center 100%",
+                    backgroundPosition: "var(--bg-pos-normal)",
                     clipPath: `polygon(
                       0 var(--corner-size),
                       20% var(--corner-size),
