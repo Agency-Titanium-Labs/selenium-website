@@ -74,7 +74,7 @@ const teamMembers = [
       "Le commercial de l'équipe, il déniche les opportunités et construit des relations solides avec les clients. Stratégie, négociation, CRM... il sait tout faire.",
     role: "Business developer",
     imageUrl: "/team/remi.png",
-    portfolioUrl: "https://www.linkedin.com/in/remicostes/",
+    portfolioUrl: "https://remicostes.fr/",
     tools: [
       {
         name: "Visual Studio Code",
