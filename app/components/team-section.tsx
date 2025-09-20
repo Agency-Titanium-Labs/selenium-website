@@ -106,47 +106,27 @@ export default function TeamSection() {
   const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
   const backgroundShapeOutlineRef = useRef<HTMLImageElement>(null);
 
+  function animateBackground(
+    ref: React.RefObject<HTMLImageElement | null>,
+    yPercent: number
+  ) {
+    gsap.to(ref.current, {
+      yPercent,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ref.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }
+
   useGSAP(() => {
-    gsap.to(backgroundLightRightRef.current, {
-      yPercent: 120,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundLightRightRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-    gsap.to(backgroundShapeRef.current, {
-      yPercent: 70,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundShapeRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-    gsap.to(backgroundLightLeftRef.current, {
-      yPercent: 100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundLightLeftRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-    gsap.to(backgroundShapeOutlineRef.current, {
-      yPercent: 50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundShapeOutlineRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+    animateBackground(backgroundLightRightRef, 120);
+    animateBackground(backgroundShapeRef, 70);
+    animateBackground(backgroundLightLeftRef, 100);
+    animateBackground(backgroundShapeOutlineRef, 50);
   }, []);
 
   return (
