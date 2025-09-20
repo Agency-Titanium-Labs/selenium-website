@@ -1,5 +1,13 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import Button from "./ui/button";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const teamMembers = [
   {
@@ -93,8 +101,68 @@ const teamMembers = [
 ];
 
 export default function TeamSection() {
+  const backgroundLightRightRef = useRef<HTMLImageElement>(null);
+  const backgroundShapeRef = useRef<HTMLImageElement>(null);
+  const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
+  const backgroundShapeOutlineRef = useRef<HTMLImageElement>(null);
+
+  function animateBackground(
+    ref: React.RefObject<HTMLImageElement | null>,
+    yPercent: number
+  ) {
+    gsap.to(ref.current, {
+      yPercent,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ref.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }
+
+  useGSAP(() => {
+    animateBackground(backgroundLightRightRef, 120);
+    animateBackground(backgroundShapeRef, 70);
+    animateBackground(backgroundLightLeftRef, 100);
+    animateBackground(backgroundShapeOutlineRef, 50);
+  }, []);
+
   return (
-    <section className="flex flex-col items-center gap-12 p-12 min-h-screen">
+    <section className="relative flex flex-col items-center gap-12 p-12">
+      <Image
+        ref={backgroundLightRightRef}
+        src="/background light.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute top-0 right-0 transform -translate-y-1/2 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
+      />
+      <Image
+        ref={backgroundShapeRef}
+        src="/background shape full.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute top-0 right-0 transform -translate-y-1/3 w-1/3 md:w-1/4 h-auto pointer-events-none select-none -z-10"
+      />
+      <Image
+        ref={backgroundLightLeftRef}
+        src="/background light.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute bottom-0 left-0 transform -translate-y-1/2 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
+      />
+      <Image
+        ref={backgroundShapeOutlineRef}
+        src="/background shape outline.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute bottom-0 left-0 w-1/4 md:w-1/5 h-auto pointer-events-none select-none -z-10"
+      />
       <h2 className="text-3xl font-bold mb-8 text-center">Notre équipe</h2>
       <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12">
         {teamMembers.map((member) => (
