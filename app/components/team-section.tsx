@@ -80,7 +80,7 @@ const teamMembers = [
     name: "Rémi",
     description:
       "Le commercial de l'équipe, il déniche les opportunités et construit des relations solides avec les clients. Stratégie, négociation, CRM... il sait tout faire.",
-    role: "Business developer",
+    role: "Business dev",
     imageUrl: "/team/remi.png",
     portfolioUrl: "https://remicostes.fr/",
     tools: [
