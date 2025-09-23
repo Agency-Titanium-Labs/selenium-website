@@ -5,8 +5,8 @@
   --color-grey-darkest: #000000;
   --color-grey-darker: #252525;
   --color-grey-dark: #3a3a3a;
-  --color-grey-lighter: #a3a3a3;
-  --color-grey-light: #e0e0e0;
+  --color-grey-light: #a3a3a3;
+  --color-grey-lighter: #e0e0e0;
   --color-grey-lightest: #ffffff;
 
   /* Accents */
@@ -17,6 +17,11 @@
   --color-secondary: #9bd5eb;
   --color-tertiary: #e279a3;
   --color-quaternary: #bad6a9;
+
+  --color-1: #e279a3;
+  --color-2: #fcca46;
+  --color-3: #bad6a9;
+  --color-4: #9bd5eb;
 
   /* Font families */
   --font-outfit: "Outfit", sans-serif;
