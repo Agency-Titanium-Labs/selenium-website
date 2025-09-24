@@ -5,8 +5,8 @@
   --color-grey-darkest: #000000;
   --color-grey-darker: #252525;
   --color-grey-dark: #3a3a3a;
-  --color-grey-lighter: #a3a3a3;
-  --color-grey-light: #e0e0e0;
+  --color-grey-light: #a3a3a3;
+  --color-grey-lighter: #e0e0e0;
   --color-grey-lightest: #ffffff;
 
   /* Accents */
@@ -18,10 +18,44 @@
   --color-tertiary: #e279a3;
   --color-quaternary: #bad6a9;
 
+  --color-1: #9bd5eb;
+  --color-1-dark: #2a6c85;
+  --color-2: #e279a3;
+  --color-2-dark: #4a152a;
+  --color-3: #fcca46;
+  --color-3-dark: #7e682d;
+  --color-4: #bad6a9;
+  --color-4-dark: #3e5e3b;
+
   /* Font families */
   --font-outfit: "Outfit", sans-serif;
   --font-orbitron: var(--font-orbitron), "Orbitron", sans-serif;
 }
+
+@source inline("text-1");
+@source inline("text-2");
+@source inline("text-3");
+@source inline("text-4");
+@source inline("hover:bg-1/15");
+@source inline("hover:bg-2/15");
+@source inline("hover:bg-3/15");
+@source inline("hover:bg-4/15");
+@source inline("hover:bg-1/10");
+@source inline("hover:bg-2/10");
+@source inline("hover:bg-3/10");
+@source inline("hover:bg-4/10");
+@source inline("hover:border-1");
+@source inline("hover:border-2");
+@source inline("hover:border-3");
+@source inline("hover:border-4");
+@source inline("group-hover:via-1");
+@source inline("group-hover:via-2");
+@source inline("group-hover:via-3");
+@source inline("group-hover:via-4");
+@source inline("group-hover:to-1-dark");
+@source inline("group-hover:to-2-dark");
+@source inline("group-hover:to-3-dark");
+@source inline("group-hover:to-4-dark");
 
 body {
   background: var(--color-grey-darkest);

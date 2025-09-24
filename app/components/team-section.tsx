@@ -80,7 +80,7 @@ const teamMembers = [
     name: "Rémi",
     description:
       "Le commercial de l'équipe, il déniche les opportunités et construit des relations solides avec les clients. Stratégie, négociation, CRM... il sait tout faire.",
-    role: "Business developer",
+    role: "Business dev",
     imageUrl: "/team/remi.png",
     portfolioUrl: "https://remicostes.fr/",
     tools: [
@@ -130,7 +130,7 @@ export default function TeamSection() {
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center gap-12 p-12">
+    <section className="relative flex flex-col items-center gap-12 px-4 py-16 md:py-24">
       <Image
         ref={backgroundLightRightRef}
         src="/background light.svg"
@@ -164,7 +164,7 @@ export default function TeamSection() {
         className="absolute bottom-0 left-0 w-1/4 md:w-1/5 h-auto pointer-events-none select-none -z-10"
       />
       <h2 className="text-3xl font-bold mb-8 text-center">Notre équipe</h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 xl:gap-12">
         {teamMembers.map((member) => (
           <li
             key={member.name}
