@@ -330,6 +330,10 @@ export default function ServicesSection() {
         <div className="hover:border-2"></div>
         <div className="hover:border-3"></div>
         <div className="hover:border-4"></div>
+        <div className="group-hover:via-1 group-hover:to-1-dark"></div>
+        <div className="group-hover:via-2 group-hover:to-2-dark"></div>
+        <div className="group-hover:via-3 group-hover:to-3-dark"></div>
+        <div className="group-hover:via-4 group-hover:to-4-dark"></div>
       </div>
       <div className="flex">
         {services.map((service, index) => (
@@ -359,7 +363,34 @@ export default function ServicesSection() {
                   } transition-all duration-300 ease-in-out cursor-pointer`}
                   onMouseEnter={() => setHoveredService(item.description)}
                   onMouseLeave={() => setHoveredService("")}
+                  className={`group relative w-32 xl:w-40 h-32 xl:h-40 flex flex-col justify-end items-center gap-2 py-2 px-4 bg-grey-lightest/5 hover:bg-${
+                    index + 1
+                  }/10 hover:z-10 transition-all duration-300 ease-in-out cursor-pointer`}
                 >
+                  <div
+                    className={`absolute -inset-[1px] -z-1 bg-linear-to-br from-grey-dark via-grey-dark to-grey-dark group-hover:from-primary-lighter group-hover:via-${
+                      index + 1
+                    } group-hover:to-${
+                      index + 1
+                    }-dark transition-all duration-300 ease-in-out`}
+                    style={
+                      {
+                        "--border-width": "2px",
+                        clipPath: `polygon(
+                          0 0,
+                          calc(100% - var(--border-width)) 0,
+                          calc(100% - var(--border-width)) var(--border-width),
+                          var(--border-width) var(--border-width),
+                          var(--border-width) calc(100% - var(--border-width)),
+                          calc(100% - var(--border-width)) calc(100% - var(--border-width)),
+                          calc(100% - var(--border-width)) 0,
+                          100% 0,
+                          100% 100%,
+                          0 100%
+                        )`,
+                      } as React.CSSProperties
+                    }
+                  ></div>
                   {item.icon}
                   <h4 className="font-outfit! text-center text-grey-lightest text-sm font-bold">
                     {item.name}
