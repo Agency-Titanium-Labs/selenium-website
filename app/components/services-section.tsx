@@ -313,28 +313,6 @@ export default function ServicesSection() {
   return (
     <section className="relative flex flex-col items-center gap-8 px-4 py-16 md:py-24">
       <h2 className="text-3xl font-bold text-center">Nos Services</h2>
-      <div className="hidden">
-        <div className="text-1"></div>
-        <div className="text-2"></div>
-        <div className="text-3"></div>
-        <div className="text-4"></div>
-        <div className="hover:bg-1/15"></div>
-        <div className="hover:bg-2/15"></div>
-        <div className="hover:bg-3/15"></div>
-        <div className="hover:bg-4/15"></div>
-        <div className="hover:bg-1/10"></div>
-        <div className="hover:bg-2/10"></div>
-        <div className="hover:bg-3/10"></div>
-        <div className="hover:bg-4/10"></div>
-        <div className="hover:border-1"></div>
-        <div className="hover:border-2"></div>
-        <div className="hover:border-3"></div>
-        <div className="hover:border-4"></div>
-        <div className="group-hover:via-1 group-hover:to-1-dark"></div>
-        <div className="group-hover:via-2 group-hover:to-2-dark"></div>
-        <div className="group-hover:via-3 group-hover:to-3-dark"></div>
-        <div className="group-hover:via-4 group-hover:to-4-dark"></div>
-      </div>
       <div className="flex justify-center flex-wrap">
         {services.map((service, index) => (
           <div
