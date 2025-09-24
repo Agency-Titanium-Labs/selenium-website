@@ -350,7 +350,9 @@ export default function ServicesSection() {
             </h3>
             <ul className="flex flex-col flex-wrap place-content-end max-h-[30rem]">
               {(service.list.length < 3 ||
-                (service.list.length - 1) % 3 === 0) && (
+                (service.list.length - 1) % 3 === 0 ||
+                ((service.list.length - 2) % 3 === 0 &&
+                  index + 1 > service.list.length / 2)) && (
                 <div className="w-40 h-40"></div>
               )}
               {service.list.map((item) => (
