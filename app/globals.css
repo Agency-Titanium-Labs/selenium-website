@@ -18,10 +18,14 @@
   --color-tertiary: #e279a3;
   --color-quaternary: #bad6a9;
 
-  --color-1: #e279a3;
-  --color-2: #fcca46;
-  --color-3: #bad6a9;
-  --color-4: #9bd5eb;
+  --color-1: #9bd5eb;
+  --color-1-dark: #2a6c85;
+  --color-2: #e279a3;
+  --color-2-dark: #4a152a;
+  --color-3: #fcca46;
+  --color-3-dark: #7e682d;
+  --color-4: #bad6a9;
+  --color-4-dark: #3e5e3b;
 
   /* Font families */
   --font-outfit: "Outfit", sans-serif;
