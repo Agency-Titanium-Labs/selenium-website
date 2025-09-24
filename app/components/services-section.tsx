@@ -356,11 +356,6 @@ export default function ServicesSection() {
               {service.list.map((item) => (
                 <li
                   key={item.name}
-                  className={`w-40 h-40 flex flex-col justify-end items-center gap-2 py-2 px-4 bg-grey-lightest/5 border border-grey-dark hover:bg-${
-                    index + 1
-                  }/10 hover:border-${
-                    index + 1
-                  } transition-all duration-300 ease-in-out cursor-pointer`}
                   onMouseEnter={() => setHoveredService(item.description)}
                   onMouseLeave={() => setHoveredService("")}
                   className={`group relative w-32 xl:w-40 h-32 xl:h-40 flex flex-col justify-end items-center gap-2 py-2 px-4 bg-grey-lightest/5 hover:bg-${
