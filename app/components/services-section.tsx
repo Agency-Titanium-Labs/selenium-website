@@ -312,7 +312,7 @@ export default function ServicesSection() {
 
   return (
     <section className="relative flex flex-col items-center gap-8 px-4 py-16 md:py-24">
-      <h2 className="text-3xl font-bold mb-8 text-center">Nos Services</h2>
+      <h2 className="text-3xl font-bold text-center">Nos Services</h2>
       <div className="hidden">
         <div className="text-1"></div>
         <div className="text-2"></div>
@@ -335,17 +335,17 @@ export default function ServicesSection() {
         <div className="group-hover:via-3 group-hover:to-3-dark"></div>
         <div className="group-hover:via-4 group-hover:to-4-dark"></div>
       </div>
-      <div className="flex">
+      <div className="flex justify-center flex-wrap">
         {services.map((service, index) => (
           <div
             key={service.category}
-            className={`flex flex-col gap-8 shrink-0 pt-2 text-${
+            className={`flex flex-col gap-8 shrink-0 pt-2 mt-8 text-${
               index + 1
             } hover:bg-${
               index + 1
             }/15 transition-colors duration-300 ease-in-out`}
           >
-            <h3 className="font-outfit! text-center w-max place-self-center">
+            <h3 className="text-sm xl:text-base font-outfit! text-center w-max place-self-center">
               {service.category}
             </h3>
             <ul className="flex flex-col flex-wrap place-content-end max-h-[30rem]">
@@ -353,7 +353,7 @@ export default function ServicesSection() {
                 (service.list.length - 1) % 3 === 0 ||
                 ((service.list.length - 2) % 3 === 0 &&
                   index + 1 > service.list.length / 2)) && (
-                <div className="w-40 h-40"></div>
+                <div className="w-32 xl:w-40 h-32 xl:h-40 max-md:hidden"></div>
               )}
               {service.list.map((item) => (
                 <li
@@ -389,7 +389,7 @@ export default function ServicesSection() {
                     }
                   ></div>
                   {item.icon}
-                  <h4 className="font-outfit! text-center text-grey-lightest text-sm font-bold">
+                  <h4 className="font-outfit! text-center text-grey-lightest text-xs xl:text-sm font-bold">
                     {item.name}
                   </h4>
                 </li>
