@@ -5,12 +5,12 @@ import ServicesSection from "./components/services-section";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <>
       <Nav />
       <HeroSection />
       <TeamSection />
       <ServicesSection />
       <div className="min-h-screen"></div>
-    </div>
+    </>
   );
 }
