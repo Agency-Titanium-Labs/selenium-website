@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import LenisProvider from "./components/LenisProvider";
+import { ContactModalProvider } from "./contexts/contact-modal-context";
+import GlobalContactModal from "./components/global-contact-modal";
 
 const orbitron = localFont({
   src: "../public/fonts/Orbitron-VariableFont_wght.ttf",
@@ -22,7 +24,12 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${orbitron.variable} antialiased`}>
-        <LenisProvider>{children}</LenisProvider>
+        <ContactModalProvider>
+          <LenisProvider>
+            {children}
+            <GlobalContactModal />
+          </LenisProvider>
+        </ContactModalProvider>
       </body>
     </html>
   );

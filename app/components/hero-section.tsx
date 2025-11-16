@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Button from "./ui/button";
+import { useContactModal } from "../contexts/contact-modal-context";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -11,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const backgroundLightTopRef = useRef<HTMLImageElement>(null);
+  const { openModal } = useContactModal();
 
   useGSAP(() => {
     gsap.to(backgroundLightTopRef.current, {
@@ -46,7 +48,7 @@ export default function HeroSection() {
         & du <span className="text-primary">dev</span>
       </h1>
       <div className="relative grid sm:grid-cols-2 gap-4">
-        <Button>Nous contacter</Button>
+        <Button onClick={() => openModal()}>Nous contacter</Button>
         <Button variant="outline">Nos projets</Button>
       </div>
     </section>
