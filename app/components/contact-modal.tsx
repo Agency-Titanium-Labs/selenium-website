@@ -269,7 +269,7 @@ export default function ContactModal({
                       }}
                     />
                     <div className="flex-1 flex items-center gap-2">
-                      Autre :
+                      {"Autre : "}
                       <input
                         name="otherCategory"
                         type="text"
@@ -407,24 +407,29 @@ export default function ContactModal({
               Précédent
             </Button>
           )}
-          {currentStep === 0 ? (
-            <Button onClick={handleNext}>Répondre en 2min</Button>
-          ) : currentStep < 5 ? (
-            <>
-              {(currentStep === 1 &&
-                formData.categories.length === 0 &&
-                !formData.otherCategory) ||
-              (currentStep === 2 && !formData.companySize) ? (
+          {(() => {
+            if (currentStep === 0) {
+              return <Button onClick={handleNext}>Répondre en 2min</Button>;
+            }
+
+            if (currentStep < 5) {
+              const canSkip =
+                (currentStep === 1 &&
+                  formData.categories.length === 0 &&
+                  !formData.otherCategory) ||
+                (currentStep === 2 && !formData.companySize);
+
+              return canSkip ? (
                 <Button variant="outline" onClick={handleNext}>
                   Passer
                 </Button>
               ) : (
                 <Button onClick={handleNext}>Suivant</Button>
-              )}
-            </>
-          ) : (
-            <Button onClick={handleSubmit}>Envoyer</Button>
-          )}
+              );
+            }
+
+            return <Button onClick={handleSubmit}>Envoyer</Button>;
+          })()}
         </div>
       </div>
     </Modal>
