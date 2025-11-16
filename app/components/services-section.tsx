@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const iconsClassName = "h-24 w-auto";
+const iconsClassName = "h-20 w-auto";
 
 const services = [
   {
@@ -315,35 +315,58 @@ const services = [
 export default function ServicesSection() {
   const [hoveredService, setHoveredService] = useState<string>("");
 
+  const getNumberOfColumns = () => {
+    let result = 0;
+    services.forEach((_, index) => {
+      result += getColumnSpan(index);
+    });
+    return result;
+  };
+
+  const getColumnSpan = (categoryIndex: number) => {
+    return Math.ceil(services[categoryIndex].list.length / 3);
+  };
+
   return (
-    <section className="relative flex flex-col items-center gap-8 px-4 py-16 md:py-24">
+    <section className="relative flex flex-col items-center gap-8 px-8 py-16 md:py-24">
       <h2 className="text-3xl font-bold text-center">Nos Services</h2>
-      <div className="flex justify-center flex-wrap">
+      <div
+        className="grid max-md:grid-cols-2! gap-y-8"
+        style={{
+          gridTemplateColumns: `repeat(${getNumberOfColumns()}, minmax(0, 1fr))`,
+        }}
+      >
         {services.map((service, index) => (
           <div
             key={service.category}
-            className={`flex flex-col gap-8 shrink-0 pt-2 mt-8 text-${
+            className={`grid grid-rows-[auto_1fr] gap-8 pt-3 text-${
               index + 1
             } hover:bg-${
               index + 1
             }/15 transition-colors duration-300 ease-in-out`}
+            style={{ gridColumn: `span ${getColumnSpan(index)}` }}
           >
-            <h3 className="text-sm xl:text-base font-outfit! text-center w-max place-self-center">
+            <h3 className="text-sm xl:text-base font-outfit! text-center place-self-center px-3">
               {service.category}
             </h3>
-            <ul className="flex flex-col flex-wrap place-content-end max-h-[30rem]">
-              {(service.list.length < 3 ||
-                (service.list.length - 1) % 3 === 0 ||
-                ((service.list.length - 2) % 3 === 0 &&
-                  index + 1 > service.list.length / 2)) && (
-                <div className="w-32 xl:w-40 h-32 xl:h-40 max-md:hidden"></div>
-              )}
+            <ul
+              className="grid place-content-end"
+              style={{
+                gridTemplateColumns: `repeat(${getColumnSpan(
+                  index
+                )}, minmax(0, 1fr))`,
+              }}
+            >
+              {index > services.length / 2 &&
+                (service.list.length + 1) % 3 === 0 && (
+                  <div className="max-md:hidden"></div>
+                )}
               {service.list.map((item) => (
                 <li
                   key={item.name}
                   onMouseEnter={() => setHoveredService(item.description)}
                   onMouseLeave={() => setHoveredService("")}
-                  className={`group relative w-32 xl:w-40 h-32 xl:h-40 flex flex-col justify-end items-center gap-2 py-2 px-4 bg-grey-lightest/5 hover:bg-${
+                  className={`group relative grid justify-items-center gap-2 py-4 px-4 bg-grey-lightest/5 hover:bg-${
                     index + 1
                   }/10 hover:z-10 transition-all duration-300 ease-in-out cursor-pointer`}
                 >
@@ -382,9 +405,11 @@ export default function ServicesSection() {
         ))}
       </div>
       {hoveredService ? (
-        <p className="text-center text-grey-lightest">{hoveredService}</p>
+        <p className="text-center text-grey-lightest max-md:hidden">
+          {hoveredService}
+        </p>
       ) : (
-        <p className="text-center text-grey-light italic">
+        <p className="text-center text-grey-light italic max-md:hidden">
           Survolez un service pour voir sa description
         </p>
       )}
