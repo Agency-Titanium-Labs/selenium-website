@@ -316,11 +316,7 @@ export default function ServicesSection() {
   const [hoveredService, setHoveredService] = useState<string>("");
 
   const getNumberOfColumns = () => {
-    let result = 0;
-    services.forEach((_, index) => {
-      result += getColumnSpan(index);
-    });
-    return result;
+    return services.reduce((sum, _, index) => sum + getColumnSpan(index), 0);
   };
 
   const getColumnSpan = (categoryIndex: number) => {
