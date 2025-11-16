@@ -97,15 +97,14 @@ function useTypewriter(
             // Pause avant de commencer à effacer
             setTimeout(() => setIsDeleting(true), pauseTime);
           }
+        }
+        // Mode effacement
+        else if (currentText.length > 0) {
+          setCurrentText(currentText.substring(0, currentText.length - 1));
         } else {
-          // Mode effacement
-          if (currentText.length > 0) {
-            setCurrentText(currentText.substring(0, currentText.length - 1));
-          } else {
-            // Passer au texte suivant
-            setIsDeleting(false);
-            setCurrentTextIndex((prev) => (prev + 1) % texts.length);
-          }
+          // Passer au texte suivant
+          setIsDeleting(false);
+          setCurrentTextIndex((prev) => (prev + 1) % texts.length);
         }
       },
       isDeleting ? deleteSpeed : typeSpeed
@@ -125,7 +124,10 @@ function useTypewriter(
   return currentText;
 }
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export default function ContactModal({
+  isOpen,
+  onClose,
+}: Readonly<ContactModalProps>) {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const categoryPlaceholder = useTypewriter(
@@ -195,13 +197,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
         {/* Step 0: Informations */}
         {currentStep === 0 && (
-          <>
-            <p>
-              Chaque projet est unique. En quelques questions, aidez-nous à
-              comprendre vos besoins pour vous proposer la solution la plus
-              adaptée.
-            </p>
-          </>
+          <p>
+            Chaque projet est unique. En quelques questions, aidez-nous à
+            comprendre vos besoins pour vous proposer la solution la plus
+            adaptée.
+          </p>
         )}
 
         {/* Step 1: Catégories */}
@@ -255,16 +255,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       className="accent-primary"
                       checked={!!formData.otherCategory}
                       onChange={(e) => {
-                        if (!e.target.checked) {
-                          setFormData({
-                            ...formData,
-                            otherCategory: undefined,
-                          });
-                        } else {
+                        if (e.target.checked) {
                           const input = document.querySelector(
                             'input[name="otherCategory"]'
                           ) as HTMLInputElement;
                           input.focus();
+                        } else {
+                          setFormData({
+                            ...formData,
+                            otherCategory: undefined,
+                          });
                         }
                       }}
                     />
@@ -298,8 +298,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {currentStep === 2 && (
           <>
             <div className="flex flex-col items-center gap-1">
-              <h3 className="text-xl font-bold">Taille de l'entreprise</h3>
-              <p className="text-sm">Votre structure, c'est plutôt…</p>
+              <h3 className="text-xl font-bold">Taille de l&apos;entreprise</h3>
+              <p className="text-sm">Votre structure, c&apos;est plutôt…</p>
             </div>
             <p className="text-grey-light text-sm italic">
               Un seul choix possible
@@ -380,12 +380,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
         {/* Step 4: Délai / Timing */}
         {currentStep === 4 && (
-          <>
-            <div className="flex flex-col items-center gap-1">
-              <h3 className="text-xl font-bold">Délai / Timing</h3>
-              <p className="text-sm">Vous souhaitez lancer votre projet…</p>
-            </div>
-          </>
+          <div className="flex flex-col items-center gap-1">
+            <h3 className="text-xl font-bold">Délai / Timing</h3>
+            <p className="text-sm">Vous souhaitez lancer votre projet…</p>
+          </div>
         )}
 
         {/* Step 5: Coordonnées */}
@@ -394,8 +392,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <div className="flex flex-col items-center gap-1">
               <h3 className="text-xl font-bold">Coordonnées</h3>
               <p className="text-sm">
-                Super ! Pour qu'on puisse vous proposer une solution adaptée,
-                laissez-nous vos coordonnées
+                Super ! Pour qu&apos;on puisse vous proposer une solution
+                adaptée, laissez-nous vos coordonnées
               </p>
             </div>
             <form className="grid grid-cols-2 gap-4"></form>
