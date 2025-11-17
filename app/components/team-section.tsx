@@ -13,7 +13,7 @@ const teamMembers = [
   {
     name: "Antoine",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
+      "Ingénieur informatique, il crée des interfaces rapides, responsives et accessibles. Pixel-perfect, animations et SEO technique : il optimise l'expérience utilisateur.",
     role: "Dev frontend",
     imageUrl: "/team/antoine.png",
     portfolioUrl: "https://antoinefavereau.fr/",
@@ -35,7 +35,7 @@ const teamMembers = [
   {
     name: "Athéna",
     description:
-      "La créative de l'équipe, elle conçoit des designs modernes et intuitifs qui captivent les utilisateurs. Branding, UI/UX, prototypage... elle maîtrise tout.",
+      "Diplômée d'un master en design, elle conçoit des designs intuitifs et modernes, alliant branding, UX/UI et prototypage pour transformer vos outils digitaux en véritables atouts business.",
     role: "Design UX/UI",
     imageUrl: "/team/athena.png",
     portfolioUrl: "https://graine2pain.fr/",
@@ -57,7 +57,7 @@ const teamMembers = [
   {
     name: "Anatholy",
     description:
-      "Le magicien des serveurs et des bases de données. Il construit des API robustes et sécurisées, et optimise les performances backend pour une expérience utilisateur fluide.",
+      "Ingénieur informatique et expert en serveurs, API et bases de données, il construit des solutions robustes, sécurisées et performantes pour soutenir votre croissance digitale.",
     role: "Dev backend",
     imageUrl: "/team/anatholy.png",
     portfolioUrl: "https://anatholyb1.github.io/",
@@ -79,7 +79,7 @@ const teamMembers = [
   {
     name: "Rémi",
     description:
-      "Le commercial de l'équipe, il déniche les opportunités et construit des relations solides avec les clients. Stratégie, négociation, CRM... il sait tout faire.",
+      "Ingénieur de formation, il analyse marché, budget et stratégie pour rendre vos projets viables et rentables. De l'idée à la solution, il maximise la valeur de votre investissement.",
     role: "Business dev",
     imageUrl: "/team/remi.png",
     portfolioUrl: "https://remicostes.fr/",
