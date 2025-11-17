@@ -53,7 +53,7 @@ export default function Nav() {
         }
       >
         <div
-          className="absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 -z-1"
+          className="absolute left-0 w-full top-0 h-full bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 -z-1"
           style={
             {
               "--corner-size": "30px",
