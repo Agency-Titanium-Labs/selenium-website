@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Modal from "./ui/modal";
 import Button from "./ui/button";
+import Input from "./ui/Input";
 
 const categoriesOptions = [
   { label: "Web & Applications", value: "web_applications" },
@@ -50,9 +51,9 @@ interface FormData {
   budget?: number;
   delay?: string;
   contactDetails?: {
-    name: string;
-    email: string;
+    name?: string;
     phone?: string;
+    email: string;
     message?: string;
   };
 }
@@ -64,9 +65,9 @@ const initialFormData: FormData = {
   budget: undefined,
   delay: undefined,
   contactDetails: {
-    name: "",
-    email: "",
+    name: undefined,
     phone: undefined,
+    email: "",
     message: undefined,
   },
 };
@@ -131,7 +132,7 @@ export default function ContactModal({
   isOpen,
   onClose,
 }: Readonly<ContactModalProps>) {
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const categoryPlaceholder = useTypewriter(
     currentStep === 2 ? categoryPlaceholders : [],
@@ -260,13 +261,89 @@ export default function ContactModal({
         {currentStep === 1 && (
           <>
             <div className="flex flex-col items-center gap-1">
-              <h3 className="text-xl font-bold">Coordonnées</h3>
-              <p className="text-sm">
-                Super ! Pour qu&apos;on puisse vous proposer une solution
-                adaptée, laissez-nous vos coordonnées
+              <h3 className="text-xl font-bold text-primary">Coordonnées</h3>
+              <p className="text-xs text-center">
+                Pour qu&apos;on puisse vous proposer une solution adaptée,
+                laissez-nous vos coordonnées
               </p>
             </div>
-            <form className="grid grid-cols-2 gap-4"></form>
+            <form
+              id="step1-form"
+              className="grid grid-cols-2 gap-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleNext();
+              }}
+            >
+              <Input
+                label="Nom"
+                name="name"
+                type="text"
+                value={formData.contactDetails?.name || ""}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    contactDetails: {
+                      ...formData.contactDetails,
+                      email: formData.contactDetails?.email || "",
+                      name: e.target.value,
+                    },
+                  })
+                }
+              />
+              <Input
+                label="Téléphone"
+                name="phone"
+                type="tel"
+                value={formData.contactDetails?.phone || ""}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    contactDetails: {
+                      ...formData.contactDetails,
+                      email: formData.contactDetails?.email || "",
+                      phone: e.target.value,
+                    },
+                  })
+                }
+              />
+              <div className="col-span-2">
+                <Input
+                  label="E-mail"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.contactDetails?.email || ""}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      contactDetails: {
+                        ...formData.contactDetails,
+                        email: e.target.value,
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div className="col-span-2">
+                <Input
+                  label="Message"
+                  name="message"
+                  as="textarea"
+                  value={formData.contactDetails?.message || ""}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                    setFormData({
+                      ...formData,
+                      contactDetails: {
+                        ...formData.contactDetails,
+                        email: formData.contactDetails?.email || "",
+                        message: e.target.value,
+                      },
+                    })
+                  }
+                />
+              </div>
+            </form>
           </>
         )}
 
@@ -274,8 +351,10 @@ export default function ContactModal({
         {currentStep === 2 && (
           <>
             <div className="flex flex-col items-center gap-1">
-              <h3 className="text-xl font-bold">Accroche / Projet</h3>
-              <p className="text-sm">
+              <h3 className="text-xl font-bold text-primary">
+                Accroche / Projet
+              </h3>
+              <p className="text-xs text-center">
                 Quel type de projet souhaitez-vous lancer ?
               </p>
             </div>
@@ -364,8 +443,12 @@ export default function ContactModal({
         {currentStep === 3 && (
           <>
             <div className="flex flex-col items-center gap-1">
-              <h3 className="text-xl font-bold">Taille de l&apos;entreprise</h3>
-              <p className="text-sm">Votre structure, c&apos;est plutôt…</p>
+              <h3 className="text-xl font-bold text-primary">
+                Taille de l&apos;entreprise
+              </h3>
+              <p className="text-xs text-center">
+                Votre structure, c&apos;est plutôt…
+              </p>
             </div>
             <p className="text-grey-light text-sm italic">
               *Un seul choix possible
@@ -402,8 +485,8 @@ export default function ContactModal({
         {currentStep === 4 && (
           <>
             <div className="flex flex-col items-center gap-1">
-              <h3 className="text-xl font-bold">Budget</h3>
-              <p className="text-sm">
+              <h3 className="text-xl font-bold text-primary">Budget</h3>
+              <p className="text-xs text-center">
                 Avez-vous une idée du budget à investir ?
               </p>
             </div>
@@ -448,8 +531,10 @@ export default function ContactModal({
         {/* Step 5: Délai / Timing */}
         {currentStep === 5 && (
           <div className="flex flex-col items-center gap-1">
-            <h3 className="text-xl font-bold">Délai / Timing</h3>
-            <p className="text-sm">Vous souhaitez lancer votre projet…</p>
+            <h3 className="text-xl font-bold text-primary">Délai / Timing</h3>
+            <p className="text-xs text-center">
+              Vous souhaitez lancer votre projet…
+            </p>
           </div>
         )}
 
@@ -461,8 +546,12 @@ export default function ContactModal({
             </Button>
           )}
           {(() => {
-            if (currentStep === 0) {
-              return <Button onClick={handleNext}>Répondre en 2min</Button>;
+            if (currentStep === 1) {
+              return (
+                <Button type="submit" form="step1-form">
+                  Suivant
+                </Button>
+              );
             }
 
             if (currentStep < 5) {
