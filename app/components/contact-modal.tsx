@@ -435,13 +435,13 @@ export default function ContactModal({
                 ))}
               </ul>
             </form>
-            {formData.categories.length > 1 ||
-              (formData.otherCategory && formData.categories.length > 0 && (
-                <p className="text-grey-light text-sm italic">
-                  Le budget affiché correspond à une estimation basée sur les
-                  catégories sélectionnées.
-                </p>
-              ))}
+            {(formData.categories.length > 1 ||
+              (formData.otherCategory && formData.categories.length > 0)) && (
+              <p className="text-grey-light text-sm italic">
+                Le budget affiché correspond à une estimation basée sur les
+                catégories sélectionnées.
+              </p>
+            )}
           </>
         )}
 
