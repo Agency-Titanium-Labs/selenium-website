@@ -24,12 +24,11 @@ export default function Contact() {
   };
 
   return (
-    <section className="grid place-items-center py-32">
+    <section className="grid place-items-center py-32 max-md:pb-16 px-4">
       <div
-        className="group team-member-card relative bg-grey-lightest/5 backdrop-blur-md w-5xl"
+        className="group team-member-card relative bg-grey-lightest/5 backdrop-blur-md w-full max-w-5xl [--corner-size:40px] md:[--corner-size:80px]"
         style={
           {
-            "--corner-size": "80px",
             clipPath: `polygon(
                         var(--corner-size) 0,
                         var(--corner-size) -50%,
@@ -42,10 +41,9 @@ export default function Contact() {
         }
       >
         <div
-          className="absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 -z-1"
+          className="absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 -z-1 [--corner-size:40px] md:[--corner-size:80px]"
           style={
             {
-              "--corner-size": "80px",
               "--border-width": "1px",
               clipPath: `polygon(
                           var(--corner-size) 0,
@@ -64,13 +62,13 @@ export default function Contact() {
             } as React.CSSProperties
           }
         ></div>
-        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-4 py-2 text-3xl font-orbitron font-bold bg-primary text-grey-darkest">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-max px-2 md:px-4 py-1 md:py-2 text-xl md:text-3xl font-orbitron font-bold bg-primary text-grey-darkest">
           Contactez nous
         </h2>
-        <div className="grid grid-cols-2 items-center gap-4 p-10 pt-16">
-          <div className="flex flex-col items-center gap-10 px-8">
-            <div className="flex flex-col items-center gap-6">
-              <h3 className="text-xl">Restons en contact</h3>
+        <div className="grid md:grid-cols-2 items-center gap-16 md:gap-4 p-10 pt-16">
+          <div className="flex flex-col items-center gap-8 md:px-8">
+            <div className="flex flex-col items-center gap-5">
+              <h3 className="text-xl text-center">Restons en contact</h3>
               <p className="text-center">
                 Répondez à ce formulaire pour planifier un rendez-vous Google
                 Meet avec nous.
@@ -135,9 +133,9 @@ export default function Contact() {
                 }
               />
             </div>
-            <div className="md:col-span-2 flex justify-end">
-              <Button type="submit">Envoyer</Button>
-            </div>
+            <Button type="submit" className="md:col-span-2 md:ml-auto">
+              Envoyer
+            </Button>
           </form>
         </div>
       </div>
