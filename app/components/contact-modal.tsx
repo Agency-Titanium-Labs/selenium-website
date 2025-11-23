@@ -643,7 +643,7 @@ export default function ContactModal({
               return (
                 <Button
                   variant="outline"
-                  href=""
+                  href="#"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gap-2"
