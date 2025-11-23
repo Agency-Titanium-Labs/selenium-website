@@ -205,7 +205,7 @@ export default function ContactModal({
       }
     }
 
-    if (currentStep < 5) {
+    if (currentStep < 7) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -236,7 +236,7 @@ export default function ContactModal({
   return (
     <Modal isOpen={isOpen} onClose={handleClose} className="w-xl">
       <div className="space-y-6">
-        {currentStep !== 6 && (
+        {currentStep !== 7 && (
           <div
             className="flex space-x-2 mr-8"
             style={
@@ -253,7 +253,7 @@ export default function ContactModal({
               } as React.CSSProperties
             }
           >
-            {[1, 2, 3, 4, 5].map((step) => (
+            {[1, 2, 3, 4, 5, 6].map((step) => (
               <div
                 key={step}
                 className={`flex-1 h-3 transition-colors ${
@@ -327,24 +327,6 @@ export default function ContactModal({
                       contactDetails: {
                         ...formData.contactDetails,
                         email: e.target.value,
-                      },
-                    })
-                  }
-                />
-              </div>
-              <div className="col-span-2">
-                <Input
-                  label="Message"
-                  name="message"
-                  as="textarea"
-                  value={formData.contactDetails?.message || ""}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setFormData({
-                      ...formData,
-                      contactDetails: {
-                        ...formData.contactDetails,
-                        email: formData.contactDetails?.email || "",
-                        message: e.target.value,
                       },
                     })
                   }
@@ -576,6 +558,38 @@ export default function ContactModal({
           </>
         )}
 
+        {/* Step 6: Message */}
+        {currentStep === 6 && (
+          <>
+            <div className="flex flex-col items-center gap-1">
+              <h3 className="text-2xl font-bold text-primary">Commentaire</h3>
+              <p className="text-sm text-center">
+                Partagez vos idées, questions ou besoins spécifiques
+              </p>
+            </div>
+            <form className="grid">
+              <div>
+                <Input
+                  label="Message"
+                  name="message"
+                  as="textarea"
+                  value={formData.contactDetails?.message || ""}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                    setFormData({
+                      ...formData,
+                      contactDetails: {
+                        ...formData.contactDetails,
+                        email: formData.contactDetails?.email || "",
+                        message: e.target.value,
+                      },
+                    })
+                  }
+                />
+              </div>
+            </form>
+          </>
+        )}
+
         {/* Navigation buttons */}
         <div className="flex justify-end items-center gap-6 mt-12">
           {currentStep > 1 && (
@@ -587,17 +601,19 @@ export default function ContactModal({
             if (currentStep === 1) {
               return (
                 <Button type="submit" form="step1-form">
-                  Suivant
+                  Démarrer le questionnaire
                 </Button>
               );
             }
 
-            if (currentStep < 5) {
+            if (currentStep < 6) {
               const canSkip =
                 (currentStep === 2 &&
                   formData.categories.length === 0 &&
                   !formData.otherCategory) ||
-                (currentStep === 3 && !formData.companySize);
+                (currentStep === 3 && !formData.companySize) ||
+                (currentStep === 4 && !formData.budget) ||
+                (currentStep === 5 && !formData.delay);
 
               return canSkip ? (
                 <Button variant="outline" onClick={handleNext}>
