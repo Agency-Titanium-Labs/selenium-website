@@ -312,7 +312,7 @@ const services = [
   // },
 ];
 
-export default function ServicesSection() {
+export default function Services() {
   const [hoveredService, setHoveredService] = useState<string>("");
 
   const getNumberOfColumns = () => {

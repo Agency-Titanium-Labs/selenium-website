@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Button from "./ui/button";
+import Button from "../ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -100,7 +100,7 @@ const teamMembers = [
   },
 ];
 
-export default function TeamSection() {
+export default function Team() {
   const backgroundLightRightRef = useRef<HTMLImageElement>(null);
   const backgroundShapeRef = useRef<HTMLImageElement>(null);
   const backgroundLightLeftRef = useRef<HTMLImageElement>(null);

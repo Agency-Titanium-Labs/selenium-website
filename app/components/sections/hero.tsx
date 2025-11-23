@@ -2,15 +2,15 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Button from "./ui/button";
-import { useContactModal } from "../contexts/contact-modal-context";
+import Button from "../ui/button";
+import { useContactModal } from "../../contexts/contact-modal-context";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroSection() {
+export default function Hero() {
   const backgroundLightTopRef = useRef<HTMLImageElement>(null);
   const { openModal } = useContactModal();
 

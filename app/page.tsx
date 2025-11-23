@@ -1,15 +1,15 @@
 import Nav from "./components/nav";
-import HeroSection from "./components/hero-section";
-import TeamSection from "./components/team-section";
-import ServicesSection from "./components/services-section";
+import Hero from "./components/sections/hero";
+import Team from "./components/sections/team";
+import Services from "./components/sections/services";
 
 export default function Home() {
   return (
     <>
       <Nav />
-      <HeroSection />
-      <TeamSection />
-      <ServicesSection />
+      <Hero />
+      <Team />
+      <Services />
       <div className="min-h-screen"></div>
     </>
   );
