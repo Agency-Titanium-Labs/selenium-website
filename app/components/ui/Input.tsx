@@ -26,7 +26,7 @@ export default function Input({
         id={props.id || props.name}
         placeholder=""
         className={twMerge(
-          "px-4 py-2 rounded-sm bg-grey-darker peer",
+          "px-4 py-2 rounded-sm bg-grey-darker min-w-0 peer",
           as === "textarea" && "resize-y min-h-[100px]",
           props.className
         )}
