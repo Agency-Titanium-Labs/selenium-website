@@ -58,7 +58,7 @@ export default function Nav() {
           style={
             {
               "--corner-size": "30px",
-              "--border-width": "2px",
+              "--border-width": "1px",
               clipPath: `polygon(
                       var(--corner-size) 0,
                       calc(100% - var(--border-width)) 0,
