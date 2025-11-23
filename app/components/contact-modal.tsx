@@ -375,7 +375,7 @@ export default function ContactModal({
                     <label className="flex items-center gap-4 select-none">
                       <input
                         type="checkbox"
-                        className="accent-primary"
+                        className="accent-primary w-4 h-4"
                         checked={formData.categories.includes(category.value)}
                         onChange={() => {
                           if (formData.categories.includes(category.value)) {
@@ -404,7 +404,7 @@ export default function ContactModal({
                   <label className="flex items-center gap-4 select-none">
                     <input
                       type="checkbox"
-                      className="accent-primary"
+                      className="accent-primary w-4 h-4"
                       checked={!!formData.otherCategory}
                       onChange={(e) => {
                         if (e.target.checked) {
@@ -477,7 +477,7 @@ export default function ContactModal({
                           });
                           handleNext();
                         }}
-                        className="accent-primary"
+                        className="accent-primary w-4 h-4"
                       />
                       {size.label}
                     </label>
@@ -517,7 +517,7 @@ export default function ContactModal({
                           });
                           handleNext();
                         }}
-                        className="accent-primary"
+                        className="accent-primary w-4 h-4"
                       />
                       {getBudgetLabel(index)}
                     </label>
@@ -565,7 +565,7 @@ export default function ContactModal({
                             delay: e.target.value,
                           });
                         }}
-                        className="accent-primary"
+                        className="accent-primary w-4 h-4"
                       />
                       {delay.label}
                     </label>
