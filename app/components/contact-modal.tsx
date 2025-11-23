@@ -546,6 +546,7 @@ export default function ContactModal({
                             ...formData,
                             delay: e.target.value,
                           });
+                          handleNext();
                         }}
                         className="accent-primary w-4 h-4"
                       />
