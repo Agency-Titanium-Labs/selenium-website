@@ -276,7 +276,7 @@ export default function ContactModal({
             </div>
             <form
               id="step1-form"
-              className="grid grid-cols-2 gap-4"
+              className="grid md:grid-cols-2 gap-4"
               onSubmit={(e) => {
                 e.preventDefault();
                 handleNext();
@@ -314,7 +314,7 @@ export default function ContactModal({
                   })
                 }
               />
-              <div className="col-span-2">
+              <div className="md:col-span-2">
                 <Input
                   label="E-mail"
                   name="email"
@@ -351,7 +351,7 @@ export default function ContactModal({
               Plusieurs choix possibles
             </p>
             <form>
-              <ul className="grid grid-cols-2 gap-4 text-grey-lighter">
+              <ul className="grid md:grid-cols-2 gap-4 text-grey-lighter">
                 {categoriesOptions.map((category) => (
                   <li key={category.value}>
                     <label className="flex items-center gap-4 select-none">
@@ -382,7 +382,7 @@ export default function ContactModal({
                     </label>
                   </li>
                 ))}
-                <li className="col-span-2">
+                <li className="md:col-span-2">
                   <label className="flex items-center gap-4 select-none">
                     <input
                       type="checkbox"
@@ -407,7 +407,7 @@ export default function ContactModal({
                       <input
                         name="otherCategory"
                         type="text"
-                        className="flex-1 bg-grey-darker rounded-xs px-4 py-1"
+                        className="flex-1 bg-grey-darker rounded-xs px-4 py-1 min-w-0"
                         placeholder={categoryPlaceholder}
                         value={formData.otherCategory || ""}
                         onChange={(e) =>
