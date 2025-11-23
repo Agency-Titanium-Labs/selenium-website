@@ -2,17 +2,32 @@ import { twMerge } from "tailwind-merge";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  as?: "input" | "textarea";
 }
 
-export default function Input({ label, ...props }: Readonly<InputProps>) {
+interface TextAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label: string;
+  as: "textarea";
+}
+
+export default function Input({
+  label,
+  as = "input",
+  ...props
+}: Readonly<InputProps | TextAreaProps>) {
+  const Component = as;
+
   return (
     <div className="relative grid">
-      <input
-        {...props}
+      <Component
+        {...(props as React.InputHTMLAttributes<HTMLInputElement> &
+          React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         id={props.id || props.name}
         placeholder=""
         className={twMerge(
           "px-4 py-2 rounded-sm bg-grey-darker peer",
+          as === "textarea" && "resize-y min-h-[100px]",
           props.className
         )}
       />
