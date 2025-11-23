@@ -12,14 +12,19 @@ const buttonVariants = {
     "bg-transparent text-grey-lighter before:bg-transparent hover:bg-grey-darker transition-all duration-300",
 };
 
+type ButtonProps = {
+  variant?: keyof typeof buttonVariants;
+  className?: string;
+} & (
+  | (React.ButtonHTMLAttributes<HTMLButtonElement> & { href?: never })
+  | (React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string })
+);
+
 export default function Button({
   variant = "default",
   className,
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement> & {
-  variant?: keyof typeof buttonVariants;
-  href?: string;
-}) {
+}: ButtonProps) {
   return props.href ? (
     <a
       className={twMerge(
@@ -27,7 +32,7 @@ export default function Button({
         buttonVariants[variant],
         className
       )}
-      {...props}
+      {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
     ></a>
   ) : (
     <button
@@ -37,7 +42,7 @@ export default function Button({
         buttonVariants[variant],
         className
       )}
-      {...props}
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     ></button>
   );
 }
