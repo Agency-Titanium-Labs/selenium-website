@@ -218,7 +218,7 @@ export default function ContactModal({
 
   const handleSubmit = () => {
     console.log("Form submitted:", formData);
-    handleClose();
+    handleNext();
   };
 
   const getBudgetLabel = (index: number): string => {
@@ -590,9 +590,23 @@ export default function ContactModal({
           </>
         )}
 
+        {/* Step 7: Confirmation */}
+        {currentStep === 7 && (
+          <div className="flex flex-col items-center gap-2">
+            <h3 className="text-xl font-outfit! font-bold text-center">
+              {`Merci${
+                " " + formData.contactDetails?.name || ""
+              }, nous allons revenir vers vous avec une solution adaptée à votre projet !`}
+            </h3>
+            <p className="text-sm text-center">
+              Souhaitez-vous planifier un appel personnalisé avec notre équipe ?
+            </p>
+          </div>
+        )}
+
         {/* Navigation buttons */}
         <div className="flex justify-end items-center gap-6 mt-12">
-          {currentStep > 1 && (
+          {currentStep > 1 && currentStep < 7 && (
             <Button variant="transparent" onClick={handlePrevious}>
               Précédent
             </Button>
@@ -622,9 +636,33 @@ export default function ContactModal({
               ) : (
                 <Button onClick={handleNext}>Suivant</Button>
               );
+            } else if (currentStep === 6) {
+              return <Button onClick={handleSubmit}>Envoyer</Button>;
+            } else {
+              return (
+                <Button
+                  variant="outline"
+                  href=""
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gap-2"
+                >
+                  <svg
+                    width="18"
+                    height="20"
+                    viewBox="0 0 18 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4C0 3.45 0.195833 2.97917 0.5875 2.5875C0.979167 2.19583 1.45 2 2 2H3V0H5V2H13V0H15V2H16C16.55 2 17.0208 2.19583 17.4125 2.5875C17.8042 2.97917 18 3.45 18 4V18C18 18.55 17.8042 19.0208 17.4125 19.4125C17.0208 19.8042 16.55 20 16 20H2ZM2 18H16V8H2V18ZM2 6H16V4H2V6Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span>Réserver un appel</span>
+                </Button>
+              );
             }
-
-            return <Button onClick={handleSubmit}>Envoyer</Button>;
           })()}
         </div>
       </div>
