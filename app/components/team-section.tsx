@@ -130,7 +130,10 @@ export default function TeamSection() {
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center gap-12 px-4 py-16 md:py-24">
+    <section
+      id="team"
+      className="relative flex flex-col items-center gap-12 px-4 py-16 md:py-24"
+    >
       <Image
         ref={backgroundLightRightRef}
         src="/background light.svg"

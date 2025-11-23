@@ -5,14 +5,15 @@ import { useContactModal } from "../contexts/contact-modal-context";
 import Image from "next/image";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 type NavigationItem =
   | { name: string; href: string }
   | { name: string; action: string };
 
 const navigation: NavigationItem[] = [
-  { name: "À propos", href: "#" },
-  { name: "Nos projets", href: "#" },
+  { name: "Notre équipe", href: "#team" },
+  { name: "Nos services", href: "#services" },
   { name: "Nous contacter", action: "contact" },
 ];
 
@@ -78,13 +79,15 @@ export default function Nav() {
           }
         ></div>
         <div className="flex justify-between items-center gap-8">
-          <Image
-            src="/logo-full.svg"
-            alt="Selenium Logo"
-            width={100}
-            height={100}
-            className="h-10 sm:h-12 md:h-14 w-auto"
-          />
+          <Link href="#top" onClick={() => setMenuOpen(false)}>
+            <Image
+              src="/logo-full.svg"
+              alt="Selenium Logo"
+              width={100}
+              height={100}
+              className="h-10 sm:h-12 md:h-14 w-auto"
+            />
+          </Link>
           <ul className="flex flex-col md:flex-row items-center gap-2 md:gap-4 max-md:hidden">
             {navigation.map((item) => (
               <li key={item.name}>
@@ -92,7 +95,7 @@ export default function Nav() {
                   variant="transparent"
                   {...("action" in item
                     ? { onClick: () => handleNavClick(item.action) }
-                    : { href: item.href })}
+                    : { href: item.href, onClick: () => setMenuOpen(false) })}
                 >
                   {item.name}
                 </Button>
@@ -136,7 +139,7 @@ export default function Nav() {
                 variant="transparent"
                 {...("action" in item
                   ? { onClick: () => handleNavClick(item.action) }
-                  : { href: item.href })}
+                  : { href: item.href, onClick: () => setMenuOpen(false) })}
               >
                 {item.name}
               </Button>

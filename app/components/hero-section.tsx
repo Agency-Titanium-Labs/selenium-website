@@ -28,7 +28,10 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center justify-center gap-12 min-h-svh px-4">
+    <section
+      id="top"
+      className="relative flex flex-col items-center justify-center gap-12 min-h-svh px-4"
+    >
       <Image
         ref={backgroundLightTopRef}
         src="/background light.svg"

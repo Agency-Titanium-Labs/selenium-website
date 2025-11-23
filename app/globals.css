@@ -58,6 +58,10 @@
 @source inline("group-hover:to-3-dark");
 @source inline("group-hover:to-4-dark");
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--color-grey-darkest);
   color: var(--color-grey-lightest);

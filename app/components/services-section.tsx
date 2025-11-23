@@ -324,7 +324,10 @@ export default function ServicesSection() {
   };
 
   return (
-    <section className="relative flex flex-col items-center gap-8 px-8 py-16 md:py-24">
+    <section
+      id="services"
+      className="relative flex flex-col items-center gap-8 px-8 py-16 md:py-24"
+    >
       <h2 className="text-3xl font-bold text-center">Nos Services</h2>
       <div
         className="grid max-md:grid-cols-2! gap-y-8"
