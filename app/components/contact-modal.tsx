@@ -569,24 +569,22 @@ export default function ContactModal({
               </p>
             </div>
             <form className="grid">
-              <div>
-                <Input
-                  label="Message"
-                  name="message"
-                  as="textarea"
-                  value={formData.contactDetails?.message || ""}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setFormData({
-                      ...formData,
-                      contactDetails: {
-                        ...formData.contactDetails,
-                        email: formData.contactDetails?.email || "",
-                        message: e.target.value,
-                      },
-                    })
-                  }
-                />
-              </div>
+              <Input
+                label="Message"
+                name="message"
+                as="textarea"
+                value={formData.contactDetails?.message || ""}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setFormData({
+                    ...formData,
+                    contactDetails: {
+                      ...formData.contactDetails,
+                      email: formData.contactDetails?.email || "",
+                      message: e.target.value,
+                    },
+                  })
+                }
+              />
             </form>
           </>
         )}
