@@ -26,6 +26,13 @@ const sizeOptions = [
   { label: "Grande entreprise (250+)", value: "grande_entreprise" },
 ];
 
+const delayOptions = [
+  { label: "Immédiatement", value: "immediatement" },
+  { label: "D'ici 1 à 3 mois", value: "1_3_mois" },
+  { label: "D'ici 3 à 6 mois", value: "3_6_mois" },
+  { label: "Plus tard", value: "plus_tard" },
+];
+
 const categoryPlaceholders = [
   "Cuisine moléculaire & confiserie 🍬",
   "Élevage de licornes 🦄",
@@ -530,12 +537,41 @@ export default function ContactModal({
 
         {/* Step 5: Délai / Timing */}
         {currentStep === 5 && (
-          <div className="flex flex-col items-center gap-1">
-            <h3 className="text-xl font-bold text-primary">Délai / Timing</h3>
-            <p className="text-xs text-center">
-              Vous souhaitez lancer votre projet…
+          <>
+            <div className="flex flex-col items-center gap-1">
+              <h3 className="text-xl font-bold text-primary">Délai / Timing</h3>
+              <p className="text-xs text-center">
+                Vous souhaitez lancer votre projet…
+              </p>
+            </div>
+            <p className="text-grey-light text-sm italic">
+              *Un seul choix possible
             </p>
-          </div>
+            <form>
+              <ul className="grid gap-4 text-grey-lighter">
+                {delayOptions.map((delay) => (
+                  <li key={delay.value}>
+                    <label className="flex items-center gap-4 select-none">
+                      <input
+                        type="radio"
+                        name="delay"
+                        value={delay.value}
+                        checked={formData.delay === delay.value}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            delay: e.target.value,
+                          });
+                        }}
+                        className="accent-primary"
+                      />
+                      {delay.label}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </form>
+          </>
         )}
 
         {/* Navigation buttons */}
