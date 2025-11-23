@@ -37,7 +37,7 @@ export default function Nav() {
         onClick={() => setMenuOpen(false)}
       ></div>
       <nav
-        className="fixed top-8 left-1/2 transform -translate-x-1/2 w-max flex flex-col space-y-2 pl-10 sm:pl-16 pr-8 py-4 min-w-2/3 z-50 bg-grey-lightest/5 backdrop-blur-md"
+        className="fixed top-8 left-1/2 transform -translate-x-1/2 w-max flex flex-col pl-10 sm:pl-16 pr-8 py-4 min-w-2/3 z-50 bg-grey-lightest/5 backdrop-blur-md"
         style={
           {
             "--corner-size": "30px",
@@ -126,7 +126,7 @@ export default function Nav() {
         </div>
         <ul
           className={twMerge(
-            "flex flex-col md:flex-row items-center gap-2 md:gap-4 overflow-hidden md:hidden",
+            "flex flex-col md:flex-row items-center gap-2 md:gap-4 pt-2 overflow-hidden md:hidden",
             !menuOpen && "hidden"
           )}
         >
