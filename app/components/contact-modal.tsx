@@ -47,8 +47,7 @@ interface FormData {
   categories: string[];
   otherCategory?: string;
   companySize?: string;
-  budgetStart?: number;
-  budgetEnd?: number;
+  budget?: number;
   delay?: string;
   contactDetails?: {
     name: string;
@@ -62,8 +61,7 @@ const initialFormData: FormData = {
   categories: [],
   otherCategory: undefined,
   companySize: undefined,
-  budgetStart: 2000,
-  budgetEnd: 40000,
+  budget: undefined,
   delay: undefined,
   contactDetails: {
     name: "",
@@ -85,6 +83,11 @@ function useTypewriter(
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    if (texts.length === 0) {
+      setCurrentText("");
+      return;
+    }
+
     const targetText = texts[currentTextIndex];
 
     const timeout = setTimeout(
@@ -128,29 +131,79 @@ export default function ContactModal({
   isOpen,
   onClose,
 }: Readonly<ContactModalProps>) {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(4);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const categoryPlaceholder = useTypewriter(
-    categoryPlaceholders,
+    currentStep === 2 ? categoryPlaceholders : [],
     100,
     50,
     2000
   );
+  const [budgetList, setBudgetList] = useState<number[]>([
+    500,
+    2000,
+    5000,
+    20000,
+    Infinity,
+  ]);
 
   const handleClose = () => {
-    setCurrentStep(0);
+    setCurrentStep(1);
     setFormData(initialFormData);
     onClose();
   };
 
   const handleNext = () => {
+    if (currentStep === 2) {
+      if (formData.categories.length > 0 || formData.otherCategory) {
+        setBudgetList([0, 0, 0, 0, 0]); // Reset budget list
+
+        for (const category of formData.categories) {
+          if (
+            [
+              "web_applications",
+              "automatisation_data",
+              "consulting_gestion_de_projet",
+            ].includes(category)
+          ) {
+            setBudgetList((prevBudgets) => {
+              const newBudgets = [2000, 5000, 20000, 50000, Infinity];
+              return prevBudgets.map(
+                (budget, index) => budget + newBudgets[index]
+              );
+            });
+          } else if (
+            ["design_branding", "production_visuelle_publicitaire"].includes(
+              category
+            )
+          ) {
+            setBudgetList((prevBudgets) => {
+              const newBudgets = [500, 2000, 5000, 20000, Infinity];
+              return prevBudgets.map(
+                (budget, index) => budget + newBudgets[index]
+              );
+            });
+          }
+        }
+
+        if (formData.otherCategory) {
+          setBudgetList((prevBudgets) => {
+            const newBudgets = [500, 2000, 5000, 20000, Infinity];
+            return prevBudgets.map(
+              (budget, index) => budget + newBudgets[index]
+            );
+          });
+        }
+      }
+    }
+
     if (currentStep < 5) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handlePrevious = () => {
-    if (currentStep > 0) {
+    if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
@@ -160,14 +213,22 @@ export default function ContactModal({
     handleClose();
   };
 
+  const getBudgetLabel = (index: number): string => {
+    if (index === 0) {
+      return `Moins de ${budgetList[0].toLocaleString("fr-FR")} €`;
+    }
+    if (index === budgetList.length - 1) {
+      return `Plus de ${budgetList[index - 1].toLocaleString("fr-FR")} €`;
+    }
+    return `Entre ${budgetList[index - 1].toLocaleString(
+      "fr-FR"
+    )} € et ${budgetList[index].toLocaleString("fr-FR")} €`;
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={handleClose} className="w-xl">
       <div className="space-y-6">
-        {currentStep === 0 ? (
-          <h2 className="text-2xl font-orbitron font-bold text-primary text-center mr-8">
-            Nous contacter
-          </h2>
-        ) : (
+        {currentStep !== 6 && (
           <div
             className="flex space-x-2 mr-8"
             style={
@@ -195,17 +256,22 @@ export default function ContactModal({
           </div>
         )}
 
-        {/* Step 0: Informations */}
-        {currentStep === 0 && (
-          <p>
-            Chaque projet est unique. En quelques questions, aidez-nous à
-            comprendre vos besoins pour vous proposer la solution la plus
-            adaptée.
-          </p>
+        {/* Step 1: Coordonnées */}
+        {currentStep === 1 && (
+          <>
+            <div className="flex flex-col items-center gap-1">
+              <h3 className="text-xl font-bold">Coordonnées</h3>
+              <p className="text-sm">
+                Super ! Pour qu&apos;on puisse vous proposer une solution
+                adaptée, laissez-nous vos coordonnées
+              </p>
+            </div>
+            <form className="grid grid-cols-2 gap-4"></form>
+          </>
         )}
 
-        {/* Step 1: Catégories */}
-        {currentStep === 1 && (
+        {/* Step 2: Catégories */}
+        {currentStep === 2 && (
           <>
             <div className="flex flex-col items-center gap-1">
               <h3 className="text-xl font-bold">Accroche / Projet</h3>
@@ -294,15 +360,15 @@ export default function ContactModal({
           </>
         )}
 
-        {/* Step 2: Taille de l'entreprise */}
-        {currentStep === 2 && (
+        {/* Step 3: Taille de l'entreprise */}
+        {currentStep === 3 && (
           <>
             <div className="flex flex-col items-center gap-1">
               <h3 className="text-xl font-bold">Taille de l&apos;entreprise</h3>
               <p className="text-sm">Votre structure, c&apos;est plutôt…</p>
             </div>
             <p className="text-grey-light text-sm italic">
-              Un seul choix possible
+              *Un seul choix possible
             </p>
             <form>
               <ul className="grid gap-4 text-grey-lighter">
@@ -332,8 +398,8 @@ export default function ContactModal({
           </>
         )}
 
-        {/* Step 3: Budget */}
-        {currentStep === 3 && (
+        {/* Step 4: Budget */}
+        {currentStep === 4 && (
           <>
             <div className="flex flex-col items-center gap-1">
               <h3 className="text-xl font-bold">Budget</h3>
@@ -341,63 +407,50 @@ export default function ContactModal({
                 Avez-vous une idée du budget à investir ?
               </p>
             </div>
-            <div className="relative">
-              <input
-                className="relative w-full pointer-events-none [&::-webkit-slider-thumb]:pointer-events-all"
-                type="range"
-                name="budgetStart"
-                id="budgetStart"
-                min={0}
-                max={50000}
-                step={1000}
-                value={formData.budgetStart}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    budgetStart: e.target.valueAsNumber,
-                  })
-                }
-              />
-              <input
-                className="absolute left-0 top-0 w-full pointer-events-none [&::-webkit-slider-thumb]:pointer-events-all"
-                type="range"
-                name="budgetEnd"
-                id="budgetEnd"
-                min={0}
-                max={50000}
-                step={1000}
-                value={formData.budgetEnd}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    budgetEnd: e.target.valueAsNumber,
-                  })
-                }
-              />
-            </div>
+            <p className="text-grey-light text-sm italic">
+              *Un seul choix possible
+            </p>
+            <form>
+              <ul className="grid gap-4 text-grey-lighter">
+                {budgetList.map((budget, index) => (
+                  <li key={budget}>
+                    <label className="flex items-center gap-4 select-none">
+                      <input
+                        type="radio"
+                        name="budget"
+                        value={budget}
+                        checked={formData.budget === budget}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            budget: Number(e.target.value),
+                          });
+                          handleNext();
+                        }}
+                        className="accent-primary"
+                      />
+                      {getBudgetLabel(index)}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </form>
+            {formData.categories.length > 1 ||
+              (formData.otherCategory && formData.categories.length > 0 && (
+                <p className="text-grey-light text-sm italic">
+                  Le budget affiché correspond à une estimation basée sur les
+                  catégories sélectionnées.
+                </p>
+              ))}
           </>
         )}
 
-        {/* Step 4: Délai / Timing */}
-        {currentStep === 4 && (
+        {/* Step 5: Délai / Timing */}
+        {currentStep === 5 && (
           <div className="flex flex-col items-center gap-1">
             <h3 className="text-xl font-bold">Délai / Timing</h3>
             <p className="text-sm">Vous souhaitez lancer votre projet…</p>
           </div>
-        )}
-
-        {/* Step 5: Coordonnées */}
-        {currentStep === 5 && (
-          <>
-            <div className="flex flex-col items-center gap-1">
-              <h3 className="text-xl font-bold">Coordonnées</h3>
-              <p className="text-sm">
-                Super ! Pour qu&apos;on puisse vous proposer une solution
-                adaptée, laissez-nous vos coordonnées
-              </p>
-            </div>
-            <form className="grid grid-cols-2 gap-4"></form>
-          </>
         )}
 
         {/* Navigation buttons */}
@@ -414,10 +467,10 @@ export default function ContactModal({
 
             if (currentStep < 5) {
               const canSkip =
-                (currentStep === 1 &&
+                (currentStep === 2 &&
                   formData.categories.length === 0 &&
                   !formData.otherCategory) ||
-                (currentStep === 2 && !formData.companySize);
+                (currentStep === 3 && !formData.companySize);
 
               return canSkip ? (
                 <Button variant="outline" onClick={handleNext}>
