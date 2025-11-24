@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Modal from "./ui/modal";
 import Button from "./ui/button";
 import Input from "./ui/Input";
+import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
 const categoriesOptions = [
@@ -243,7 +244,21 @@ export default function ContactModal({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} className="w-xl">
+    <Modal
+      isOpen={isOpen}
+      onClose={handleClose}
+      className="w-xl overflow-hidden"
+    >
+      <Image
+        src="/background light.svg"
+        alt=""
+        width={800}
+        height={800}
+        className={twMerge(
+          "absolute top-1/2 left-1/2 pointer-events-none select-none blur-[300px] -z-10 transition-transform duration-1000",
+          currentStep % 2 === 0 ? "translate-x-[-130%]" : "translate-x-[30%]"
+        )}
+      />
       <div className="space-y-6">
         {currentStep !== 7 && (
           <div
