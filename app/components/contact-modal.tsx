@@ -256,7 +256,7 @@ export default function ContactModal({
         height={800}
         className={twMerge(
           "absolute top-1/2 left-1/2 pointer-events-none select-none blur-[300px] -z-10 transition-transform duration-1000",
-          currentStep % 2 === 0 ? "translate-x-[-130%]" : "translate-x-[30%]"
+          currentStep % 2 === 0 ? "translate-x-[30%]" : "translate-x-[-130%]"
         )}
       />
       <div className="space-y-6">
