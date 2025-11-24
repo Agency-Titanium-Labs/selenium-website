@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Modal from "./ui/modal";
 import Button from "./ui/button";
 import Input from "./ui/Input";
+import { twMerge } from "tailwind-merge";
 
 const categoriesOptions = [
   { label: "Web & Applications", value: "web_applications" },
@@ -164,6 +165,7 @@ export default function ContactModal({
 
   const handleClose = () => {
     setCurrentStep(1);
+    setLastStepReached(1);
     setFormData(initialFormData);
     onClose();
   };
@@ -263,9 +265,11 @@ export default function ContactModal({
             {[1, 2, 3, 4, 5, 6].map((step) => (
               <button
                 key={step}
-                className={`flex-1 h-3 transition-colors ${
-                  step <= currentStep ? "bg-primary" : "bg-grey-darker"
-                }`}
+                className={twMerge(
+                  "flex-1 h-3 bg-grey-darker transition-colors",
+                  step <= lastStepReached && "bg-primary-dark",
+                  step === currentStep && "bg-primary"
+                )}
                 disabled={step > lastStepReached || currentStep === 1}
                 onClick={() => setCurrentStep(step)}
               />
