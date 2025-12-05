@@ -232,7 +232,7 @@ export default function Team() {
             <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest">
               {member.role}
             </p>
-            <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
+            {/* <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
               {member.tools.map((tool) => (
                 <li key={tool.name} title={tool.name}>
                   <Image
@@ -243,7 +243,7 @@ export default function Team() {
                   />
                 </li>
               ))}
-            </ul>
+            </ul> */}
             <div
               className="absolute bottom-0 left-0 w-full flex flex-col items-center gap-4 p-4 bg-grey-darkest/60 backdrop-blur-xs text-xl transform translate-y-[calc(100%-2rem-1.2em)] group-hover:translate-y-0 transition-transform duration-500 ease-in-out group-hover:delay-50 [&]:[@media(hover:none)]:translate-y-0"
               style={
