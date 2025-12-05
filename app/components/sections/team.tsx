@@ -171,7 +171,7 @@ export default function Team() {
         {teamMembers.map((member) => (
           <li
             key={member.name}
-            className="group team-member-card relative bg-grey-lightest/5 backdrop-blur-md w-full sm:max-w-3xs"
+            className="group team-member-card relative bg-grey-lightest/10 backdrop-blur-md w-full sm:max-w-3xs"
             style={
               {
                 "--corner-size": "30px",
