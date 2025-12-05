@@ -52,7 +52,7 @@ export default function Hero() {
       </h1>
       <div className="relative grid sm:grid-cols-2 gap-4">
         <Button onClick={() => openModal()}>Nous contacter</Button>
-        <Button variant="outline">Nos projets</Button>
+        <Button variant="outline" href="#services">Nos services</Button>
       </div>
     </section>
   );
