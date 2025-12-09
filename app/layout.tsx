@@ -5,6 +5,11 @@ import LenisProvider from "./components/LenisProvider";
 import { ContactModalProvider } from "./contexts/contact-modal-context";
 import GlobalContactModal from "./components/global-contact-modal";
 
+const outfit = localFont({
+  src: "../public/fonts/Outfit-VariableFont_wght.ttf",
+  variable: "--font-outfit",
+});
+
 const orbitron = localFont({
   src: "../public/fonts/Orbitron-VariableFont_wght.ttf",
   variable: "--font-orbitron",
@@ -23,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${orbitron.variable} antialiased`}>
+      <body className={`${outfit.variable} ${orbitron.variable} antialiased`}>
         <ContactModalProvider>
           <LenisProvider>
             {children}

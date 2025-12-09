@@ -29,7 +29,7 @@
   --color-4-dark: #3e5e3b;
 
   /* Font families */
-  --font-outfit: "Outfit", sans-serif;
+  --font-outfit: var(--font-outfit), "Outfit", sans-serif;
   --font-orbitron: var(--font-orbitron), "Orbitron", sans-serif;
 }
 
