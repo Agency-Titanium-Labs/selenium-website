@@ -69,7 +69,7 @@ export default function Contact() {
           <div className="flex flex-col items-center gap-8 md:px-8">
             <div className="flex flex-col items-center gap-5">
               <h3 className="text-xl text-center">Restons en contact</h3>
-              <p className="text-center">
+              <p className="text-center text-balance">
                 Répondez à ce formulaire pour planifier un rendez-vous Google
                 Meet avec nous.
               </p>
