@@ -1,6 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const iconsClassName = "h-20 w-auto";
 
@@ -314,6 +320,8 @@ const services = [
 
 export default function Services() {
   const [hoveredService, setHoveredService] = useState<string>("");
+  const backgroundShapeRef = useRef<HTMLImageElement>(null);
+  const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
 
   const getNumberOfColumns = () => {
     return services.reduce((sum, _, index) => sum + getColumnSpan(index), 0);
@@ -323,62 +331,102 @@ export default function Services() {
     return Math.ceil(services[categoryIndex].list.length / 3);
   };
 
+  useGSAP(() => {
+    gsap.to(backgroundShapeRef.current, {
+      yPercent: 50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: backgroundShapeRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+    gsap.to(backgroundLightLeftRef.current, {
+      yPercent: 100,
+      ease: "none",
+      scrollTrigger: {
+        trigger: backgroundLightLeftRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
+
   return (
     <section
       id="services"
       className="relative flex flex-col items-center gap-8 px-8 py-16 md:py-24"
     >
+      <Image
+        ref={backgroundShapeRef}
+        src="/background shape full.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute top-0 right-0 transform translate-y-1/2 w-1/3 md:w-2/7 h-auto opacity-15 pointer-events-none select-none -z-10"
+      />
+      <Image
+        ref={backgroundLightLeftRef}
+        src="/background light.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute bottom-0 left-0 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
+      />
       <h2 className="text-3xl font-bold text-center">Nos Services</h2>
-      <div
-        className="grid max-md:grid-cols-2! gap-y-8"
-        style={{
-          gridTemplateColumns: `repeat(${getNumberOfColumns()}, minmax(0, 1fr))`,
-        }}
-      >
-        {services.map((service, index) => (
-          <div
-            key={service.category}
-            className={`grid grid-rows-[auto_1fr] gap-8 pt-3 text-${
-              index + 1
-            } hover:bg-${
-              index + 1
-            }/15 transition-colors duration-300 ease-in-out`}
-            style={{ gridColumn: `span ${getColumnSpan(index)}` }}
-          >
-            <h3 className="text-sm xl:text-base font-outfit! text-center place-self-center px-3">
-              {service.category}
-            </h3>
-            <ul
-              className="grid place-content-end"
-              style={{
-                gridTemplateColumns: `repeat(${getColumnSpan(
-                  index
-                )}, minmax(0, 1fr))`,
-              }}
+      <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
+        <div
+          className="grid max-md:grid-cols-2! gap-y-8 w-full"
+          style={{
+            gridTemplateColumns: `repeat(${getNumberOfColumns()}, minmax(0, 1fr))`,
+          }}
+        >
+          {services.map((service, index) => (
+            <div
+              key={service.category}
+              className={`grid grid-rows-[auto_1fr] gap-8 pt-3 text-${
+                index + 1
+              } hover:bg-${
+                index + 1
+              }/15 transition-colors duration-300 ease-in-out`}
+              style={{ gridColumn: `span ${getColumnSpan(index)}` }}
             >
-              {index > services.length / 2 &&
-                (service.list.length + 1) % 3 === 0 && (
-                  <div className="max-md:hidden"></div>
-                )}
-              {service.list.map((item) => (
-                <li
-                  key={item.name}
-                  onMouseEnter={() => setHoveredService(item.description)}
-                  onMouseLeave={() => setHoveredService("")}
-                  className={`group relative grid justify-items-center gap-2 py-4 px-4 bg-grey-lightest/5 hover:bg-${
-                    index + 1
-                  }/10 hover:z-10 transition-all duration-300 ease-in-out cursor-pointer`}
-                >
-                  <div
-                    className={`absolute -inset-[1px] -z-1 bg-linear-to-br from-grey-dark via-grey-dark to-grey-dark group-hover:from-primary-lighter group-hover:via-${
+              <h3 className="text-sm xl:text-base font-outfit! text-center place-self-center px-3">
+                {service.category}
+              </h3>
+              <ul
+                className="grid place-content-end"
+                style={{
+                  gridTemplateColumns: `repeat(${getColumnSpan(
+                    index
+                  )}, minmax(0, 1fr))`,
+                }}
+              >
+                {index > services.length / 2 &&
+                  (service.list.length + 1) % 3 === 0 && (
+                    <div className="max-md:hidden"></div>
+                  )}
+                {service.list.map((item) => (
+                  <li
+                    key={item.name}
+                    onMouseEnter={() => setHoveredService(item.description)}
+                    onMouseLeave={() => setHoveredService("")}
+                    className={`group relative grid justify-items-center gap-2 py-4 px-4 bg-grey-lightest/5 hover:bg-${
                       index + 1
-                    } group-hover:to-${
-                      index + 1
-                    }-dark transition-all duration-300 ease-in-out`}
-                    style={
-                      {
-                        "--border-width": "2px",
-                        clipPath: `polygon(
+                    }/10 hover:z-10 transition-all duration-300 ease-in-out cursor-pointer`}
+                  >
+                    <div
+                      className={`absolute -inset-[1px] -z-1 bg-linear-to-br from-grey-dark via-grey-dark to-grey-dark group-hover:from-primary-lighter group-hover:via-${
+                        index + 1
+                      } group-hover:to-${
+                        index + 1
+                      }-dark transition-all duration-300 ease-in-out`}
+                      style={
+                        {
+                          "--border-width": "2px",
+                          clipPath: `polygon(
                           0 0,
                           calc(100% - var(--border-width)) 0,
                           calc(100% - var(--border-width)) var(--border-width),
@@ -390,28 +438,29 @@ export default function Services() {
                           100% 100%,
                           0 100%
                         )`,
-                      } as React.CSSProperties
-                    }
-                  ></div>
-                  {item.icon}
-                  <h4 className="font-outfit! text-center text-grey-lightest text-xs xl:text-sm font-bold">
-                    {item.name}
-                  </h4>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+                        } as React.CSSProperties
+                      }
+                    ></div>
+                    {item.icon}
+                    <h4 className="font-outfit! text-center text-grey-lightest text-xs xl:text-sm font-bold">
+                      {item.name}
+                    </h4>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        {hoveredService ? (
+          <p className="text-center text-balance text-grey-lightest max-md:hidden">
+            {hoveredService}
+          </p>
+        ) : (
+          <p className="text-center text-balance text-grey-light italic max-md:hidden">
+            Survolez un service pour voir sa description
+          </p>
+        )}
       </div>
-      {hoveredService ? (
-        <p className="text-center text-grey-lightest max-md:hidden">
-          {hoveredService}
-        </p>
-      ) : (
-        <p className="text-center text-grey-light italic max-md:hidden">
-          Survolez un service pour voir sa description
-        </p>
-      )}
     </section>
   );
 }
