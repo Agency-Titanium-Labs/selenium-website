@@ -5,7 +5,10 @@ import Modal from "./ui/modal";
 import Button from "./ui/button";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
-import { ContactModalProps, FormData } from "./contact-modal/types";
+import type {
+  ContactModalProps,
+  FormData as ContactFormData,
+} from "./contact-modal/types";
 import { initialFormData } from "./contact-modal/constants";
 import Step1Contact from "./contact-modal/steps/Step1Contact";
 import Step2Category from "./contact-modal/steps/Step2Category";
@@ -14,13 +17,14 @@ import Step4Budget from "./contact-modal/steps/Step4Budget";
 import Step5Delay from "./contact-modal/steps/Step5Delay";
 import Step6Message from "./contact-modal/steps/Step6Message";
 import Step7Confirmation from "./contact-modal/steps/Step7Confirmation";
+import { useSendContact } from "../hook/sendContact";
 
 export default function ContactModal({
   isOpen,
   onClose,
 }: Readonly<ContactModalProps>) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<ContactFormData>(initialFormData);
   const [budgetList, setBudgetList] = useState<number[]>([
     500,
     2000,
@@ -28,6 +32,8 @@ export default function ContactModal({
     20000,
     Infinity,
   ]);
+
+  const { send, isLoading, isError, error } = useSendContact();
 
   const [lastStepReached, setLastStepReached] = useState(1);
   useEffect(() => {
@@ -98,9 +104,35 @@ export default function ContactModal({
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Form submitted:", formData);
-    handleNext();
+  const handleSubmit = async () => {
+    try {
+      const fd = new FormData();
+
+      // Arrays: append each value
+      formData.categories.forEach((c) => fd.append("categories", c));
+
+      // Optional primitives
+      if (formData.otherCategory)
+        fd.append("otherCategory", formData.otherCategory);   
+      if (formData.companySize) fd.append("companySize", formData.companySize);
+      if (typeof formData.budget === "number")
+        fd.append("budget", String(formData.budget));
+      if (formData.delay) fd.append("delay", formData.delay);
+
+      // Contact details
+      if (formData.contactDetails) {
+        const { name, phone, email, message } = formData.contactDetails;
+        if (name) fd.append("name", name);
+        if (phone) fd.append("phone", phone);
+        fd.append("email", email);
+        if (message) fd.append("message", message);
+      }
+
+      await send(fd);
+      handleNext();
+    } catch (e) {
+      console.error("Form submit failed:", e);
+    }
   };
 
   return (
@@ -139,6 +171,7 @@ export default function ContactModal({
           >
             {[1, 2, 3, 4, 5, 6].map((step) => (
               <button
+                title="Go to step {step}"
                 key={step}
                 className={twMerge(
                   "flex-1 h-3 bg-grey-darker transition-colors",
@@ -228,7 +261,11 @@ export default function ContactModal({
                 <Button onClick={handleNext}>Suivant</Button>
               );
             } else if (currentStep === 6) {
-              return <Button onClick={handleSubmit}>Envoyer</Button>;
+              return (
+                <Button onClick={handleSubmit} disabled={isLoading}>
+                  {isLoading ? "Envoi…" : "Envoyer"}
+                </Button>
+              );
             } else {
               return (
                 <Button
