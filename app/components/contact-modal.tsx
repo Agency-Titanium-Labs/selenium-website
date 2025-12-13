@@ -113,7 +113,7 @@ export default function ContactModal({
 
       // Optional primitives
       if (formData.otherCategory)
-        fd.append("otherCategory", formData.otherCategory);   
+        fd.append("otherCategory", formData.otherCategory);
       if (formData.companySize) fd.append("companySize", formData.companySize);
       if (typeof formData.budget === "number")
         fd.append("budget", String(formData.budget));
@@ -270,7 +270,7 @@ export default function ContactModal({
               return (
                 <Button
                   variant="outline"
-                  href="#"
+                  href="https://cal.com/remi-costes-rgl4n1/selenium-studio"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gap-2"
