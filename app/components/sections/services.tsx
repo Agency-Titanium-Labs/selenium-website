@@ -1,17 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-const iconsClassName = "h-24 w-auto";
+gsap.registerPlugin(ScrollTrigger);
+
+const iconsClassName = "h-20 w-auto";
 
 const services = [
   {
     category: "Web & Applications",
     list: [
       {
-        name: "Landing pages",
+        name: "Création de landing pages",
         description:
-          "Création de pages d'atterrissage attrayantes et optimisées pour convertir les visiteurs en clients.",
+          "Nous concevons des landing pages performantes, par exemple pour des campagnes Google Ads ou Instagram, optimisées SEO et responsive pour convertir vos visiteurs en clients.",
         icon: (
           <svg
             width="88"
@@ -29,9 +35,9 @@ const services = [
         ),
       },
       {
-        name: "Outils internes / externes",
+        name: "Outils B2B et B2C",
         description:
-          "Développement d'outils personnalisés pour améliorer l'efficacité et la productivité de votre entreprise.",
+          "Développement d'applications web sur-mesure, comme un tableau de suivi de commandes pour votre équipe ou une plateforme client pour gérer les réservations, adaptées à vos besoins.",
         icon: (
           <svg
             width="88"
@@ -51,7 +57,7 @@ const services = [
       {
         name: "Solutions CRM & ERP",
         description:
-          "Intégration et personnalisation de systèmes CRM et ERP pour une gestion optimale de vos ressources.",
+          "Nous intégrons ou développons des CRM et ERP personnalisés, par exemple un CRM pour suivre vos leads ou un ERP pour gérer inventaire et facturation, centralisant vos données et processus.",
         icon: (
           <svg
             width="88"
@@ -71,12 +77,12 @@ const services = [
     ],
   },
   {
-    category: "Pilotage & Gestion de projet",
+    category: "Consulting & Gestion de projet",
     list: [
       {
-        name: "Coaching agile",
+        name: "Audit & Optimisation",
         description:
-          "Accompagnement des équipes dans la mise en place de méthodes agiles pour améliorer leur efficacité.",
+          "Nous réalisons des audits SEO complets (technique, contenu, netlinking), évaluons l'accessibilité (WCAG) et identifions les problèmes de performance, sécurité et UX pour optimiser votre site.",
         icon: (
           <svg
             width="88"
@@ -94,9 +100,9 @@ const services = [
         ),
       },
       {
-        name: "Suivi de roadmap",
+        name: "Pilotage & Méthodes agiles",
         description:
-          "Gestion et suivi de votre feuille de route pour garantir l'atteinte de vos objectifs.",
+          "Nous vous accompagnons avec du coaching agile, l'organisation de sprints et le suivi d'objectifs pour structurer vos projets et assurer leur succès.",
         icon: (
           <svg
             width="88"
@@ -114,29 +120,9 @@ const services = [
         ),
       },
       {
-        name: "Déploiement d'outils",
+        name: "Coordination",
         description:
-          "Mise en place et configuration d'outils pour améliorer la collaboration et la productivité des équipes.",
-        icon: (
-          <svg
-            width="88"
-            height="88"
-            viewBox="0 0 88 88"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={iconsClassName}
-          >
-            <path
-              d="M69.1166 80.5753C68.6277 80.5753 68.1694 80.4989 67.7416 80.3462C67.3138 80.1934 66.9166 79.9337 66.5499 79.567L47.8499 60.867C47.4832 60.5003 47.2235 60.1031 47.0708 59.6753C46.918 59.2476 46.8416 58.7892 46.8416 58.3003C46.8416 57.8114 46.918 57.3531 47.0708 56.9253C47.2235 56.4976 47.4832 56.1003 47.8499 55.7337L55.6416 47.942C56.0083 47.5753 56.4055 47.3156 56.8332 47.1628C57.261 47.01 57.7194 46.9337 58.2082 46.9337C58.6971 46.9337 59.1555 47.01 59.5832 47.1628C60.011 47.3156 60.4082 47.5753 60.7749 47.942L79.4749 66.642C79.8416 67.0087 80.1013 67.4059 80.2541 67.8337C80.4069 68.2614 80.4833 68.7198 80.4833 69.2087C80.4833 69.6975 80.4069 70.1559 80.2541 70.5837C80.1013 71.0114 79.8416 71.4087 79.4749 71.7753L71.6833 79.567C71.3166 79.9337 70.9194 80.1934 70.4916 80.3462C70.0638 80.4989 69.6055 80.5753 69.1166 80.5753ZM69.1166 71.867L71.7749 69.2087L58.2999 55.7337L55.6416 58.392L69.1166 71.867ZM18.7916 80.667C18.3027 80.667 17.8291 80.5753 17.3708 80.392C16.9124 80.2087 16.4999 79.9337 16.1333 79.567L8.43325 71.867C8.06659 71.5003 7.79159 71.0878 7.60825 70.6295C7.42492 70.1712 7.33325 69.6975 7.33325 69.2087C7.33325 68.7198 7.42492 68.2614 7.60825 67.8337C7.79159 67.4059 8.06659 67.0087 8.43325 66.642L27.8666 47.2087H35.6583L38.7749 44.092L23.6499 28.967H18.4249L7.33325 17.8753L17.6916 7.51699L28.7833 18.6087V23.8337L43.9083 38.9587L54.5416 28.3253L50.5999 24.3837L55.7332 19.2503H45.3749L42.8083 16.6837L55.8249 3.66699L58.3916 6.23366V16.592L63.5249 11.4587L76.5416 24.4753C77.5805 25.5142 78.3749 26.6906 78.9249 28.0045C79.4749 29.3184 79.7499 30.7087 79.7499 32.1753C79.7499 33.642 79.4749 35.0475 78.9249 36.392C78.3749 37.7364 77.5805 38.9281 76.5416 39.967L68.7499 32.1753L63.6166 37.3087L59.7666 33.4587L40.7916 52.4337V60.1337L21.3583 79.567C20.9916 79.9337 20.5944 80.2087 20.1666 80.392C19.7388 80.5753 19.2805 80.667 18.7916 80.667ZM18.7916 71.867L34.3749 56.2837V53.6253H31.7166L16.1333 69.2087L18.7916 71.867ZM18.7916 71.867L16.1333 69.2087L17.5083 70.492L18.7916 71.867Z"
-              fill="currentColor"
-            />
-          </svg>
-        ),
-      },
-      {
-        name: "Coordination d'équipes",
-        description:
-          "Facilitation de la collaboration entre les équipes pour garantir la réussite de vos projets.",
+          "Nous coordonnons vos équipes en déployant des outils collaboratifs adaptés pour garantir productivité et transparence.",
         icon: (
           <svg
             width="88"
@@ -161,7 +147,7 @@ const services = [
       {
         name: "Design UX/UI",
         description:
-          "Création d'interfaces utilisateur intuitives et esthétiques pour améliorer l'expérience de vos clients.",
+          "Création de designs intuitifs et modernes, comme la refonte d'un site e-commerce ou d'une plateforme SaaS, pour améliorer l'expérience utilisateur et augmenter l'engagement.",
         icon: (
           <svg
             width="88"
@@ -179,9 +165,9 @@ const services = [
         ),
       },
       {
-        name: "Direction artistique",
+        name: "Identité visuelle",
         description:
-          "Création d'une identité visuelle forte et cohérente pour votre marque.",
+          "Développement d'une identité visuelle forte, par exemple un logo, une charte graphique complète et des templates de présentation ou flyers, pour renforcer votre image de marque.",
         icon: (
           <svg
             width="88"
@@ -206,7 +192,7 @@ const services = [
       {
         name: "Scénario automatisé",
         description:
-          "Mise en place de scénarios automatisés pour optimiser vos processus métiers.",
+          "Nous créons des scénarios automatisés personnalisés, comme l'envoi automatique de mails après un formulaire ou la synchronisation entre CRM et outils marketing, pour réduire les tâches répétitives et fiabiliser vos processus.",
         icon: (
           <svg
             width="88"
@@ -226,7 +212,7 @@ const services = [
       {
         name: "Gestion de données",
         description:
-          "Collecte, traitement et analyse de données pour des décisions éclairées.",
+          "Nous assurons la gestion, le nettoyage et la migration de vos données, par exemple la migration de vos clients d'un ancien CRM vers un nouveau ou le nettoyage de bases produits pour un e-commerce, garantissant cohérence et sécurité.",
         icon: (
           <svg
             width="88"
@@ -244,49 +230,9 @@ const services = [
         ),
       },
       {
-        name: "Nettoyage de données",
-        description:
-          "Identification et correction des erreurs dans vos données pour garantir leur qualité.",
-        icon: (
-          <svg
-            width="88"
-            height="88"
-            viewBox="0 0 88 88"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={iconsClassName}
-          >
-            <path
-              d="M29.3333 80.6667C27.3167 80.6667 25.5903 79.9487 24.1542 78.5126C22.7181 77.0764 22 75.35 22 73.3334V57.5667C22 53.0445 22.6417 48.6903 23.925 44.5042C25.2083 40.3181 27.225 36.1473 29.975 31.9917C27.6528 31.4417 25.7431 30.1889 24.2458 28.2334C22.7486 26.2778 22 24.0778 22 21.6334V17.7834C22 14.85 23.2681 12.3903 25.8042 10.4042C28.3403 8.4181 30.9833 7.57782 33.7333 7.88338L66.3667 11.0917C67.4056 11.2139 68.2153 11.6264 68.7958 12.3292C69.3764 13.032 69.6667 13.8417 69.6667 14.7584V25.6667C69.6667 26.5834 69.3458 27.3931 68.7042 28.0959C68.0625 28.7987 67.2833 29.2112 66.3667 29.3334L63.0667 29.7C63.9222 32.6945 65.0528 35.3834 66.4583 37.7667C67.8639 40.15 69.5444 41.8612 71.5 42.9L67.8333 49.3167C64.5944 47.4223 62.0889 44.8098 60.3167 41.4792C58.5444 38.1487 57.1389 34.4362 56.1 30.3417L52.0667 30.7084C52.5556 33.7639 53.4875 36.85 54.8625 39.9667C56.2375 43.0834 57.6278 45.8945 59.0333 48.4C60.1333 50.3556 60.9583 52.4028 61.5083 54.5417C62.0583 56.6806 62.3333 58.85 62.3333 61.05V73.3334C62.3333 75.35 61.6153 77.0764 60.1792 78.5126C58.7431 79.9487 57.0167 80.6667 55 80.6667H29.3333ZM29.3333 18.7V21.6334C29.3333 22.7334 29.7306 23.6195 30.525 24.2917C31.3194 24.9639 32.2667 25.2389 33.3667 25.1167L62.3333 22.3667V17.9667L33.3667 15.2167C32.2667 15.0945 31.3194 15.3695 30.525 16.0417C29.7306 16.7139 29.3333 17.6 29.3333 18.7ZM29.3333 73.3334H55V61.05C55 59.4612 54.8014 57.9028 54.4042 56.375C54.0069 54.8473 53.4111 53.3806 52.6167 51.975C50.7222 48.675 49.0722 45.2681 47.6667 41.7542C46.2611 38.2403 45.2833 34.8028 44.7333 31.4417L39.2333 31.9L36.85 35.0167C34.4056 38.2556 32.5417 41.8153 31.2583 45.6959C29.975 49.5764 29.3333 53.5334 29.3333 57.5667V73.3334Z"
-              fill="currentColor"
-            />
-          </svg>
-        ),
-      },
-      {
-        name: "Migration de données",
-        description:
-          "Transfert sécurisé et efficace de vos données vers de nouvelles plateformes ou systèmes.",
-        icon: (
-          <svg
-            width="88"
-            height="88"
-            viewBox="0 0 88 88"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={iconsClassName}
-          >
-            <path
-              d="M44.7333 51.3337L38.7749 57.292L43.9083 62.4253L58.6666 47.667L43.9083 32.9087L38.7749 38.042L44.7333 44.0003H29.3333V51.3337H44.7333ZM14.6666 73.3337C12.6499 73.3337 10.9235 72.6156 9.48742 71.1795C8.05131 69.7434 7.33325 68.017 7.33325 66.0003V22.0003C7.33325 19.9837 8.05131 18.2573 9.48742 16.8212C10.9235 15.385 12.6499 14.667 14.6666 14.667H36.6666L43.9999 22.0003H73.3333C75.3499 22.0003 77.0763 22.7184 78.5124 24.1545C79.9485 25.5906 80.6666 27.317 80.6666 29.3337V66.0003C80.6666 68.017 79.9485 69.7434 78.5124 71.1795C77.0763 72.6156 75.3499 73.3337 73.3333 73.3337H14.6666ZM14.6666 66.0003H73.3333V29.3337H40.9749L33.6416 22.0003H14.6666V66.0003Z"
-              fill="currentColor"
-            />
-          </svg>
-        ),
-      },
-      {
         name: "Dashboards & rapports",
         description:
-          "Création de tableaux de bord et de rapports personnalisés pour visualiser vos données et suivre vos performances.",
+          "Nous développons des dashboards interactifs, comme des tableaux de bord ventes ou KPI marketing, pour suivre vos performances en temps réel et prendre des décisions éclairées.",
         icon: (
           <svg
             width="88"
@@ -305,53 +251,182 @@ const services = [
       },
     ],
   },
+  // {
+  //   category: "Production visuelle & publicitaire",
+  //   list: [
+  //     {
+  //       name: "Photographie",
+  //       description:
+  //         "Création de photos publicitaires et produits, comme packshots pour e-commerce, portraits professionnels ou reportages événementiels, retouchées et optimisées pour vos supports marketing.",
+  //       icon: (
+  //         <svg
+  //           width="88"
+  //           height="89"
+  //           viewBox="0 0 88 89"
+  //           fill="none"
+  //           xmlns="http://www.w3.org/2000/svg"
+  //           className={iconsClassName}
+  //         >
+  //           <path
+  //             d="M27.1333 63.75C24.5666 65.8889 21.893 66.8667 19.1124 66.6833C16.3319 66.5 13.9027 65.5528 11.8249 63.8417C9.74714 62.1306 8.3263 59.8847 7.56242 57.1042C6.79853 54.3236 7.30269 51.4667 9.07492 48.5333L15.9499 37.1667C14.4221 35.8222 13.2152 34.2028 12.3291 32.3083C11.443 30.4139 10.9999 28.3667 10.9999 26.1667C10.9999 22.1333 12.436 18.6806 15.3082 15.8083C18.1805 12.9361 21.6333 11.5 25.6666 11.5C29.6999 11.5 33.1527 12.9361 36.0249 15.8083C38.8971 18.6806 40.3333 22.1333 40.3333 26.1667C40.3333 30.2 38.8971 33.6528 36.0249 36.525C33.1527 39.3972 29.6999 40.8333 25.6666 40.8333C25.1166 40.8333 24.5666 40.8028 24.0166 40.7417C23.4666 40.6806 22.9471 40.5889 22.4583 40.4667L15.3999 52.3833C14.7277 53.4833 14.5138 54.5681 14.7583 55.6375C15.0027 56.7069 15.5221 57.5778 16.3166 58.25C17.111 58.9222 18.0583 59.3042 19.1583 59.3958C20.2583 59.4875 21.3277 59.1056 22.3666 58.25L60.8666 25.1583C63.4333 23.0194 66.1221 22.0569 68.9333 22.2708C71.7444 22.4847 74.1888 23.4472 76.2666 25.1583C78.3444 26.8694 79.7499 29.1153 80.4833 31.8958C81.2166 34.6764 80.6972 37.5333 78.9249 40.4667L72.0499 51.8333C73.5777 53.1778 74.7846 54.7972 75.6708 56.6917C76.5569 58.5861 76.9999 60.6333 76.9999 62.8333C76.9999 66.8667 75.5638 70.3194 72.6916 73.1917C69.8194 76.0639 66.3666 77.5 62.3333 77.5C58.2999 77.5 54.8471 76.0639 51.9749 73.1917C49.1027 70.3194 47.6666 66.8667 47.6666 62.8333C47.6666 58.8 49.1027 55.3472 51.9749 52.475C54.8471 49.6028 58.2999 48.1667 62.3333 48.1667C62.8833 48.1667 63.418 48.1972 63.9374 48.2583C64.4569 48.3194 64.961 48.4111 65.4499 48.5333L72.5999 36.6167C73.2721 35.5167 73.486 34.4319 73.2416 33.3625C72.9971 32.2931 72.4777 31.4222 71.6833 30.75C70.8888 30.0778 69.9416 29.6958 68.8416 29.6042C67.7416 29.5125 66.6721 29.8944 65.6333 30.75L27.1333 63.75ZM25.6666 33.5C27.6833 33.5 29.4096 32.7819 30.8458 31.3458C32.2819 29.9097 32.9999 28.1833 32.9999 26.1667C32.9999 24.15 32.2819 22.4236 30.8458 20.9875C29.4096 19.5514 27.6833 18.8333 25.6666 18.8333C23.6499 18.8333 21.9235 19.5514 20.4874 20.9875C19.0513 22.4236 18.3333 24.15 18.3333 26.1667C18.3333 28.1833 19.0513 29.9097 20.4874 31.3458C21.9235 32.7819 23.6499 33.5 25.6666 33.5ZM62.3333 70.1667C64.3499 70.1667 66.0763 69.4486 67.5124 68.0125C68.9485 66.5764 69.6666 64.85 69.6666 62.8333C69.6666 60.8167 68.9485 59.0903 67.5124 57.6542C66.0763 56.2181 64.3499 55.5 62.3333 55.5C60.3166 55.5 58.5902 56.2181 57.1541 57.6542C55.718 59.0903 54.9999 60.8167 54.9999 62.8333C54.9999 64.85 55.718 66.5764 57.1541 68.0125C58.5902 69.4486 60.3166 70.1667 62.3333 70.1667Z"
+  //             fill="currentColor"
+  //           />
+  //         </svg>
+  //       ),
+  //     },
+  //     {
+  //       name: "Vidéos",
+  //       description:
+  //         "Production de publicités, vidéos corporate et contenus social media, par exemple spots promotionnels, vidéos événementielles ou prises de vue drone, adaptées à chaque canal de diffusion.",
+  //       icon: (
+  //         <svg
+  //           width="88"
+  //           height="88"
+  //           viewBox="0 0 88 88"
+  //           fill="none"
+  //           xmlns="http://www.w3.org/2000/svg"
+  //           className={iconsClassName}
+  //         >
+  //           <path
+  //             d="M44 77C34.7722 77 26.9653 75.5792 20.5792 72.7375C14.1931 69.8958 11 66.4278 11 62.3333V25.6667C11 21.6333 14.2236 18.1806 20.6708 15.3083C27.1181 12.4361 34.8944 11 44 11C53.1056 11 60.8819 12.4361 67.3292 15.3083C73.7764 18.1806 77 21.6333 77 25.6667V62.3333C77 66.4278 73.8069 69.8958 67.4208 72.7375C61.0347 75.5792 53.2278 77 44 77ZM44 33.0917C49.4389 33.0917 54.9083 32.3125 60.4083 30.7542C65.9083 29.1958 68.9944 27.5306 69.6667 25.7583C68.9944 23.9861 65.9236 22.3056 60.4542 20.7167C54.9847 19.1278 49.5 18.3333 44 18.3333C38.4389 18.3333 32.9847 19.1125 27.6375 20.6708C22.2903 22.2292 19.1889 23.925 18.3333 25.7583C19.1889 27.5917 22.2903 29.2722 27.6375 30.8C32.9847 32.3278 38.4389 33.0917 44 33.0917ZM44 51.3333C46.5667 51.3333 49.0417 51.2111 51.425 50.9667C53.8083 50.7222 56.0847 50.3708 58.2542 49.9125C60.4236 49.4542 62.4708 48.8889 64.3958 48.2167C66.3208 47.5444 68.0778 46.7806 69.6667 45.925V34.925C68.0778 35.7806 66.3208 36.5444 64.3958 37.2167C62.4708 37.8889 60.4236 38.4542 58.2542 38.9125C56.0847 39.3708 53.8083 39.7222 51.425 39.9667C49.0417 40.2111 46.5667 40.3333 44 40.3333C41.4333 40.3333 38.9278 40.2111 36.4833 39.9667C34.0389 39.7222 31.7319 39.3708 29.5625 38.9125C27.3931 38.4542 25.3611 37.8889 23.4667 37.2167C21.5722 36.5444 19.8611 35.7806 18.3333 34.925V45.925C19.8611 46.7806 21.5722 47.5444 23.4667 48.2167C25.3611 48.8889 27.3931 49.4542 29.5625 49.9125C31.7319 50.3708 34.0389 50.7222 36.4833 50.9667C38.9278 51.2111 41.4333 51.3333 44 51.3333ZM44 69.6667C46.8111 69.6667 49.6681 69.4528 52.5708 69.025C55.4736 68.5972 58.1472 68.0319 60.5917 67.3292C63.0361 66.6264 65.0833 65.8319 66.7333 64.9458C68.3833 64.0597 69.3611 63.1583 69.6667 62.2417V53.2583C68.0778 54.1139 66.3208 54.8778 64.3958 55.55C62.4708 56.2222 60.4236 56.7875 58.2542 57.2458C56.0847 57.7042 53.8083 58.0556 51.425 58.3C49.0417 58.5444 46.5667 58.6667 44 58.6667C41.4333 58.6667 38.9278 58.5444 36.4833 58.3C34.0389 58.0556 31.7319 57.7042 29.5625 57.2458C27.3931 56.7875 25.3611 56.2222 23.4667 55.55C21.5722 54.8778 19.8611 54.1139 18.3333 53.2583V62.3333C18.6389 63.25 19.6014 64.1361 21.2208 64.9917C22.8403 65.8472 24.8722 66.6264 27.3167 67.3292C29.7611 68.0319 32.45 68.5972 35.3833 69.025C38.3167 69.4528 41.1889 69.6667 44 69.6667Z"
+  //             fill="currentColor"
+  //           />
+  //         </svg>
+  //       ),
+  //     },
+  //     {
+  //       name: "Montage & Post-production",
+  //       description:
+  //         "Montage de vidéos et motion design, comme teasers pour réseaux sociaux, trailers de lancement ou habillage graphique pour vos vidéos, pour un rendu professionnel et engageant.",
+  //       icon: (
+  //         <svg
+  //           width="88"
+  //           height="88"
+  //           viewBox="0 0 88 88"
+  //           fill="none"
+  //           xmlns="http://www.w3.org/2000/svg"
+  //           className={iconsClassName}
+  //         >
+  //           <path
+  //             d="M54.9999 73.3337V47.667H80.6666V73.3337H54.9999ZM40.3333 40.3337V14.667H80.6666V40.3337H40.3333ZM7.33325 73.3337V47.667H47.6666V73.3337H7.33325ZM7.33325 40.3337V14.667H32.9999V40.3337H7.33325ZM47.6666 33.0003H73.3333V22.0003H47.6666V33.0003ZM14.6666 66.0003H40.3333V55.0003H14.6666V66.0003ZM62.3333 66.0003H73.3333V55.0003H62.3333V66.0003ZM14.6666 33.0003H25.6666V22.0003H14.6666V33.0003Z"
+  //             fill="currentColor"
+  //           />
+  //         </svg>
+  //       ),
+  //     },
+  //   ],
+  // },
 ];
 
-export default function ServicesSection() {
+export default function Services() {
   const [hoveredService, setHoveredService] = useState<string>("");
+  const backgroundShapeRef = useRef<HTMLImageElement>(null);
+  const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
+
+  const getNumberOfColumns = () => {
+    return services.reduce((sum, _, index) => sum + getColumnSpan(index), 0);
+  };
+
+  const getColumnSpan = (categoryIndex: number) => {
+    return Math.ceil(services[categoryIndex].list.length / 3);
+  };
+
+  useGSAP(() => {
+    gsap.to(backgroundShapeRef.current, {
+      yPercent: 50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: backgroundShapeRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+    gsap.to(backgroundLightLeftRef.current, {
+      yPercent: 100,
+      ease: "none",
+      scrollTrigger: {
+        trigger: backgroundLightLeftRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
 
   return (
-    <section className="relative flex flex-col items-center gap-8 px-4 py-16 md:py-24">
+    <section
+      id="services"
+      className="relative flex flex-col items-center gap-8 px-8 py-16 md:py-24"
+    >
+      <Image
+        ref={backgroundShapeRef}
+        src="/background shape full.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute top-0 right-0 transform translate-y-1/2 w-1/3 md:w-2/7 h-auto opacity-15 pointer-events-none select-none -z-10"
+      />
+      <Image
+        ref={backgroundLightLeftRef}
+        src="/background light.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute bottom-0 left-0 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
+      />
       <h2 className="text-3xl font-bold text-center">Nos Services</h2>
-      <div className="flex justify-center flex-wrap">
-        {services.map((service, index) => (
-          <div
-            key={service.category}
-            className={`flex flex-col gap-8 shrink-0 pt-2 mt-8 text-${
-              index + 1
-            } hover:bg-${
-              index + 1
-            }/15 transition-colors duration-300 ease-in-out`}
-          >
-            <h3 className="text-sm xl:text-base font-outfit! text-center w-max place-self-center">
-              {service.category}
-            </h3>
-            <ul className="flex flex-col flex-wrap place-content-end max-h-[30rem]">
-              {(service.list.length < 3 ||
-                (service.list.length - 1) % 3 === 0 ||
-                ((service.list.length - 2) % 3 === 0 &&
-                  index + 1 > service.list.length / 2)) && (
-                <div className="w-32 xl:w-40 h-32 xl:h-40 max-md:hidden"></div>
-              )}
-              {service.list.map((item) => (
-                <li
-                  key={item.name}
-                  onMouseEnter={() => setHoveredService(item.description)}
-                  onMouseLeave={() => setHoveredService("")}
-                  className={`group relative w-32 xl:w-40 h-32 xl:h-40 flex flex-col justify-end items-center gap-2 py-2 px-4 bg-grey-lightest/5 hover:bg-${
-                    index + 1
-                  }/10 hover:z-10 transition-all duration-300 ease-in-out cursor-pointer`}
-                >
-                  <div
-                    className={`absolute -inset-[1px] -z-1 bg-linear-to-br from-grey-dark via-grey-dark to-grey-dark group-hover:from-primary-lighter group-hover:via-${
+      <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
+        <div
+          className="grid max-md:grid-cols-2! gap-y-8 w-full"
+          style={{
+            gridTemplateColumns: `repeat(${getNumberOfColumns()}, minmax(0, 1fr))`,
+          }}
+        >
+          {services.map((service, index) => (
+            <div
+              key={service.category}
+              className={`grid grid-rows-[auto_1fr] gap-8 pt-3 text-${
+                index + 1
+              } hover:bg-${
+                index + 1
+              }/15 transition-colors duration-300 ease-in-out`}
+              style={{ gridColumn: `span ${getColumnSpan(index)}` }}
+            >
+              <h3 className="text-sm xl:text-base font-outfit! text-center place-self-center px-3">
+                {service.category}
+              </h3>
+              <ul
+                className="grid place-content-end"
+                style={{
+                  gridTemplateColumns: `repeat(${getColumnSpan(
+                    index
+                  )}, minmax(0, 1fr))`,
+                }}
+              >
+                {index > services.length / 2 &&
+                  (service.list.length + 1) % 3 === 0 && (
+                    <div className="max-md:hidden"></div>
+                  )}
+                {service.list.map((item) => (
+                  <li
+                    key={item.name}
+                    onMouseEnter={() => setHoveredService(item.description)}
+                    onMouseLeave={() => setHoveredService("")}
+                    className={`group relative grid justify-items-center gap-2 py-4 px-4 bg-grey-lightest/5 hover:bg-${
                       index + 1
-                    } group-hover:to-${
-                      index + 1
-                    }-dark transition-all duration-300 ease-in-out`}
-                    style={
-                      {
-                        "--border-width": "2px",
-                        clipPath: `polygon(
+                    }/10 hover:z-10 transition-all duration-300 ease-in-out cursor-pointer`}
+                  >
+                    <div
+                      className={`absolute -inset-[1px] -z-1 bg-linear-to-br from-grey-dark via-grey-dark to-grey-dark group-hover:from-primary-lighter group-hover:via-${
+                        index + 1
+                      } group-hover:to-${
+                        index + 1
+                      }-dark transition-all duration-300 ease-in-out`}
+                      style={
+                        {
+                          "--border-width": "2px",
+                          clipPath: `polygon(
                           0 0,
                           calc(100% - var(--border-width)) 0,
                           calc(100% - var(--border-width)) var(--border-width),
@@ -363,26 +438,29 @@ export default function ServicesSection() {
                           100% 100%,
                           0 100%
                         )`,
-                      } as React.CSSProperties
-                    }
-                  ></div>
-                  {item.icon}
-                  <h4 className="font-outfit! text-center text-grey-lightest text-xs xl:text-sm font-bold">
-                    {item.name}
-                  </h4>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+                        } as React.CSSProperties
+                      }
+                    ></div>
+                    {item.icon}
+                    <h4 className="font-outfit! text-center text-grey-lightest text-xs xl:text-sm font-bold">
+                      {item.name}
+                    </h4>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        {hoveredService ? (
+          <p className="text-center text-balance text-grey-lightest max-md:hidden">
+            {hoveredService}
+          </p>
+        ) : (
+          <p className="text-center text-balance text-grey-light italic max-md:hidden">
+            Survolez un service pour voir sa description
+          </p>
+        )}
       </div>
-      {hoveredService ? (
-        <p className="text-center text-grey-lightest">{hoveredService}</p>
-      ) : (
-        <p className="text-center text-grey-light italic">
-          Survolez un service pour voir sa description
-        </p>
-      )}
     </section>
   );
 }

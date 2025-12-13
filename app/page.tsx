@@ -1,16 +1,17 @@
 import Nav from "./components/nav";
-import HeroSection from "./components/hero-section";
-import TeamSection from "./components/team-section";
-import ServicesSection from "./components/services-section";
+import Hero from "./components/sections/hero";
+import Team from "./components/sections/team";
+import Services from "./components/sections/services";
+import Contact from "./components/sections/contact";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <>
       <Nav />
-      <HeroSection />
-      <TeamSection />
-      <ServicesSection />
-      <div className="min-h-screen"></div>
-    </div>
+      <Hero />
+      <Team />
+      <Services />
+      <Contact />
+    </>
   );
 }

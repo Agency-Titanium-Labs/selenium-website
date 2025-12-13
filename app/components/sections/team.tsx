@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Button from "./ui/button";
+import Button from "../ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -13,7 +13,7 @@ const teamMembers = [
   {
     name: "Antoine",
     description:
-      "Le pixel-perfect, c'est son truc. Il transforme les maquettes en interfaces fluides, rapides et responsives.\nReact, animations web, accessibilité... rien ne lui échappe.",
+      "Ingénieur informatique, il crée des interfaces rapides, responsives et accessibles. Pixel-perfect, animations et SEO technique : il optimise l'expérience utilisateur.",
     role: "Dev frontend",
     imageUrl: "/team/antoine.png",
     portfolioUrl: "https://antoinefavereau.fr/",
@@ -35,7 +35,7 @@ const teamMembers = [
   {
     name: "Athéna",
     description:
-      "La créative de l'équipe, elle conçoit des designs modernes et intuitifs qui captivent les utilisateurs. Branding, UI/UX, prototypage... elle maîtrise tout.",
+      "Diplômée d'un master en design, elle conçoit des designs intuitifs et modernes, alliant branding, UX/UI et prototypage pour transformer vos outils digitaux en véritables atouts business.",
     role: "Design UX/UI",
     imageUrl: "/team/athena.png",
     portfolioUrl: "https://graine2pain.fr/",
@@ -57,7 +57,7 @@ const teamMembers = [
   {
     name: "Anatholy",
     description:
-      "Le magicien des serveurs et des bases de données. Il construit des API robustes et sécurisées, et optimise les performances backend pour une expérience utilisateur fluide.",
+      "Ingénieur informatique et expert en serveurs, API et bases de données, il construit des solutions robustes, sécurisées et performantes pour soutenir votre croissance digitale.",
     role: "Dev backend",
     imageUrl: "/team/anatholy.png",
     portfolioUrl: "https://anatholyb1.github.io/",
@@ -79,7 +79,7 @@ const teamMembers = [
   {
     name: "Rémi",
     description:
-      "Le commercial de l'équipe, il déniche les opportunités et construit des relations solides avec les clients. Stratégie, négociation, CRM... il sait tout faire.",
+      "Ingénieur de formation, il analyse marché, budget et stratégie pour rendre vos projets viables et rentables. De l'idée à la solution, il maximise la valeur de votre investissement.",
     role: "Business dev",
     imageUrl: "/team/remi.png",
     portfolioUrl: "https://remicostes.fr/",
@@ -100,7 +100,7 @@ const teamMembers = [
   },
 ];
 
-export default function TeamSection() {
+export default function Team() {
   const backgroundLightRightRef = useRef<HTMLImageElement>(null);
   const backgroundShapeRef = useRef<HTMLImageElement>(null);
   const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
@@ -130,7 +130,10 @@ export default function TeamSection() {
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center gap-12 px-4 py-16 md:py-24">
+    <section
+      id="team"
+      className="relative flex flex-col items-center gap-12 px-4 py-16 md:py-24"
+    >
       <Image
         ref={backgroundLightRightRef}
         src="/background light.svg"
@@ -168,7 +171,7 @@ export default function TeamSection() {
         {teamMembers.map((member) => (
           <li
             key={member.name}
-            className="group team-member-card relative bg-grey-lightest/5 backdrop-blur-md w-full sm:max-w-3xs"
+            className="group team-member-card relative bg-grey-lightest/10 backdrop-blur-md w-full sm:max-w-3xs"
             style={
               {
                 "--corner-size": "30px",
@@ -229,7 +232,7 @@ export default function TeamSection() {
             <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest">
               {member.role}
             </p>
-            <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
+            {/* <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
               {member.tools.map((tool) => (
                 <li key={tool.name} title={tool.name}>
                   <Image
@@ -240,7 +243,7 @@ export default function TeamSection() {
                   />
                 </li>
               ))}
-            </ul>
+            </ul> */}
             <div
               className="absolute bottom-0 left-0 w-full flex flex-col items-center gap-4 p-4 bg-grey-darkest/60 backdrop-blur-xs text-xl transform translate-y-[calc(100%-2rem-1.2em)] group-hover:translate-y-0 transition-transform duration-500 ease-in-out group-hover:delay-50 [&]:[@media(hover:none)]:translate-y-0"
               style={
