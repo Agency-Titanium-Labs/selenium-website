@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Button from "../ui/button";
 import Input from "../ui/Input";
 import { useContactModal } from "@/app/contexts/contact-modal-context";
+import { useSendContact } from "@/app/hook/sendContact";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -24,6 +25,7 @@ export default function Contact() {
     message: undefined,
   });
   const { openModal } = useContactModal();
+  const { send, isLoading, status } = useSendContact();
   const backgroundDotsRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -40,8 +42,26 @@ export default function Contact() {
     });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const fd = new FormData();
+    if (formData.name) fd.append("name", formData.name);
+    if (formData.phone) fd.append("phone", formData.phone);
+    fd.append("email", formData.email);
+    if (formData.message) fd.append("message", formData.message);
+
+    try {
+      await send(fd);
+      setFormData({
+        name: undefined,
+        phone: undefined,
+        email: "",
+        message: undefined,
+      });
+    } catch (err) {
+      console.error("Failed to send contact form:", err);
+    }
   };
 
   return (
@@ -165,8 +185,16 @@ export default function Contact() {
                 }
               />
             </div>
-            <Button type="submit" className="md:col-span-2 md:ml-auto">
-              Envoyer
+            <Button
+              type="submit"
+              className="md:col-span-2 md:ml-auto"
+              disabled={isLoading}
+            >
+              {isLoading
+                ? "Envoi…"
+                : status === "success"
+                ? "Envoyé ✓"
+                : "Envoyer"}
             </Button>
           </form>
         </div>
