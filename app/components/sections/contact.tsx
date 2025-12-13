@@ -1,9 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../ui/button";
 import Input from "../ui/Input";
 import { useContactModal } from "@/app/contexts/contact-modal-context";
+import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
   const [formData, setFormData] = useState<{
@@ -18,13 +24,39 @@ export default function Contact() {
     message: undefined,
   });
   const { openModal } = useContactModal();
+  const backgroundDotsRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    gsap.from(backgroundDotsRef.current, {
+      yPercent: -60,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
 
   return (
-    <section className="grid place-items-center py-32 max-md:pb-16 px-4">
+    <section
+      ref={containerRef}
+      className="relative grid place-items-center py-32 max-md:pb-16 px-4 overflow-hidden"
+    >
+      <Image
+        ref={backgroundDotsRef}
+        src="/background dots.svg"
+        alt=""
+        width={800}
+        height={800}
+        className="absolute bottom-0 left-0 transform -translate-x-1/3 translate-y-1/3 w-1/4 h-auto pointer-events-none select-none -z-10"
+      />
       <div
         className="group team-member-card relative bg-grey-lightest/5 backdrop-blur-md w-full max-w-5xl [--corner-size:40px] md:[--corner-size:80px]"
         style={
