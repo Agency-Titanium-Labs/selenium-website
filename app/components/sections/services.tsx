@@ -397,7 +397,7 @@ export default function Services() {
                 {service.category}
               </h3>
               <ul
-                className="grid place-content-end"
+                className="grid place-content-start md:place-content-end"
                 style={{
                   gridTemplateColumns: `repeat(${getColumnSpan(
                     index
