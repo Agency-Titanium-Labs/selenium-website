@@ -66,8 +66,8 @@ export default function LegalNotices() {
         <li>
           <h2 className="text-white">Propriété intellectuelle</h2>
           <p>
-            L’ensemble du contenu du site (textes, images, vidéos, graphismes,
-            logos, icônes, etc.) est la propriété exclusive de{" "}
+            L&rsquo;ensemble du contenu du site (textes, images, vidéos,
+            graphismes, logos, icônes, etc.) est la propriété exclusive de{" "}
             <b>Selenium Studio</b>, sauf mention contraire.
           </p>
           <p>
@@ -85,8 +85,8 @@ export default function LegalNotices() {
           <p>
             Conformément au{" "}
             <b>Règlement Général sur la Protection des Données (RGPD)</b>, vous
-            disposez d’un droit d’accès, de rectification et de suppression de
-            vos données.
+            disposez d&rsquo;un droit d&rsquo;accès, de rectification et de
+            suppression de vos données.
           </p>
           <p>
             Pour toute demande, contactez :{" "}
@@ -102,28 +102,28 @@ export default function LegalNotices() {
             <a href="/legal-documents/privacy-policy" className="text-primary">
               Politique de confidentialité & cookies
             </a>{" "}
-            pour plus d’informations.
+            pour plus d&rsquo;informations.
           </p>
         </li>
         <li>
           <h2 className="text-white">Responsabilité</h2>
           <p>
-            <b>Selenium Studio</b> s’efforce d’assurer la fiabilité des
-            informations présentes sur le site.
+            <b>Selenium Studio</b> s&rsquo;efforce d&rsquo;assurer la fiabilité
+            des informations présentes sur le site.
           </p>
           <p>
-            Cependant, l’entreprise ne peut garantir l’exactitude, la complétude
-            ou la mise à jour de ces informations et décline toute
-            responsabilité en cas d’erreur ou d’omission.
+            Cependant, l&rsquo;entreprise ne peut garantir l&rsquo;exactitude,
+            la complétude ou la mise à jour de ces informations et décline toute
+            responsabilité en cas d&rsquo;erreur ou d&rsquo;omission.
           </p>
         </li>
         <li>
           <h2 className="text-white">Liens externes</h2>
           <p>
-            Le site peut contenir des liens vers d’autres sites.{" "}
-            <b>Selenium Studio</b> n’exerce aucun contrôle sur ces contenus
-            externes et décline toute responsabilité quant à leur contenu ou
-            leur politique de confidentialité.
+            Le site peut contenir des liens vers d&rsquo;autres sites.{" "}
+            <b>Selenium Studio</b> n&rsquo;exerce aucun contrôle sur ces
+            contenus externes et décline toute responsabilité quant à leur
+            contenu ou leur politique de confidentialité.
           </p>
         </li>
         <li>
@@ -132,7 +132,7 @@ export default function LegalNotices() {
             Les présentes mentions légales sont régies par le droit français.
           </p>
           <p>
-            Tout litige relatif à l’utilisation du site sera soumis à la
+            Tout litige relatif à l&rsquo;utilisation du site sera soumis à la
             compétence des tribunaux français.
           </p>
         </li>

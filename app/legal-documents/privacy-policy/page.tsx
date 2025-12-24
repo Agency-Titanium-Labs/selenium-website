@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
             </li>
             <li>
               Des données techniques (IP, navigateur, pages visitées) pour
-              analyser l’usage du site et améliorer l’expérience.
+              analyser l&rsquo;usage du site et améliorer l&rsquo;expérience.
             </li>
           </ul>
           <p>
@@ -51,10 +51,12 @@ export default function PrivacyPolicy() {
           <h2 className="text-white">Partage des données</h2>
           <p>
             Nous ne partageons vos données personnelles avec des tiers que
-            lorsque c’est nécessaire pour :
+            lorsque c&rsquo;est nécessaire pour :
           </p>
           <ul>
-            <li>Fournir nos services (hébergement, outils d’emailing, CRM).</li>
+            <li>
+              Fournir nos services (hébergement, outils d&rsquo;emailing, CRM).
+            </li>
             <li>Respecter nos obligations légales.</li>
           </ul>
         </li>
@@ -89,10 +91,10 @@ export default function PrivacyPolicy() {
               du site.
             </li>
             <li>
-              <b>Vercel Analytics</b>, une solution de mesure d’audience
+              <b>Vercel Analytics</b>, une solution de mesure d&rsquo;audience
               respectueuse de la vie privée, qui ne suit pas vos habitudes de
-              navigation sur d’autres sites et ne nécessite pas de bannière de
-              consentement.
+              navigation sur d&rsquo;autres sites et ne nécessite pas de
+              bannière de consentement.
             </li>
           </ul>
           <p>
