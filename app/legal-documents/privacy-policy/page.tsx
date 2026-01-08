@@ -11,7 +11,7 @@ export default function PrivacyPolicy() {
             Cette page explique comment <b>Selenium Studio</b> collecte, utilise
             et protège vos données personnelles, ainsi que la manière dont nous
             utilisons les cookies et autres traceurs sur notre site{" "}
-            <a href="https://www.selenium-studio.com" className="text-primary">
+            <a href="https://selenium-studio.com" className="text-primary">
               Selenium - Agence web
             </a>
             .
