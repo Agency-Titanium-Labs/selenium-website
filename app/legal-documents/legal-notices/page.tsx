@@ -7,8 +7,8 @@ export default function LegalNotices() {
           <h2 className="text-white">Éditeur du site</h2>
           <p>
             Le site{" "}
-            <a href="https://www.selenium-studio.com" className="text-primary">
-              www.selenium-studio.com
+            <a href="https://selenium-studio.com" className="text-primary">
+              selenium-studio.com
             </a>{" "}
             est édité par :
           </p>
@@ -47,7 +47,7 @@ export default function LegalNotices() {
           </p>
           <p>
             Le nom de domaine{" "}
-            <a href="https://www.selenium-studio.com" className="text-primary">
+            <a href="https://selenium-studio.com" className="text-primary">
               Selenium - Agence web
             </a>{" "}
             est enregistré auprès de :
