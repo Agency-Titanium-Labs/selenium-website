@@ -17,11 +17,75 @@ const orbitron = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Selenium - Agence web",
+  metadataBase: new URL("https://selenium-studio.com"),
+  title: {
+    default: "Selenium - Agence web",
+    template: "%s | Selenium",
+  },
   description:
-    "Agence web spécialisée en création de sites vitrines et e-commerce. Nous allions design et développement pour offrir des solutions sur mesure à nos clients.",
+    "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
+  keywords: [
+    "Agence web",
+    "Développement web",
+    "Automatisation",
+    "Création site internet",
+    "Application web",
+    "Outils sur mesure",
+    "Web design",
+    "UI UX",
+    "Site vitrine",
+    "E-commerce",
+    "SEO",
+    "Référencement naturel",
+    "Selenium Studio",
+  ],
+  authors: [{ name: "Selenium Studio" }],
+  creator: "Selenium Studio",
+  publisher: "Selenium Studio",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: "/logo.svg",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
+  },
+  openGraph: {
+    title: "Selenium - Agence web",
+    description:
+      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
+    url: "https://selenium-studio.com",
+    siteName: "Selenium Studio",
+    images: [
+      {
+        url: "/logo-full.svg", // Using full logo as fallback OG image
+        width: 1200,
+        height: 630,
+        alt: "Selenium Studio Logo",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Selenium - Agence web",
+    description:
+      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
+    images: ["/logo-full.svg"], // Using full logo as fallback
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -33,6 +97,24 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${outfit.variable} ${orbitron.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Selenium Studio",
+              url: "https://selenium-studio.com",
+              logo: "https://selenium-studio.com/logo-full.svg",
+              description:
+                "Agence web spécialisée en création de sites vitrines et e-commerce. Design et développement sur mesure.",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "FR",
+              },
+            }),
+          }}
+        />
         <ContactModalProvider>
           <LenisProvider>
             {children}
