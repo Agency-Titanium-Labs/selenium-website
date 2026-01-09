@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Selenium - Agence web",
   description:
     "Agence web spécialisée en création de sites vitrines et e-commerce. Nous allions design et développement pour offrir des solutions sur mesure à nos clients.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
