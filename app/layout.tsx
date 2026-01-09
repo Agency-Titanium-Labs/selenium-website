@@ -23,17 +23,20 @@ export const metadata: Metadata = {
     template: "%s | Selenium",
   },
   description:
-    "Agence web spécialisée en création de sites vitrines et e-commerce. Nous allions design et développement pour offrir des solutions sur mesure à nos clients.",
+    "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
   keywords: [
     "Agence web",
-    "Création site internet",
     "Développement web",
+    "Automatisation",
+    "Création site internet",
+    "Application web",
+    "Outils sur mesure",
     "Web design",
-    "UI/UX",
+    "UI UX",
     "Site vitrine",
     "E-commerce",
     "SEO",
-    "Référencement",
+    "Référencement naturel",
     "Selenium Studio",
   ],
   authors: [{ name: "Selenium Studio" }],
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Selenium - Agence web",
     description:
-      "Agence web spécialisée en création de sites vitrines et e-commerce. Nous allions design et développement pour offrir des solutions sur mesure à nos clients.",
+      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
     url: "https://selenium-studio.com",
     siteName: "Selenium Studio",
     images: [
@@ -70,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Selenium - Agence web",
     description:
-      "Agence web spécialisée en création de sites vitrines et e-commerce. Nous allions design et développement pour offrir des solutions sur mesure à nos clients.",
+      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
     images: ["/logo-full.svg"], // Using full logo as fallback
   },
   robots: {
