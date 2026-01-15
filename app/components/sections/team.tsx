@@ -297,7 +297,12 @@ export default function Team() {
               ></div>
               <h3 className="text-primary font-bold">{member.name}</h3>
               <p className="text-base">{member.description}</p>
-              <Button variant="outline" href={member.portfolioUrl}>
+              <Button
+                variant="outline"
+                href={member.portfolioUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Portfolio{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
