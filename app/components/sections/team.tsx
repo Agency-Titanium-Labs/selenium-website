@@ -19,12 +19,12 @@ const teamMembers = [
     portfolioUrl: "https://antoinefavereau.fr/",
     tools: [
       {
-        name: "Visual Studio Code",
-        iconUrl: "/tools/vscode.svg",
+        name: "Next.js",
+        iconUrl: "/tools/nextjs.svg",
       },
       {
-        name: "Node.js",
-        iconUrl: "/tools/nodejs.svg",
+        name: "Tailwind CSS",
+        iconUrl: "/tools/tailwindcss.svg",
       },
       {
         name: "Chrome DevTools",
@@ -41,16 +41,16 @@ const teamMembers = [
     portfolioUrl: "https://graine2pain.fr/",
     tools: [
       {
-        name: "Visual Studio Code",
-        iconUrl: "/tools/vscode.svg",
+        name: "Figma",
+        iconUrl: "/tools/figma.svg",
       },
       {
-        name: "Node.js",
-        iconUrl: "/tools/nodejs.svg",
+        name: "Adobe",
+        iconUrl: "/tools/adobe.svg",
       },
       {
-        name: "Chrome DevTools",
-        iconUrl: "/tools/chrome.svg",
+        name: "Blender",
+        iconUrl: "/tools/blender.svg",
       },
     ],
   },
@@ -63,16 +63,16 @@ const teamMembers = [
     portfolioUrl: "https://anatholyb1.github.io/",
     tools: [
       {
-        name: "Visual Studio Code",
-        iconUrl: "/tools/vscode.svg",
+        name: "MCP",
+        iconUrl: "/tools/mcp.svg",
       },
       {
-        name: "Node.js",
-        iconUrl: "/tools/nodejs.svg",
+        name: "N8N",
+        iconUrl: "/tools/n8n.svg",
       },
       {
-        name: "Chrome DevTools",
-        iconUrl: "/tools/chrome.svg",
+        name: "Cloud",
+        iconUrl: "/tools/cloud.svg",
       },
     ],
   },
@@ -85,16 +85,16 @@ const teamMembers = [
     portfolioUrl: "https://remicostes.fr/",
     tools: [
       {
-        name: "Visual Studio Code",
-        iconUrl: "/tools/vscode.svg",
+        name: "Semrush",
+        iconUrl: "/tools/semrush.svg",
       },
       {
-        name: "Node.js",
-        iconUrl: "/tools/nodejs.svg",
+        name: "Google Analytics",
+        iconUrl: "/tools/googleanalytics.svg",
       },
       {
-        name: "Chrome DevTools",
-        iconUrl: "/tools/chrome.svg",
+        name: "HubSpot",
+        iconUrl: "/tools/hubspot.svg",
       },
     ],
   },
@@ -108,7 +108,7 @@ export default function Team() {
 
   function animateBackground(
     ref: React.RefObject<HTMLImageElement | null>,
-    yPercent: number
+    yPercent: number,
   ) {
     gsap.to(ref.current, {
       yPercent,
@@ -216,6 +216,31 @@ export default function Team() {
               height={100}
               className="absolute top-40 left-6 w-16 h-auto pointer-events-none select-none"
             />
+            <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-50 group-hover:opacity-100 group-hover:z-10 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
+              {member.tools.map((tool) => (
+                <li
+                  key={tool.name}
+                  title={tool.name}
+                  className="border border-white/50 p-1"
+                >
+                  <div
+                    role="img"
+                    aria-label={tool.name}
+                    className="w-6 h-6 bg-current text-white/50"
+                    style={{
+                      maskImage: `url('${tool.iconUrl}')`,
+                      WebkitMaskImage: `url('${tool.iconUrl}')`,
+                      maskSize: "contain",
+                      WebkitMaskSize: "contain",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskPosition: "center",
+                      WebkitMaskPosition: "center",
+                    }}
+                  />
+                </li>
+              ))}
+            </ul>
             <Image
               src={member.imageUrl}
               alt={member.name}
@@ -232,18 +257,6 @@ export default function Team() {
             <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest">
               {member.role}
             </p>
-            {/* <ul className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out delay-0 group-hover:delay-200 [&]:[@media(hover:none)]:opacity-100">
-              {member.tools.map((tool) => (
-                <li key={tool.name} title={tool.name}>
-                  <Image
-                    src={tool.iconUrl}
-                    alt={tool.name}
-                    width={32}
-                    height={32}
-                  />
-                </li>
-              ))}
-            </ul> */}
             <div
               className="absolute bottom-0 left-0 w-full flex flex-col items-center gap-4 p-4 bg-grey-darkest/60 backdrop-blur-xs text-xl transform translate-y-[calc(100%-2rem-1.2em)] group-hover:translate-y-0 transition-transform duration-500 ease-in-out group-hover:delay-50 [&]:[@media(hover:none)]:translate-y-0"
               style={
