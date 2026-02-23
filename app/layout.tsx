@@ -96,7 +96,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Selenium Studio",
               url: "https://selenium-studio.com",
-              logo: "https://selenium-studio.com/logo-full.svg",
+              logo: "https://selenium-studio.com/logo-full.png",
               description:
                 "Agence web spécialisée en création de sites vitrines et e-commerce. Design et développement sur mesure.",
               address: {
