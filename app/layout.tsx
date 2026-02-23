@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: "Selenium Studio",
     images: [
       {
-        url: "/logo-full.svg", // Using full logo as fallback OG image
+        url: "/logo-full.png", // Using full logo as fallback OG image
         width: 1200,
         height: 630,
         alt: "Selenium Studio Logo",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "Selenium - Agence web",
     description:
       "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: ["/logo-full.svg"], // Using full logo as fallback
+    images: ["/logo-full.png"], // Using full logo as fallback
   },
   robots: {
     index: true,
@@ -105,7 +105,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Selenium Studio",
               url: "https://selenium-studio.com",
-              logo: "https://selenium-studio.com/logo-full.svg",
+              logo: "https://selenium-studio.com/logo-full.png",
               description:
                 "Agence web spécialisée en création de sites vitrines et e-commerce. Design et développement sur mesure.",
               address: {
