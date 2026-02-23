@@ -58,14 +58,6 @@ export const metadata: Metadata = {
       "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
     url: "https://selenium-studio.com",
     siteName: "Selenium Studio",
-    images: [
-      {
-        url: "/logo-full.png", // Using full logo as fallback OG image
-        width: 1200,
-        height: 630,
-        alt: "Selenium Studio Logo",
-      },
-    ],
     locale: "fr_FR",
     type: "website",
   },
@@ -74,7 +66,6 @@ export const metadata: Metadata = {
     title: "Selenium - Agence web",
     description:
       "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: ["/logo-full.png"], // Using full logo as fallback
   },
   robots: {
     index: true,
@@ -105,7 +96,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Selenium Studio",
               url: "https://selenium-studio.com",
-              logo: "https://selenium-studio.com/logo-full.png",
+              logo: "https://selenium-studio.com/logo-full.svg",
               description:
                 "Agence web spécialisée en création de sites vitrines et e-commerce. Design et développement sur mesure.",
               address: {
