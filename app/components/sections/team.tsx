@@ -60,7 +60,7 @@ const teamMembers = [
       "Ingénieur informatique et expert en serveurs, API et bases de données, il construit des solutions robustes, sécurisées et performantes pour soutenir votre croissance digitale.",
     role: "Dev backend",
     imageUrl: "/team/anatholy.png",
-    portfolioUrl: "https://anatholyb1.github.io/",
+    portfolioUrl: "https://anatholy-bricon.com/",
     tools: [
       {
         name: "MCP",
