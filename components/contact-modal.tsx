@@ -1,23 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Modal from "./ui/modal";
-import Button from "./ui/button";
+import Modal from "@/components/ui/modal";
+import Button from "@/components/ui/button";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import type {
   ContactModalProps,
   FormData as ContactFormData,
-} from "./contact-modal/types";
-import { initialFormData } from "./contact-modal/constants";
-import Step1Contact from "./contact-modal/steps/Step1Contact";
-import Step2Category from "./contact-modal/steps/Step2Category";
-import Step3CompanySize from "./contact-modal/steps/Step3CompanySize";
-import Step4Budget from "./contact-modal/steps/Step4Budget";
-import Step5Delay from "./contact-modal/steps/Step5Delay";
-import Step6Message from "./contact-modal/steps/Step6Message";
-import Step7Confirmation from "./contact-modal/steps/Step7Confirmation";
-import { useSendContact } from "../hook/sendContact";
+} from "@/components/contact-modal/types";
+import { initialFormData } from "@/components/contact-modal/constants";
+import Step1Contact from "@/components/contact-modal/steps/Step1Contact";
+import Step2Category from "@/components/contact-modal/steps/Step2Category";
+import Step3CompanySize from "@/components/contact-modal/steps/Step3CompanySize";
+import Step4Budget from "@/components/contact-modal/steps/Step4Budget";
+import Step5Delay from "@/components/contact-modal/steps/Step5Delay";
+import Step6Message from "@/components/contact-modal/steps/Step6Message";
+import Step7Confirmation from "@/components/contact-modal/steps/Step7Confirmation";
+import { useSendContact } from "@/hook/sendContact";
 
 export default function ContactModal({
   isOpen,
@@ -65,18 +65,18 @@ export default function ContactModal({
             setBudgetList((prevBudgets) => {
               const newBudgets = [2000, 5000, 20000, 50000, Infinity];
               return prevBudgets.map(
-                (budget, index) => budget + newBudgets[index]
+                (budget, index) => budget + newBudgets[index],
               );
             });
           } else if (
             ["design_branding", "production_visuelle_publicitaire"].includes(
-              category
+              category,
             )
           ) {
             setBudgetList((prevBudgets) => {
               const newBudgets = [500, 2000, 5000, 20000, Infinity];
               return prevBudgets.map(
-                (budget, index) => budget + newBudgets[index]
+                (budget, index) => budget + newBudgets[index],
               );
             });
           }
@@ -86,7 +86,7 @@ export default function ContactModal({
           setBudgetList((prevBudgets) => {
             const newBudgets = [500, 2000, 5000, 20000, Infinity];
             return prevBudgets.map(
-              (budget, index) => budget + newBudgets[index]
+              (budget, index) => budget + newBudgets[index],
             );
           });
         }
@@ -148,7 +148,7 @@ export default function ContactModal({
         height={800}
         className={twMerge(
           "absolute top-1/2 left-1/2 pointer-events-none select-none blur-[300px] -z-10 transition-transform duration-1000",
-          currentStep % 2 === 0 ? "translate-x-[30%]" : "translate-x-[-130%]"
+          currentStep % 2 === 0 ? "translate-x-[30%]" : "translate-x-[-130%]",
         )}
       />
       <div className="space-y-6">
@@ -176,7 +176,7 @@ export default function ContactModal({
                 className={twMerge(
                   "flex-1 h-3 bg-grey-darker transition-colors",
                   step <= lastStepReached && "bg-primary-dark",
-                  step === currentStep && "bg-primary"
+                  step === currentStep && "bg-primary",
                 )}
                 disabled={step > lastStepReached || currentStep === 1}
                 onClick={() => setCurrentStep(step)}

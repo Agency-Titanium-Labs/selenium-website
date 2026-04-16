@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "./ui/button";
-import { useContactModal } from "../contexts/contact-modal-context";
+import Button from "@/components/ui/button";
+import { useContactModal } from "@/contexts/contact-modal-context";
 import Image from "next/image";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";

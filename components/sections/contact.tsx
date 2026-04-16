@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Button from "../ui/button";
-import Input from "../ui/Input";
-import { useContactModal } from "@/app/contexts/contact-modal-context";
-import { useSendContact } from "@/app/hook/sendContact";
+import Button from "@/components/ui/button";
+import Input from "@/components/ui/Input";
+import { useContactModal } from "@/contexts/contact-modal-context";
+import { useSendContact } from "@/hook/sendContact";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -193,8 +193,8 @@ export default function Contact() {
               {isLoading
                 ? "Envoi…"
                 : status === "success"
-                ? "Envoyé ✓"
-                : "Envoyer"}
+                  ? "Envoyé ✓"
+                  : "Envoyer"}
             </Button>
           </form>
         </div>

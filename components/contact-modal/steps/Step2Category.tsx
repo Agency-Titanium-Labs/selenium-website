@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { FormData } from "../types";
-import { categoriesOptions, categoryPlaceholders } from "../constants";
+import { FormData } from "@/components/contact-modal/types";
+import { categoriesOptions, categoryPlaceholders } from "@/components/contact-modal/constants";
 
 interface Step2CategoryProps {
   formData: FormData;

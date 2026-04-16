@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import LenisProvider from "./components/LenisProvider";
-import { ContactModalProvider } from "./contexts/contact-modal-context";
-import GlobalContactModal from "./components/global-contact-modal";
+import LenisProvider from "@/components/LenisProvider";
+import { ContactModalProvider } from "@/contexts/contact-modal-context";
+import GlobalContactModal from "@/components/global-contact-modal";
 import { Analytics } from "@vercel/analytics/next";
 
 const outfit = localFont({

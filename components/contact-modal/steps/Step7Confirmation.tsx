@@ -1,4 +1,4 @@
-import { FormData } from "../types";
+import { FormData } from "@/components/contact-modal/types";
 
 interface Step7ConfirmationProps {
   formData: FormData;

@@ -1,4 +1,4 @@
-import { FormData } from "./types";
+import { FormData } from "@/components/contact-modal/types";
 
 export const categoriesOptions = [
   { label: "Web & Applications", value: "web_applications" },

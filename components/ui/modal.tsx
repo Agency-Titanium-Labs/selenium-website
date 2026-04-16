@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { twMerge } from "tailwind-merge";
-import { useLenis } from "../LenisProvider";
+import { useLenis } from "@/components/LenisProvider";
 
 interface ModalProps {
   isOpen: boolean;

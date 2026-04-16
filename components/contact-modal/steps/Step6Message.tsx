@@ -1,5 +1,5 @@
-import Input from "../../ui/Input";
-import { FormData } from "../types";
+import Input from "@/components/ui/Input";
+import { FormData } from "@/components/contact-modal/types";
 
 interface Step6MessageProps {
   formData: FormData;
