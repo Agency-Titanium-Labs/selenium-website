@@ -18,23 +18,6 @@ const projects = [
     link: "https://selenium-studio.com",
   },
   {
-    title: "Selenium Studio",
-    description:
-      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: [
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-    ],
-    link: "https://selenium-studio.com",
-  },
-  {
-    title: "Selenium Studio",
-    description:
-      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: ["/projects/selenium-studio-hero.png"],
-    link: "https://selenium-studio.com",
-  },
-  {
     title: "Portfolio Antoine Favereau",
     description: "Portfolio de Antoine Favereau, développeur Full Stack",
     images: ["/projects/portfolio-antoine-hero.png"],
@@ -42,59 +25,44 @@ const projects = [
     accentColor: "#00adb5",
   },
   {
-    title: "Selenium Studio",
-    description:
-      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: [
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-    ],
-    link: "https://selenium-studio.com",
+    title: "Portfolio Anatholy Bricon",
+    description: "Portfolio de Anatholy Bricon, développeur Full Stack",
+    images: ["/projects/portfolio-anatholy-hero.png"],
+    link: "https://anatholy-bricon.com/",
+    accentColor: "#4f46e5",
   },
   {
-    title: "Selenium Studio",
+    title: "Gecko Cabane",
     description:
-      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: [
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-    ],
-    link: "https://selenium-studio.com",
+      "Site complet pour un restaurant avec menus, photos d'ambiance, intégration Google Maps, informations de réservation et SEO local pour augmenter la fréquentation.",
+    images: ["/projects/gecko-cabane-hero.png"],
+    link: "https://geckocabanerestaurant.com/",
+    accentColor: "#2d5a3d",
   },
   {
-    title: "Selenium Studio",
+    title: "Victor Verissimo",
     description:
-      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: [
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-    ],
-    link: "https://selenium-studio.com",
+      "Portfolio soigné pour un professionnel créatif avec animations fluides, système de design raffiné et mise en valeur convaincante des compétences et réalisations.",
+    images: ["/projects/victor-verissimo-hero.png"],
+    link: "https://victor-verissimo.vercel.app/",
+    accentColor: "#84cc16",
   },
   {
-    title: "Selenium Studio",
+    title: "Ghjulianu Codani",
     description:
-      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: [
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-    ],
-    link: "https://selenium-studio.com",
+      "Site vitrine élégant pour l'artiste corse Ghjulianu Codani, mettant en avant son univers musical et artistique avec un design immersif et une expérience utilisateur moderne.",
+    images: ["/projects/ghjulianu-codani-hero.png"],
+    link: "https://www.ghjulianu-codani.com/",
+    accentColor: "#c8a97e",
   },
   {
-    title: "Selenium Studio",
+    title: "Les Folies Temps Danse",
     description:
-      "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    images: [
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png",
-    ],
-    link: "https://selenium-studio.com",
+      "Site complet pour la compagnie de danse Les Folies Temps Danse, présentant le répertoire, les actualités, les cours et les événements dans un design dynamique et animé.",
+    images: ["/projects/les-folies-temps-danse-hero.png"],
+    link: "https://lesfoliestempsdanse.com/",
+    accentColor: "#bc0042",
+    lightMode: true,
   },
 ];
 
@@ -259,7 +227,10 @@ function ProjectCard({
         })}
       </div>
       <div
-        className="relative h-5/6 bg-grey-lightest/20 backdrop-blur-md [--corner-size-x:40px] [--corner-size-y:30px] [--left-size:100px] p-6 flex flex-col justify-end transform -rotate-x-0 origin-bottom group-hover:-rotate-x-30 transition-transform duration-300 z-4"
+        className={twMerge(
+          "relative h-5/6 backdrop-blur-md [--corner-size-x:40px] [--corner-size-y:30px] [--left-size:100px] p-6 flex flex-col justify-end transform -rotate-x-0 origin-bottom group-hover:-rotate-x-30 transition-transform duration-300 z-4",
+          project.lightMode ? "bg-grey-darkest/60" : "bg-grey-lightest/20",
+        )}
         style={
           {
             clipPath: `polygon(
