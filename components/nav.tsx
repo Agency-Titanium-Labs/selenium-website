@@ -98,7 +98,7 @@ export default function Nav() {
                 className="h-10 sm:h-12 md:h-14 w-auto"
               />
             </Link>
-            <ul className="flex flex-col md:flex-row items-center gap-2 md:gap-4 max-md:hidden">
+            <ul className="flex flex-col md:flex-row items-center gap-0 lg:gap-1 max-md:hidden">
               {navigation.map((item) => (
                 <li key={item.name}>
                   <Button

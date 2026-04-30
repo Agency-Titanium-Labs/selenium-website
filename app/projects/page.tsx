@@ -27,7 +27,7 @@ const projects = projectsData as Project[];
 export default function Projects() {
   return (
     <div className="grid place-items-center px-8 py-16">
-      <div className="w-full max-w-5xl grid grid-cols-3 gap-8">
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <ProjectCard key={project.title + index} project={project} />
         ))}

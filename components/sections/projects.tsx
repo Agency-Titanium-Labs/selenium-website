@@ -13,7 +13,7 @@ export default function Projects() {
     >
       <h2 className="text-3xl font-bold text-center">Nos Derniers Projets</h2>
       <div className="grid place-items-center gap-12 px-8">
-        <div className="w-full max-w-5xl grid grid-cols-3 gap-8">
+        <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.slice(0, 6).map((project, index) => (
             <ProjectCard key={project.title + index} project={project} />
           ))}
