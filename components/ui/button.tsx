@@ -30,7 +30,7 @@ export default function Button({
       className={twMerge(
         buttonDefaultClasses,
         buttonVariants[variant],
-        className
+        className,
       )}
       {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
     ></a>
@@ -40,7 +40,7 @@ export default function Button({
       className={twMerge(
         buttonDefaultClasses,
         buttonVariants[variant],
-        className
+        className,
       )}
       {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     ></button>

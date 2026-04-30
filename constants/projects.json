@@ -3,94 +3,257 @@
     "title": "Selenium Studio",
     "slug": "selenium-studio",
     "description": "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
+    "longDescription": "Selenium Studio est le site vitrine de notre agence web. Conçu pour refléter notre expertise en développement moderne, il présente nos services, réalisations et notre identité de marque. Le site mise sur un design immersif avec des animations GSAP, un design system cohérent et des performances optimisées pour donner une première impression mémorable à chaque visiteur.",
     "images": [
       "/projects/selenium-studio-hero.png",
       "/projects/selenium-studio-hero.png",
       "/projects/selenium-studio-hero.png"
     ],
-    "link": "https://selenium-studio.com"
-  },
-  {
-    "title": "Selenium Studio",
-    "slug": "selenium-studio",
-    "description": "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
-    "images": [
-      "/projects/selenium-studio-hero.png",
-      "/projects/selenium-studio-hero.png"
+    "link": "https://selenium-studio.com",
+    "year": 2025,
+    "category": "web",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "GSAP",
+      "Tailwind CSS"
     ],
-    "link": "https://selenium-studio.com"
+    "role": "Design + Développement full-stack",
+    "duration": "2 mois",
+    "client": "Selenium Studio",
+    "features": [
+      "Animations GSAP avancées",
+      "Design system sur mesure",
+      "SEO optimisé",
+      "Performances Lighthouse 95+"
+    ],
+    "challenges": [
+      "Créer une identité visuelle forte et unique",
+      "Animer des composants complexes sans nuire aux performances"
+    ]
   },
   {
     "title": "Portfolio Antoine Favereau",
     "slug": "portfolio-antoine-favereau",
     "description": "Portfolio de Antoine Favereau, développeur Full Stack",
+    "longDescription": "Portfolio personnel mettant en valeur le parcours et les compétences de Antoine Favereau, développeur Full Stack. Le site propose une navigation fluide, des transitions animées soignées et une présentation claire des projets réalisés. L'accent a été mis sur la rapidité de chargement et l'expérience utilisateur.",
     "images": [
       "/projects/portfolio-antoine-hero.png"
     ],
     "link": "https://antoinefavereau.fr",
-    "accentColor": "#00adb5"
+    "accentColor": "#00adb5",
+    "year": 2024,
+    "category": "web",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "GSAP",
+      "Tailwind CSS"
+    ],
+    "role": "Design + Développement full-stack",
+    "duration": "3 semaines",
+    "client": "Antoine Favereau",
+    "features": [
+      "Animations GSAP avancées",
+      "Responsive design",
+      "Traduction intégrée",
+      "Chargement optimisé des images"
+    ],
+    "challenges": [
+      "Rendre le portfolio à la fois personnel et professionnel",
+      "Équilibrer animations et accessibilité"
+    ]
   },
   {
     "title": "Portfolio Anatholy Bricon",
     "slug": "portfolio-anatholy-bricon",
     "description": "Portfolio de Anatholy Bricon, développeur Full Stack",
+    "longDescription": "Portfolio professionnel pour Anatholy Bricon, développeur Full Stack. Le design épuré et les couleurs indigo mettent en avant les projets et compétences techniques de manière claire et impactante. Une attention particulière a été portée à la typographie et aux micro-interactions.",
     "images": [
       "/projects/portfolio-anatholy-hero.png"
     ],
     "link": "https://anatholy-bricon.com/",
-    "accentColor": "#4f46e5"
+    "accentColor": "#4f46e5",
+    "year": 2025,
+    "category": "web",
+    "tags": [
+      "React",
+      "TypeScript",
+      "CSS Animations"
+    ],
+    "role": "Développement full-stack",
+    "duration": "2 semaines",
+    "client": "Anatholy Bricon",
+    "features": [
+      "Design minimaliste",
+      "Micro-interactions sur hover",
+      "Formulaire de contact intégré"
+    ],
+    "challenges": [
+      "Respecter la vision graphique du client",
+      "Garantir la compatibilité cross-browser"
+    ]
   },
   {
     "title": "Gecko Cabane",
     "slug": "gecko-cabane",
     "description": "Site complet pour un restaurant avec menus, photos d'ambiance, intégration Google Maps, informations de réservation et SEO local pour augmenter la fréquentation.",
+    "longDescription": "Gecko Cabane est le site officiel d'un restaurant, conçu pour attirer de nouveaux clients et simplifier la prise de réservation. Il intègre la présentation des menus, une galerie photo immersive, une carte Google Maps et un SEO local travaillé pour maximiser la visibilité sur les recherches de proximité.",
     "images": [
       "/projects/gecko-cabane-hero.png"
     ],
     "link": "https://geckocabanerestaurant.com/",
-    "accentColor": "#2d5a3d"
+    "accentColor": "#2d5a3d",
+    "year": 2023,
+    "category": "web",
+    "tags": [
+      "Next.js",
+      "SEO Local",
+      "Google Maps API",
+      "Tailwind CSS"
+    ],
+    "role": "Design + Développement full-stack",
+    "duration": "1 mois",
+    "client": "Gecko Cabane",
+    "features": [
+      "Présentation des menus dynamique",
+      "Galerie photo immersive",
+      "Intégration Google Maps",
+      "SEO local optimisé"
+    ],
+    "challenges": [
+      "Rendre le site appétissant visuellement",
+      "Optimiser le référencement local pour concurrencer TripAdvisor"
+    ]
   },
   {
     "title": "Victor Verissimo",
     "slug": "victor-verissimo",
     "description": "Portfolio soigné pour un professionnel créatif avec animations fluides, système de design raffiné et mise en valeur convaincante des compétences et réalisations.",
+    "longDescription": "Portfolio élaboré pour Victor Verissimo, professionnel créatif. Le projet repose sur un système de design raffiné avec des animations fluides pensées pour valoriser chaque réalisation. L'interface transmet une forte identité visuelle et inspire confiance dès les premières secondes.",
     "images": [
       "/projects/victor-verissimo-hero.png"
     ],
     "link": "https://victor-verissimo.vercel.app/",
-    "accentColor": "#84cc16"
+    "accentColor": "#84cc16",
+    "year": 2024,
+    "category": "web",
+    "tags": [
+      "Next.js",
+      "GSAP",
+      "Design System",
+      "TypeScript"
+    ],
+    "role": "Design + Développement full-stack",
+    "duration": "1 mois",
+    "client": "Victor Verissimo",
+    "features": [
+      "Animations d'entrée percutantes",
+      "Galerie de réalisations interactive",
+      "Design system cohérent"
+    ],
+    "challenges": [
+      "Capturer l'univers créatif du client",
+      "Maintenir des performances élevées avec des animations complexes"
+    ]
   },
   {
     "title": "Ghjulianu Codani",
     "slug": "ghjulianu-codani",
     "description": "Site vitrine élégant pour l'artiste corse Ghjulianu Codani, mettant en avant son univers musical et artistique avec un design immersif et une expérience utilisateur moderne.",
+    "longDescription": "Site officiel de Ghjulianu Codani, artiste et musicien corse. Le design plonge immédiatement le visiteur dans l'univers chaleureux et authentique de l'artiste. Les tons ocre et les textures soignées renforcent l'identité visuelle, tandis que l'intégration de contenus musicaux rend l'expérience unique.",
     "images": [
       "/projects/ghjulianu-codani-hero.png"
     ],
     "link": "https://www.ghjulianu-codani.com/",
-    "accentColor": "#c8a97e"
+    "accentColor": "#c8a97e",
+    "year": 2023,
+    "category": "web",
+    "tags": [
+      "Next.js",
+      "Tailwind CSS",
+      "Animations CSS"
+    ],
+    "role": "Design + Développement full-stack",
+    "duration": "3 semaines",
+    "client": "Ghjulianu Codani",
+    "features": [
+      "Design immersif à l'identité forte",
+      "Intégration de contenus audio",
+      "Galerie artistique"
+    ],
+    "challenges": [
+      "Retranscrire numériquement l'atmosphère corse et artistique",
+      "Optimiser les médias lourds (audio, images)"
+    ]
   },
   {
     "title": "Les Folies Temps Danse",
     "slug": "les-folies-temps-danse",
     "description": "Site complet pour la compagnie de danse Les Folies Temps Danse, présentant le répertoire, les actualités, les cours et les événements dans un design dynamique et animé.",
+    "longDescription": "Site officiel de la compagnie de danse Les Folies Temps Danse. Le projet présente le répertoire artistique, les actualités, l'agenda des spectacles et les cours proposés. Le design dynamique et les animations rythmées reflètent l'énergie de la compagnie, tandis que la structure claire facilite la navigation pour tous les publics.",
     "images": [
       "/projects/les-folies-temps-danse-hero.png"
     ],
     "link": "https://lesfoliestempsdanse.com/",
     "accentColor": "#bc0042",
-    "lightMode": true
+    "lightMode": true,
+    "year": 2023,
+    "category": "web",
+    "tags": [
+      "Next.js",
+      "Tailwind CSS",
+      "GSAP",
+      "CMS"
+    ],
+    "role": "Design + Développement full-stack",
+    "duration": "6 semaines",
+    "client": "Compagnie Les Folies Temps Danse",
+    "features": [
+      "Agenda des événements dynamique",
+      "Galerie vidéo et photos",
+      "Gestion de contenu via CMS",
+      "Animations rythmées"
+    ],
+    "challenges": [
+      "Structurer un contenu riche et varié",
+      "Animer sans alourdir l'expérience"
+    ]
   },
   {
     "title": "Ziko",
     "slug": "ziko",
     "description": "17 plugins, one app. AI coaching, nutrition tracking, GPS running and much more.",
+    "longDescription": "Ziko est une application mobile tout-en-un dédiée au sport et à la santé. Elle regroupe 17 plugins couvrant le coaching IA, le suivi nutritionnel, le running GPS, et bien plus. Le projet représente un défi d'architecture majeur pour unifier des fonctionnalités très diverses dans une expérience fluide et intuitive.",
     "images": [
       "/projects/ziko-app.png",
       "/projects/ziko-hero.png"
     ],
     "link": "https://ziko-app.com/",
     "accentColor": "#ff5c1a",
-    "lightMode": true
+    "lightMode": true,
+    "year": 2024,
+    "category": "mobile",
+    "tags": [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "AI",
+      "GPS"
+    ],
+    "role": "Développement mobile full-stack",
+    "duration": "6 mois",
+    "client": "Ziko",
+    "features": [
+      "17 modules sport & santé",
+      "Coaching IA personnalisé",
+      "Suivi nutritionnel",
+      "Running GPS temps réel"
+    ],
+    "challenges": [
+      "Architecturer 17 plugins dans une seule app cohérente",
+      "Performances natives sur iOS et Android",
+      "Intégration IA en temps réel"
+    ]
   }
 ]

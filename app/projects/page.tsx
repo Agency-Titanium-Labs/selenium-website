@@ -5,10 +5,20 @@ export type Project = {
   title: string;
   slug: string;
   description: string;
+  longDescription: string;
   images: string[];
   link: string;
+  githubLink?: string;
   accentColor?: string;
   lightMode?: boolean;
+  year: number;
+  category: string;
+  tags: string[];
+  role: string;
+  duration?: string;
+  client?: string;
+  features?: string[];
+  challenges?: string[];
 };
 
 const projects = projectsData as Project[];
