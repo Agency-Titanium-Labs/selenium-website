@@ -13,12 +13,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <div className="grid place-items-center min-h-screen px-8 py-16">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Projet introuvable</h1>
-          <Link
-            href="/projects"
-            className="opacity-60 hover:opacity-100 transition-opacity"
-          >
-            ← Retour aux projets
-          </Link>
         </div>
       </div>
     );
@@ -27,13 +21,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   return (
     <div className="min-h-screen px-8 py-16">
       <div className="max-w-5xl mx-auto grid gap-12">
-        {/* Back */}
-        <div className="flex justify-start">
-          <Button href="/projects" variant="transparent">
-            ← Retour aux projets
-          </Button>
-        </div>
-
         {/* Header */}
         <div>
           <div className="flex flex-wrap items-center gap-3 mb-4">

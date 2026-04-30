@@ -1,3 +1,4 @@
+import Nav from "@/components/nav";
 import ProjectCard from "@/components/project-card";
 import projectsData from "@/constants/projects.json";
 

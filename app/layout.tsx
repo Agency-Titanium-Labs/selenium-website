@@ -5,6 +5,7 @@ import LenisProvider from "@/components/LenisProvider";
 import { ContactModalProvider } from "@/contexts/contact-modal-context";
 import GlobalContactModal from "@/components/global-contact-modal";
 import { Analytics } from "@vercel/analytics/next";
+import Nav from "@/components/nav";
 
 const outfit = localFont({
   src: "../public/fonts/Outfit-VariableFont_wght.ttf",
@@ -108,6 +109,7 @@ export default function RootLayout({
         />
         <ContactModalProvider>
           <LenisProvider>
+            <Nav />
             {children}
             <GlobalContactModal />
             <Analytics />
