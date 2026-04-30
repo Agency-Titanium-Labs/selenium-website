@@ -1,0 +1,96 @@
+[
+  {
+    "title": "Selenium Studio",
+    "slug": "selenium-studio",
+    "description": "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
+    "images": [
+      "/projects/selenium-studio-hero.png",
+      "/projects/selenium-studio-hero.png",
+      "/projects/selenium-studio-hero.png"
+    ],
+    "link": "https://selenium-studio.com"
+  },
+  {
+    "title": "Selenium Studio",
+    "slug": "selenium-studio",
+    "description": "Agence web spécialisée en développement web, automatisation et design UI/UX. Nous créons des sites, applications et outils sur mesure adaptés à vos besoins.",
+    "images": [
+      "/projects/selenium-studio-hero.png",
+      "/projects/selenium-studio-hero.png"
+    ],
+    "link": "https://selenium-studio.com"
+  },
+  {
+    "title": "Portfolio Antoine Favereau",
+    "slug": "portfolio-antoine-favereau",
+    "description": "Portfolio de Antoine Favereau, développeur Full Stack",
+    "images": [
+      "/projects/portfolio-antoine-hero.png"
+    ],
+    "link": "https://antoinefavereau.fr",
+    "accentColor": "#00adb5"
+  },
+  {
+    "title": "Portfolio Anatholy Bricon",
+    "slug": "portfolio-anatholy-bricon",
+    "description": "Portfolio de Anatholy Bricon, développeur Full Stack",
+    "images": [
+      "/projects/portfolio-anatholy-hero.png"
+    ],
+    "link": "https://anatholy-bricon.com/",
+    "accentColor": "#4f46e5"
+  },
+  {
+    "title": "Gecko Cabane",
+    "slug": "gecko-cabane",
+    "description": "Site complet pour un restaurant avec menus, photos d'ambiance, intégration Google Maps, informations de réservation et SEO local pour augmenter la fréquentation.",
+    "images": [
+      "/projects/gecko-cabane-hero.png"
+    ],
+    "link": "https://geckocabanerestaurant.com/",
+    "accentColor": "#2d5a3d"
+  },
+  {
+    "title": "Victor Verissimo",
+    "slug": "victor-verissimo",
+    "description": "Portfolio soigné pour un professionnel créatif avec animations fluides, système de design raffiné et mise en valeur convaincante des compétences et réalisations.",
+    "images": [
+      "/projects/victor-verissimo-hero.png"
+    ],
+    "link": "https://victor-verissimo.vercel.app/",
+    "accentColor": "#84cc16"
+  },
+  {
+    "title": "Ghjulianu Codani",
+    "slug": "ghjulianu-codani",
+    "description": "Site vitrine élégant pour l'artiste corse Ghjulianu Codani, mettant en avant son univers musical et artistique avec un design immersif et une expérience utilisateur moderne.",
+    "images": [
+      "/projects/ghjulianu-codani-hero.png"
+    ],
+    "link": "https://www.ghjulianu-codani.com/",
+    "accentColor": "#c8a97e"
+  },
+  {
+    "title": "Les Folies Temps Danse",
+    "slug": "les-folies-temps-danse",
+    "description": "Site complet pour la compagnie de danse Les Folies Temps Danse, présentant le répertoire, les actualités, les cours et les événements dans un design dynamique et animé.",
+    "images": [
+      "/projects/les-folies-temps-danse-hero.png"
+    ],
+    "link": "https://lesfoliestempsdanse.com/",
+    "accentColor": "#bc0042",
+    "lightMode": true
+  },
+  {
+    "title": "Ziko",
+    "slug": "ziko",
+    "description": "17 plugins, one app. AI coaching, nutrition tracking, GPS running and much more.",
+    "images": [
+      "/projects/ziko-app.png",
+      "/projects/ziko-hero.png"
+    ],
+    "link": "https://ziko-app.com/",
+    "accentColor": "#ff5c1a",
+    "lightMode": true
+  }
+]
