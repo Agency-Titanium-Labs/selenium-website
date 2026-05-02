@@ -33,7 +33,7 @@ export default function ContactModal({
     Infinity,
   ]);
 
-  const { send, isLoading, isError, error } = useSendContact();
+  const { send, isLoading } = useSendContact();
 
   const [lastStepReached, setLastStepReached] = useState(1);
   useEffect(() => {

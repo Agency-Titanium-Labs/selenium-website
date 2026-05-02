@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard } from "swiper/modules";
+import Image from "next/image";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -47,7 +48,9 @@ export default function ProjectImageSwiper({
       >
         {images.map((image, i) => (
           <SwiperSlide key={i} style={{ width: "auto" }}>
-            <img
+            <Image
+              width={1920}
+              height={1080}
               src={image}
               alt={`${title} screenshot ${i + 1}`}
               className="h-72 w-auto rounded-xl object-cover"

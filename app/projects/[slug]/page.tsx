@@ -1,12 +1,16 @@
 import projectsData from "@/constants/projects.json";
 import { Project } from "@/app/projects/page";
-import Link from "next/link";
 import ProjectImageSwiper from "@/components/project-image-swiper";
 import Button from "@/components/ui/button";
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+interface ProjectPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { slug } = await params;
   const projects = projectsData as Project[];
-  const project = projects.find((p) => p.slug === params.slug);
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     return (
