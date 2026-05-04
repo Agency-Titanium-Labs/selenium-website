@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import gsap from "gsap";
 import Image from "next/image";
@@ -10,6 +10,28 @@ import Link from "next/link";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [scrollActive, setScrollActive] = useState(false);
+
+  // On touch devices, trigger hover-like animations via IntersectionObserver
+  useEffect(() => {
+    const isTouchDevice = () =>
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    if (!isTouchDevice() || !cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrollActive(entry.isIntersecting);
+      },
+      {
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: 0.1,
+      },
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -75,14 +97,19 @@ export default function ProjectCard({ project }: { project: Project }) {
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="group relative flex items-end aspect-video transform-3d perspective-distant hover:z-10"
+        className={twMerge(
+          "group relative flex items-end aspect-video transform-3d perspective-distant hover:z-10",
+          scrollActive && "is-active",
+        )}
         style={{
           transformStyle: "preserve-3d",
         }}
       >
         <div
           className={twMerge(
-            "absolute top-0 left-0 w-full h-full backdrop-blur-md [--corner-size:30px] transform rotate-x-0 origin-bottom group-hover:rotate-x-2 transition-transform duration-300 bg-parallax",
+            "absolute top-0 left-0 w-full h-full backdrop-blur-md [--corner-size:30px] transform rotate-x-0 origin-bottom transition-transform duration-300 bg-parallax",
+            "group-hover:rotate-x-2",
+            "group-[.is-active]:rotate-x-2",
             !project.accentColor && "bg-[#866B25]",
           )}
           style={
@@ -140,7 +167,13 @@ export default function ProjectCard({ project }: { project: Project }) {
             }
           ></div>
         </div>
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center p-6 space-x-[-80%] group-hover:space-x-[-60%] transform -rotate-x-0 origin-bottom group-hover:-rotate-x-10 transition-all duration-300">
+        <div
+          className={twMerge(
+            "images-wrapper absolute top-0 left-0 w-full h-full flex items-center justify-center p-6 space-x-[-80%] transform -rotate-x-0 origin-bottom transition-all duration-300",
+            "group-hover:space-x-[-60%] group-hover:-rotate-x-10",
+            "group-[.is-active]:space-x-[-60%] group-[.is-active]:-rotate-x-10",
+          )}
+        >
           {project.images.map((image, i) => {
             const total = project.images.length;
             const rotation = (i - (total - 1) / 2 + 0.3) * 15;
@@ -148,8 +181,9 @@ export default function ProjectCard({ project }: { project: Project }) {
               <div
                 key={i}
                 className={twMerge(
-                  "relative h-full aspect-video origin-bottom rotate-0 transition-all duration-300",
+                  "image-item relative h-full aspect-video origin-bottom rotate-0 transition-all duration-300",
                   "group-hover:mb-[30%] group-hover:[transform:rotate(var(--rotation))]",
+                  "group-[.is-active]:mb-[30%] group-[.is-active]:[transform:rotate(var(--rotation))]",
                 )}
                 style={
                   {
@@ -171,7 +205,9 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
         <div
           className={twMerge(
-            "relative h-5/6 backdrop-blur-md [--corner-size-x:40px] [--corner-size-y:30px] [--left-size:100px] p-6 flex flex-col justify-end transform -rotate-x-0 origin-bottom group-hover:-rotate-x-30 transition-transform duration-300 z-4",
+            "info-panel relative h-5/6 backdrop-blur-md [--corner-size-x:40px] [--corner-size-y:30px] [--left-size:100px] p-6 flex flex-col justify-end transform -rotate-x-0 origin-bottom transition-transform duration-300 z-4",
+            "group-hover:-rotate-x-30",
+            "group-[.is-active]:-rotate-x-30",
             project.lightMode ? "bg-grey-darkest/60" : "bg-grey-lightest/20",
           )}
           style={
