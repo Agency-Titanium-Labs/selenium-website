@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { FormData } from "@/components/contact-modal/types";
-import { categoriesOptions, categoryPlaceholders } from "@/components/contact-modal/constants";
+import {
+  categoriesOptions,
+  categoryPlaceholders,
+} from "@/components/contact-modal/constants";
 
 interface Step2CategoryProps {
   formData: FormData;
@@ -12,7 +15,7 @@ function useTypewriter(
   texts: string[],
   typeSpeed: number = 100,
   deleteSpeed: number = 50,
-  pauseTime: number = 2000
+  pauseTime: number = 2000,
 ) {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
@@ -20,7 +23,6 @@ function useTypewriter(
 
   useEffect(() => {
     if (texts.length === 0) {
-      setCurrentText("");
       return;
     }
 
@@ -46,7 +48,7 @@ function useTypewriter(
           setCurrentTextIndex((prev) => (prev + 1) % texts.length);
         }
       },
-      isDeleting ? deleteSpeed : typeSpeed
+      isDeleting ? deleteSpeed : typeSpeed,
     );
 
     return () => clearTimeout(timeout);
@@ -71,7 +73,7 @@ export default function Step2Category({
     categoryPlaceholders,
     100,
     50,
-    2000
+    2000,
   );
 
   return (
@@ -99,7 +101,7 @@ export default function Step2Category({
                       setFormData({
                         ...formData,
                         categories: formData.categories.filter(
-                          (c) => c !== category.value
+                          (c) => c !== category.value,
                         ),
                       });
                     } else {
@@ -123,7 +125,7 @@ export default function Step2Category({
                 onChange={(e) => {
                   if (e.target.checked) {
                     const input = document.querySelector(
-                      'input[name="otherCategory"]'
+                      'input[name="otherCategory"]',
                     ) as HTMLInputElement;
                     input?.focus();
                   } else {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "@/components/ui/modal";
 import Button from "@/components/ui/button";
 import Image from "next/image";
@@ -36,11 +36,9 @@ export default function ContactModal({
   const { send, isLoading } = useSendContact();
 
   const [lastStepReached, setLastStepReached] = useState(1);
-  useEffect(() => {
-    if (currentStep > lastStepReached) {
-      setLastStepReached(currentStep);
-    }
-  }, [currentStep, lastStepReached]);
+  if (currentStep > lastStepReached) {
+    setLastStepReached(currentStep);
+  }
 
   const handleClose = () => {
     setCurrentStep(1);
