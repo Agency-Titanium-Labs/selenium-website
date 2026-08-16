@@ -8,12 +8,12 @@ import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/nav";
 
 const outfit = localFont({
-  src: "../public/fonts/Outfit-VariableFont_wght.ttf",
+  src: "../../public/fonts/Outfit-VariableFont_wght.ttf",
   variable: "--font-outfit",
 });
 
 const orbitron = localFont({
-  src: "../public/fonts/Orbitron-VariableFont_wght.ttf",
+  src: "../../public/fonts/Orbitron-VariableFont_wght.ttf",
   variable: "--font-orbitron",
 });
 

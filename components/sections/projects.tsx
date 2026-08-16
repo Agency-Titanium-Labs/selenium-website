@@ -1,5 +1,5 @@
 import Button from "@/components/ui/button";
-import { Project } from "@/app/projects/page";
+import { Project } from "@/app/(frontend)/projects/page";
 import ProjectCard from "@/components/project-card";
 import projectsData from "@/constants/projects.json";
 

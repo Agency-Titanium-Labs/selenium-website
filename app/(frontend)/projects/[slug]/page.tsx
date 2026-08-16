@@ -1,5 +1,5 @@
 import projectsData from "@/constants/projects.json";
-import { Project } from "@/app/projects/page";
+import { Project } from "@/app/(frontend)/projects/page";
 import ProjectImageSwiper from "@/components/project-image-swiper";
 import Button from "@/components/ui/button";
 

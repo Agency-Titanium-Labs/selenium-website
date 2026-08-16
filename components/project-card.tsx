@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import gsap from "gsap";
 import Image from "next/image";
 
-import { Project } from "@/app/projects/page";
+import { Project } from "@/app/(frontend)/projects/page";
 import Link from "next/link";
 
 export default function ProjectCard({ project }: { project: Project }) {
