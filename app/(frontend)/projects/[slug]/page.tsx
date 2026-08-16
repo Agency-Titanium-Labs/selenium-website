@@ -1,5 +1,4 @@
-import projectsData from "@/constants/projects.json";
-import { Project } from "@/app/(frontend)/projects/page";
+import { getProjectBySlug } from "@/lib/projects";
 import ProjectImageSwiper from "@/components/project-image-swiper";
 import Button from "@/components/ui/button";
 
@@ -9,8 +8,7 @@ interface ProjectPageProps {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const projects = projectsData as Project[];
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return (
@@ -72,9 +70,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h2 className="text-sm font-mono uppercase tracking-widest opacity-40 mb-3">
               À propos
             </h2>
-            <p className="leading-relaxed opacity-80">
-              {project.longDescription}
-            </p>
+            <p className="leading-relaxed opacity-80">{project.about}</p>
           </div>
 
           {/* Meta */}
@@ -111,9 +107,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
 
         {/* Features & Challenges */}
-        {(project.features || project.challenges) && (
+        {((project.features && project.features.length > 0) ||
+          (project.challenges && project.challenges.length > 0)) && (
           <div className="grid grid-cols-2 gap-8">
-            {project.features && (
+            {project.features && project.features.length > 0 && (
               <div
                 className="rounded-xl p-6"
                 style={{
@@ -144,7 +141,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </ul>
               </div>
             )}
-            {project.challenges && (
+            {project.challenges && project.challenges.length > 0 && (
               <div
                 className="rounded-xl p-6"
                 style={{

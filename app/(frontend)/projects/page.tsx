@@ -1,11 +1,11 @@
 import ProjectCard from "@/components/project-card";
-import projectsData from "@/constants/projects.json";
+import { getProjects } from "@/lib/projects";
 
 export type Project = {
   title: string;
   slug: string;
   description: string;
-  longDescription: string;
+  about: string;
   images: string[];
   link: string;
   githubLink?: string;
@@ -21,14 +21,17 @@ export type Project = {
   challenges?: string[];
 };
 
-const projects = projectsData as Project[];
+export default async function Projects() {
+  const projects = await getProjects();
 
-export default function Projects() {
   return (
     <div className="grid place-items-center px-8 py-16">
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
-          <ProjectCard key={project.title + index} project={project} />
+          <ProjectCard
+            key={project.slug || project.title + index}
+            project={project}
+          />
         ))}
       </div>
     </div>
