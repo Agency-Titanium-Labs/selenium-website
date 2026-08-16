@@ -37,23 +37,10 @@ export const Projects: CollectionConfig = {
     },
     {
       name: "images",
-      type: "array",
+      type: "upload",
+      relationTo: "media",
+      hasMany: true,
       required: true,
-      fields: [
-        {
-          name: "image",
-          type: "upload",
-          relationTo: "media",
-        },
-        {
-          name: "imageUrl",
-          type: "text",
-          admin: {
-            description:
-              "URL de l'image (ex: /projects/selenium-studio-hero.png)",
-          },
-        },
-      ],
     },
     {
       name: "link",

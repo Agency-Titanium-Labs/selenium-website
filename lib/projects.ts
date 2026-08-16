@@ -6,11 +6,17 @@ import type { Project } from "@/app/(frontend)/projects/page";
 function mapPayloadProjectToProject(doc: PayloadProject): Project {
   const images: string[] = (doc.images || [])
     .map((imgItem) => {
-      if (imgItem.image && typeof imgItem.image === "object") {
-        const media = imgItem.image as Media;
-        return media.url || imgItem.imageUrl || "";
+      if (typeof imgItem === "object" && imgItem !== null) {
+        const item = (imgItem as unknown) as Record<string, unknown>;
+        if (typeof item.url === "string") return item.url;
+        if (typeof item.image === "object" && item.image !== null) {
+          const media = item.image as Media;
+          return media.url || "";
+        }
+        if (typeof item.imageUrl === "string") return item.imageUrl;
       }
-      return imgItem.imageUrl || "";
+      if (typeof imgItem === "string") return imgItem;
+      return "";
     })
     .filter(Boolean);
 

@@ -173,11 +173,7 @@ export interface Project {
   slug: string;
   description: string;
   about: string;
-  images: {
-    image?: string | Media | null;
-    imageUrl?: string | null;
-    id?: string | null;
-  }[];
+  images: (string | Media)[];
   link: string;
   githubLink?: string | null;
   accentColor?: string | null;
