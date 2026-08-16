@@ -268,7 +268,7 @@ export default function ContactModal({
               return (
                 <Button
                   variant="outline"
-                  href="https://cal.com/remi-costes-rgl4n1/selenium-studio"
+                  href="https://cal.com/antoine-favereau/selenium-studio-appel-decouverte-de-15-min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gap-2"
