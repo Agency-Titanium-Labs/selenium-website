@@ -87,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" data-scroll-behavior="smooth">
+    <html lang="fr">
       <body className={`${outfit.variable} ${orbitron.variable} antialiased`}>
         <script
           type="application/ld+json"

@@ -8,6 +8,7 @@ import {
   createContext,
   useContext,
 } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -39,6 +40,7 @@ export default function LenisProvider({
 }: Readonly<LenisProviderProps>) {
   const lenisRef = useRef<Lenis | null>(null);
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  const pathname = usePathname();
 
   const start = () => {
     if (lenisRef.current) {
@@ -53,8 +55,14 @@ export default function LenisProvider({
   };
 
   useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
     const lenisInstance = new Lenis({
       duration: 1.2,
+      autoRaf: true,
+      anchors: true,
     });
 
     lenisRef.current = lenisInstance;
@@ -62,14 +70,7 @@ export default function LenisProvider({
       setLenis(lenisInstance);
     });
 
-    // === 1. Synchroniser Lenis avec requestAnimationFrame ===
-    function raf(time: number) {
-      lenisInstance.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // === 2. Configurer scrollerProxy pour GSAP ScrollTrigger ===
+    // === Configurer scrollerProxy pour GSAP ScrollTrigger ===
     ScrollTrigger.scrollerProxy(document.body, {
       scrollTop(value) {
         if (typeof value === "number") {
@@ -97,9 +98,33 @@ export default function LenisProvider({
     return () => {
       lenisInstance.off("scroll", updateScrollTrigger);
       lenisInstance.destroy();
+      lenisRef.current = null;
       setLenis(null);
     };
   }, []);
+
+  // Reset scroll or scroll to hash on pathname change
+  useEffect(() => {
+    if (!lenis) return;
+
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      const timeoutId = setTimeout(() => {
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+          lenis.scrollTo(hash, { immediate: true });
+        } else {
+          lenis.scrollTo(0, { immediate: true });
+        }
+        ScrollTrigger.refresh();
+      }, 0);
+      return () => clearTimeout(timeoutId);
+    } else {
+      lenis.scrollTo(0, { immediate: true });
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+    }
+  }, [pathname, lenis]);
 
   return (
     <LenisContext.Provider value={{ lenis, start, stop }}>
