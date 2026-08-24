@@ -169,7 +169,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
         <div
           className={twMerge(
-            "absolute top-0 left-0 w-full h-full flex items-center justify-center p-6 space-x-[-80%] transform -rotate-x-0 origin-bottom transition-all duration-300",
+            "absolute top-0 left-0 w-full h-full flex items-center justify-center p-6 space-x-[-80%] transform rotate-x-0 origin-bottom transition-all duration-300",
             "group-hover:space-x-[-60%] group-hover:-rotate-x-10",
             "group-[.is-active]:space-x-[-60%] group-[.is-active]:-rotate-x-10",
           )}
@@ -182,8 +182,8 @@ export default function ProjectCard({ project }: { project: Project }) {
                 key={i}
                 className={twMerge(
                   "relative h-full aspect-video origin-bottom rotate-0 transition-all duration-300",
-                  "group-hover:mb-[30%] group-hover:[transform:rotate(var(--rotation))]",
-                  "group-[.is-active]:mb-[30%] group-[.is-active]:[transform:rotate(var(--rotation))]",
+                  "group-hover:mb-[30%] group-hover:transform-[rotate(var(--rotation))]",
+                  "group-[.is-active]:mb-[30%] group-[.is-active]:transform-[rotate(var(--rotation))]",
                 )}
                 style={
                   {
@@ -205,7 +205,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
         <div
           className={twMerge(
-            "relative h-5/6 backdrop-blur-md [--corner-size-x:40px] [--corner-size-y:30px] [--left-size:100px] p-6 flex flex-col justify-end transform -rotate-x-0 origin-bottom transition-transform duration-300 z-4",
+            "relative h-5/6 backdrop-blur-md [--corner-size-x:40px] [--corner-size-y:30px] [--left-size:100px] p-6 flex flex-col justify-end transform rotate-x-0 translate-z-1 origin-bottom transition-transform duration-300",
             "group-hover:-rotate-x-30",
             "group-[.is-active]:-rotate-x-30",
             project.lightMode ? "bg-grey-darkest/60" : "bg-grey-lightest/20",
