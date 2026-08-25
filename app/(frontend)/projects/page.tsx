@@ -25,7 +25,7 @@ export default async function Projects() {
   const projects = await getProjects();
 
   return (
-    <div className="grid place-items-center px-8 py-16">
+    <div className="grid place-items-center px-8 pt-48 pb-16">
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <ProjectCard

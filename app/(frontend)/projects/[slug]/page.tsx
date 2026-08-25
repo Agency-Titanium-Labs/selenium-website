@@ -21,7 +21,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen px-8 py-16">
+    <div className="min-h-screen px-8 pt-48 pb-16">
       <div className="max-w-5xl mx-auto grid gap-12">
         {/* Header */}
         <div>

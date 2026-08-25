@@ -4,7 +4,6 @@ import Button from "@/components/ui/button";
 import { useContactModal } from "@/contexts/contact-modal-context";
 import Image from "next/image";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 
@@ -22,8 +21,6 @@ const navigation: NavigationItem[] = [
 export default function Nav() {
   const { openModal } = useContactModal();
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const isHome = pathname === "/";
 
   const handleNavClick = (action: string) => {
     if (action === "contact") {
@@ -41,12 +38,7 @@ export default function Nav() {
         )}
         onClick={() => setMenuOpen(false)}
       ></div>
-      <div
-        className={twMerge(
-          "top-8 start-0 w-full flex justify-center pb-8 z-50",
-          isHome ? "fixed" : "sticky",
-        )}
-      >
+      <div className="fixed top-8 start-0 w-full flex justify-center pb-8 z-50">
         <nav
           className="w-max flex flex-col pl-10 sm:pl-16 pr-8 py-4 min-w-2/3 z-50 bg-grey-lightest/5 backdrop-blur-md"
           style={
