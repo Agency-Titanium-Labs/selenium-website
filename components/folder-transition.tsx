@@ -12,10 +12,10 @@ interface FolderTransitionProps {
 // Configuration de la transition (modifiez ces valeurs pour ajuster l'effet)
 export const TRANSITION_CONFIG = {
   scale: 0.4, // Niveau de dézoom
-  duration: 0.7, // Durée du zoom / dézoom (en secondes)
-  flapDuration: 0.5, // Durée d'ouverture / fermeture de la couverture (en secondes)
-  flapOffset: 0.2, // Décalage temporel de la couverture (en secondes)
-  pauseDuration: 0.35, // Durée de la pause au milieu avec dossier fermé (en secondes)
+  duration: 0.5, // Durée du zoom / dézoom (en secondes)
+  flapDuration: 0.3, // Durée d'ouverture / fermeture de la couverture (en secondes)
+  flapOffset: 0.1, // Décalage temporel de la couverture (en secondes)
+  pauseDuration: 0.5, // Durée de la pause au milieu avec dossier fermé (en secondes)
 };
 
 export default function FolderTransition({ children }: FolderTransitionProps) {
