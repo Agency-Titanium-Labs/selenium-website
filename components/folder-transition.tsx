@@ -29,7 +29,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
   const backCoverRef = useRef<HTMLDivElement>(null);
   const flapRef = useRef<HTMLDivElement>(null);
   const sheetWrapperRef = useRef<HTMLDivElement>(null);
-  const sheetContentRef = useRef<HTMLDivElement>(null);
   const titleTextRef = useRef<HTMLHeadingElement>(null);
 
   const prevPathnameRef = useRef(pathname);
@@ -57,7 +56,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
     const backCover = backCoverRef.current;
     const flap = flapRef.current;
     const sheetWrapper = sheetWrapperRef.current;
-    const sheet = sheetContentRef.current;
 
     // Maintenir le conteneur et la feuille verrouillés au viewport
     if (container) {
@@ -75,10 +73,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
       sheetWrapper.style.overflow = "hidden";
     }
 
-    if (sheet) {
-      sheet.style.transform = "translateY(0px)";
-    }
-
     const tl = gsap.timeline({
       onComplete: () => {
         if (container) {
@@ -94,9 +88,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
           sheetWrapper.style.height = "";
           sheetWrapper.style.overflow = "";
         }
-        if (sheet) {
-          sheet.style.transform = "";
-        }
         gsap.set([folder, backCover, flap, sheetWrapper], {
           clearProps: "transform,opacity",
         });
@@ -106,14 +97,9 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         if (flap) {
           flap.style.display = "none";
         }
-
-        // if (targetScrollY > 0) {
-        //   window.scrollTo(0, targetScrollY);
-        // } else if (window.location.hash) {
+        // if (window.location.hash) {
         //   const targetEl = document.querySelector(window.location.hash);
-        //   if (targetEl) {
-        //     targetEl.scrollIntoView();
-        //   }
+        //   if (targetEl) targetEl.scrollIntoView();
         // }
 
         isTransitioningRef.current = false;
@@ -227,13 +213,11 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         return;
       }
 
-      const currentScrollY = window.scrollY || window.pageYOffset || 0;
       const container = containerRef.current;
       const folder = folderRef.current;
       const backCover = backCoverRef.current;
       const flap = flapRef.current;
       const sheetWrapper = sheetWrapperRef.current;
-      const sheet = sheetContentRef.current;
 
       // Figer la vue exactement sur ce que l'utilisateur voit
       if (container) {
@@ -249,10 +233,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         sheetWrapper.style.width = "100vw";
         sheetWrapper.style.height = "100vh";
         sheetWrapper.style.overflow = "hidden";
-      }
-
-      if (sheet) {
-        sheet.style.transform = `translateY(-${currentScrollY}px)`;
       }
 
       if (backCover) {
@@ -325,7 +305,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         {/* 1. FOND EN PRIMARY (Back cover façon project card avec coin biseauté) */}
         <div
           ref={backCoverRef}
-          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size:60px] origin-bottom bg-[#866B25] z-0 shadow-2xl"
+          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size:60px] origin-bottom bg-[#866B25]"
           style={{
             display: "none",
             clipPath: `polygon(
@@ -366,21 +346,15 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         {/* 2. MILIEU : CONTENU DE LA PAGE (comme l'image dans la project card) */}
         <div
           ref={sheetWrapperRef}
-          className="relative w-full h-full z-10 origin-bottom transform-gpu"
-          style={{
-            transformStyle: "preserve-3d",
-          }}
+          className="relative w-full h-full bg-grey-darkest"
         >
-          <div ref={sheetContentRef} className="relative w-full min-h-screen">
-            <div className="absolute inset-0 bg-grey-darkest -z-100" />
-            {children}
-          </div>
+          {children}
         </div>
 
         {/* 3. DEVANT : COUVERTURE EN BLUR (Pochette avant avec découpe onglet et titre) */}
         <div
           ref={flapRef}
-          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size-x:80px] [--corner-size-y:60px] [--left-size:200px] p-12 flex flex-col justify-end origin-bottom bg-primary z-20 shadow-2xl"
+          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size-x:80px] [--corner-size-y:60px] [--left-size:200px] p-12 flex flex-col justify-end origin-bottom bg-primary"
           style={{
             display: "none",
             clipPath: `polygon(
