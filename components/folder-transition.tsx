@@ -80,7 +80,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
           container.style.width = "";
           container.style.height = "";
           container.style.overflow = "";
-          container.style.zIndex = "";
         }
         if (sheetWrapper) {
           sheetWrapper.style.width = "";
