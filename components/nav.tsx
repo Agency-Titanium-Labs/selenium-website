@@ -38,7 +38,7 @@ export default function Nav() {
         )}
         onClick={() => setMenuOpen(false)}
       ></div>
-      <div className="fixed top-8 start-0 w-full flex justify-center pb-8 z-50">
+      <div className="fixed top-8 inset-s-0 w-full flex justify-center pb-8 z-50">
         <nav
           className="w-max flex flex-col pl-10 sm:pl-16 pr-8 py-4 min-w-2/3 z-50 bg-grey-lightest/5 backdrop-blur-md"
           style={
@@ -81,7 +81,11 @@ export default function Nav() {
             }
           ></div>
           <div className="flex justify-between items-center gap-8">
-            <Link href="/#top" onClick={() => setMenuOpen(false)}>
+            <Link
+              href="/#top"
+              data-page-title="Accueil"
+              onClick={() => setMenuOpen(false)}
+            >
               <Image
                 src="/logo-full.svg"
                 alt="Selenium Logo"
@@ -95,6 +99,7 @@ export default function Nav() {
                 <li key={item.name}>
                   <Button
                     variant="transparent"
+                    data-page-title={item.name}
                     {...("action" in item
                       ? { onClick: () => handleNavClick(item.action) }
                       : { href: item.href, onClick: () => setMenuOpen(false) })}
@@ -105,25 +110,25 @@ export default function Nav() {
               ))}
             </ul>
             <button
-              className="relative flex flex-col gap-[4px] w-6 h-[17px] md:hidden"
+              className="relative flex flex-col gap-1 w-6 h-4.25 md:hidden"
               onClick={() => setMenuOpen((prev: boolean) => !prev)}
               aria-label="Toggle menu"
             >
               <div
                 className={twMerge(
-                  "absolute w-6 h-[3px] bg-white top-0 transform transition-all duration-300 ease-in-out",
+                  "absolute w-6 h-0.75 bg-white top-0 transform transition-all duration-300 ease-in-out",
                   menuOpen && "top-1/2 -rotate-45 -translate-y-1/2",
                 )}
               ></div>
               <div
                 className={twMerge(
-                  "absolute w-6 h-[3px] bg-white top-1/2 transform -translate-y-1/2 transition-all duration-300 ease-in-out",
+                  "absolute w-6 h-0.75 bg-white top-1/2 transform -translate-y-1/2 transition-all duration-300 ease-in-out",
                   menuOpen && "opacity-0",
                 )}
               ></div>
               <div
                 className={twMerge(
-                  "absolute w-6 h-[3px] bg-white bottom-0 transform transition-all duration-300 ease-in-out",
+                  "absolute w-6 h-0.75 bg-white bottom-0 transform transition-all duration-300 ease-in-out",
                   menuOpen && "bottom-1/2 rotate-45 translate-y-1/2",
                 )}
               ></div>
@@ -139,6 +144,7 @@ export default function Nav() {
               <li key={item.name}>
                 <Button
                   variant="transparent"
+                  data-page-title={item.name}
                   {...("action" in item
                     ? { onClick: () => handleNavClick(item.action) }
                     : { href: item.href, onClick: () => setMenuOpen(false) })}

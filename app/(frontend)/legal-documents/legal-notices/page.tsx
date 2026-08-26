@@ -99,7 +99,11 @@ export default function LegalNotices() {
           </p>
           <p>
             Consultez notre{" "}
-            <a href="/legal-documents/privacy-policy" className="text-primary">
+            <a
+              href="/legal-documents/privacy-policy"
+              data-page-title="Politique de Confidentialité"
+              className="text-primary"
+            >
               Politique de confidentialité & cookies
             </a>{" "}
             pour plus d&rsquo;informations.

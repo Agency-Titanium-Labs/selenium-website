@@ -92,7 +92,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   };
 
   return (
-    <Link href={`/projects/${project.slug}`}>
+    <Link href={`/projects/${project.slug}`} data-page-title={project.title}>
       <div
         ref={cardRef}
         onMouseMove={handleMouseMove}

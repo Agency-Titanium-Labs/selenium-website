@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
-import { useLenis } from "@/components/LenisProvider";
 
 interface FolderTransitionProps {
   children: React.ReactNode;
@@ -22,7 +21,8 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [, startTransition] = useTransition();
-  const { lenis } = useLenis();
+
+  const [coverTitle, setCoverTitle] = useState("");
 
   const containerRef = useRef<HTMLDivElement>(null);
   const folderRef = useRef<HTMLDivElement>(null);
@@ -30,6 +30,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
   const flapRef = useRef<HTMLDivElement>(null);
   const sheetWrapperRef = useRef<HTMLDivElement>(null);
   const sheetContentRef = useRef<HTMLDivElement>(null);
+  const titleTextRef = useRef<HTMLHeadingElement>(null);
 
   const prevPathnameRef = useRef(pathname);
   const isTransitioningRef = useRef(false);
@@ -77,7 +78,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
     if (sheet) {
       sheet.style.transform = "translateY(0px)";
     }
-    window.scrollTo(0, 0);
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -106,10 +106,16 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         if (flap) {
           flap.style.display = "none";
         }
-        if (lenis) {
-          lenis.start();
-          lenis.scrollTo(0, { immediate: true });
-        }
+
+        // if (targetScrollY > 0) {
+        //   window.scrollTo(0, targetScrollY);
+        // } else if (window.location.hash) {
+        //   const targetEl = document.querySelector(window.location.hash);
+        //   if (targetEl) {
+        //     targetEl.scrollIntoView();
+        //   }
+        // }
+
         isTransitioningRef.current = false;
       },
     });
@@ -153,7 +159,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
       },
       `<+=${TRANSITION_CONFIG.flapOffset}`,
     );
-  }, [pathname, lenis]);
+  }, [pathname]);
 
   // ==========================================
   // PHASE 1 : Clic sur un lien -> dézoom et fermeture de la couverture
@@ -208,13 +214,18 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
       e.preventDefault();
       isTransitioningRef.current = true;
 
+      // Récupérer le titre via data-page-title
+      const title = target.getAttribute("data-page-title") || "";
+      setCoverTitle(title);
+      if (titleTextRef.current) {
+        titleTextRef.current.textContent = title;
+      }
+
       if (!folderRef.current || prefersReducedMotion) {
         router.push(href);
         isTransitioningRef.current = false;
         return;
       }
-
-      if (lenis) lenis.stop();
 
       const currentScrollY = window.scrollY || window.pageYOffset || 0;
       const container = containerRef.current;
@@ -273,7 +284,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         0,
       );
 
-      // 2. En léger décalé : La couverture avant en blur se referme (rotateX -35° -> 0°)
+      // 2. En léger décalé : La couverture avant se referme
       if (flap) {
         tl.fromTo(
           flap,
@@ -303,7 +314,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         capture: true,
       });
     };
-  }, [router, lenis]);
+  }, [router]);
 
   return (
     <div ref={containerRef} className="relative w-full min-h-screen">
@@ -366,10 +377,10 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
           </div>
         </div>
 
-        {/* 3. DEVANT : COUVERTURE EN BLUR (Pochette avant avec découpe onglet) */}
+        {/* 3. DEVANT : COUVERTURE EN BLUR (Pochette avant avec découpe onglet et titre) */}
         <div
           ref={flapRef}
-          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size-x:80px] [--corner-size-y:60px] [--left-size:200px] p-6 flex flex-col justify-end origin-bottom bg-primary z-20 shadow-2xl"
+          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size-x:80px] [--corner-size-y:60px] [--left-size:200px] p-12 flex flex-col justify-end origin-bottom bg-primary z-20 shadow-2xl"
           style={{
             display: "none",
             clipPath: `polygon(
@@ -382,7 +393,14 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
               0 0
             )`,
           }}
-        />
+        >
+          <h2
+            ref={titleTextRef}
+            className="font-orbitron font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-grey-darkest"
+          >
+            {coverTitle}
+          </h2>
+        </div>
       </div>
     </div>
   );

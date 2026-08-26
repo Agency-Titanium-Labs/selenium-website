@@ -22,7 +22,11 @@ export default async function Projects() {
             </div>
           ))}
         </div>
-        <Button variant="outline" href="/projects">
+        <Button
+          variant="outline"
+          href="/projects"
+          data-page-title="Nos Projets"
+        >
           Voir tous les projets
         </Button>
       </div>

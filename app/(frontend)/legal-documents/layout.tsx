@@ -7,7 +7,12 @@ export default function LegalLayout({
 }>) {
   return (
     <div className="px-6 pt-48 pb-18 flex flex-col items-center">
-      <Button variant="transparent" href="/" className="text-white self-start">
+      <Button
+        variant="transparent"
+        href="/"
+        data-page-title="Accueil"
+        className="text-white self-start"
+      >
         Retour à l&apos;accueil
       </Button>
       <div className="max-w-4xl prose text-white">{children}</div>
