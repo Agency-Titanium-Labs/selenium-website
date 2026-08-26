@@ -64,7 +64,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
       container.style.width = "100vw";
       container.style.height = "100vh";
       container.style.overflow = "hidden";
-      container.style.zIndex = "40";
     }
 
     if (sheetWrapper) {
@@ -226,7 +225,6 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         container.style.width = "100vw";
         container.style.height = "100vh";
         container.style.overflow = "hidden";
-        container.style.zIndex = "40";
       }
 
       if (sheetWrapper) {
