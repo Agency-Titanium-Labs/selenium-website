@@ -95,10 +95,10 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         if (flap) {
           flap.style.display = "none";
         }
-        // if (window.location.hash) {
-        //   const targetEl = document.querySelector(window.location.hash);
-        //   if (targetEl) targetEl.scrollIntoView();
-        // }
+        if (window.location.hash) {
+          const targetEl = document.querySelector(window.location.hash);
+          if (targetEl) targetEl.scrollIntoView();
+        }
 
         isTransitioningRef.current = false;
       },
