@@ -251,7 +251,7 @@ function TeamMemberCard({ member }: { member: (typeof teamMembers)[number] }) {
         }
       >
         <div
-          className="team-member-bg absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 bg-[auto_200%] -z-1 transition-[background-position] duration-500 ease-in-out group-hover:delay-50"
+          className="team-member-bg absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 bg-size-[auto_200%] -z-1 transition-[background-position] duration-500 ease-in-out group-hover:delay-50"
           style={
             {
               "--corner-size": "20px",
