@@ -8,6 +8,7 @@ import {
   createContext,
   useContext,
 } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -39,6 +40,7 @@ export default function LenisProvider({
 }: Readonly<LenisProviderProps>) {
   const lenisRef = useRef<Lenis | null>(null);
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  const pathname = usePathname();
 
   const start = () => {
     if (lenisRef.current) {
@@ -129,6 +131,15 @@ export default function LenisProvider({
       setLenis(null);
     };
   }, []);
+
+  // Reset scroll or scroll to hash on pathname change
+  useEffect(() => {
+    if (!lenis || window.location.hash) return;
+
+    lenis.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
+    ScrollTrigger.refresh();
+  }, [pathname, lenis]);
 
   return (
     <LenisContext.Provider value={{ lenis, start, stop }}>
