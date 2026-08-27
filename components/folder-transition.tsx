@@ -24,11 +24,9 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
 
   const [coverTitle, setCoverTitle] = useState("");
 
-  const containerRef = useRef<HTMLDivElement>(null);
   const folderRef = useRef<HTMLDivElement>(null);
   const backCoverRef = useRef<HTMLDivElement>(null);
   const flapRef = useRef<HTMLDivElement>(null);
-  const sheetWrapperRef = useRef<HTMLDivElement>(null);
   const titleTextRef = useRef<HTMLHeadingElement>(null);
 
   const prevPathnameRef = useRef(pathname);
@@ -51,85 +49,46 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
       return;
     }
 
-    const container = containerRef.current;
     const folder = folderRef.current;
     const backCover = backCoverRef.current;
     const flap = flapRef.current;
-    const sheetWrapper = sheetWrapperRef.current;
 
-    // Maintenir le conteneur et la feuille verrouillés au viewport
-    if (container) {
-      container.style.position = "fixed";
-      container.style.inset = "0";
-      container.style.width = "100vw";
-      container.style.height = "100vh";
-      container.style.overflow = "hidden";
-    }
-
-    if (sheetWrapper) {
-      sheetWrapper.style.width = "100vw";
-      sheetWrapper.style.height = "100vh";
-      sheetWrapper.style.overflow = "hidden";
-    }
+    backCover!.style.display = "block";
+    flap!.style.display = "flex";
 
     const tl = gsap.timeline({
       onComplete: () => {
-        if (container) {
-          container.style.position = "";
-          container.style.inset = "";
-          container.style.width = "";
-          container.style.height = "";
-          container.style.overflow = "";
-        }
-        if (sheetWrapper) {
-          sheetWrapper.style.width = "";
-          sheetWrapper.style.height = "";
-          sheetWrapper.style.overflow = "";
-        }
-        gsap.set([folder, backCover, flap, sheetWrapper], {
+        backCover!.style.display = "none";
+        flap!.style.display = "none";
+
+        gsap.set([folder, backCover, flap], {
           clearProps: "transform,opacity",
         });
-        if (backCover) {
-          backCover.style.display = "none";
-        }
-        if (flap) {
-          flap.style.display = "none";
-        }
-        if (window.location.hash) {
-          const targetEl = document.querySelector(window.location.hash);
-          if (targetEl) targetEl.scrollIntoView();
-        }
 
         isTransitioningRef.current = false;
       },
     });
 
-    // 1. Afficher les éléments du dossier
-    if (backCover) backCover.style.display = "block";
-    if (flap) flap.style.display = "flex";
-
-    // 2. Pause marquée au milieu (dossier fermé au centre)
+    // 1. Pause marquée au milieu (dossier fermé au centre)
     tl.to({}, { duration: TRANSITION_CONFIG.pauseDuration });
 
-    // 3. La couverture commence à s'ouvrir vers le bas
-    if (flap) {
-      tl.fromTo(
-        flap,
-        {
-          rotateX: 0,
-          opacity: 1,
-          transformOrigin: "bottom center",
-        },
-        {
-          rotateX: -90,
-          opacity: 0,
-          duration: TRANSITION_CONFIG.flapDuration,
-          ease: "power3.out",
-        },
-      );
-    }
+    // 2. La couverture commence à s'ouvrir vers le bas
+    tl.fromTo(
+      flap,
+      {
+        rotateX: 0,
+        opacity: 1,
+        transformOrigin: "bottom center",
+      },
+      {
+        rotateX: -90,
+        opacity: 0,
+        duration: TRANSITION_CONFIG.flapDuration,
+        ease: "power3.out",
+      },
+    );
 
-    // 4. En léger décalé : La page zoome pour revenir à 100% (plein écran)
+    // 3. En léger décalé : La page zoome pour revenir à 100% (plein écran)
     tl.fromTo(
       folder,
       {
@@ -211,34 +170,12 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         return;
       }
 
-      const container = containerRef.current;
       const folder = folderRef.current;
       const backCover = backCoverRef.current;
       const flap = flapRef.current;
-      const sheetWrapper = sheetWrapperRef.current;
 
-      // Figer la vue exactement sur ce que l'utilisateur voit
-      if (container) {
-        container.style.position = "fixed";
-        container.style.inset = "0";
-        container.style.width = "100vw";
-        container.style.height = "100vh";
-        container.style.overflow = "hidden";
-      }
-
-      if (sheetWrapper) {
-        sheetWrapper.style.width = "100vw";
-        sheetWrapper.style.height = "100vh";
-        sheetWrapper.style.overflow = "hidden";
-      }
-
-      if (backCover) {
-        backCover.style.display = "block";
-      }
-
-      if (flap) {
-        flap.style.display = "flex";
-      }
+      backCover!.style.display = "block";
+      flap!.style.display = "flex";
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -249,7 +186,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         },
       });
 
-      // 1. Dézoom de la page
+      // 1. Dézoom de la page centré sur l'écran
       tl.to(
         folder,
         {
@@ -262,23 +199,21 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
       );
 
       // 2. En léger décalé : La couverture avant se referme
-      if (flap) {
-        tl.fromTo(
-          flap,
-          {
-            rotateX: -90,
-            opacity: 0,
-            transformOrigin: "bottom center",
-          },
-          {
-            rotateX: 0,
-            opacity: 1,
-            duration: TRANSITION_CONFIG.flapDuration,
-            ease: "power2.inOut",
-          },
-          TRANSITION_CONFIG.flapOffset,
-        );
-      }
+      tl.fromTo(
+        flap,
+        {
+          rotateX: -90,
+          opacity: 0,
+          transformOrigin: "bottom center",
+        },
+        {
+          rotateX: 0,
+          opacity: 1,
+          duration: TRANSITION_CONFIG.flapDuration,
+          ease: "power2.inOut",
+        },
+        TRANSITION_CONFIG.flapOffset,
+      );
 
       // Pause avec le dossier fermé au centre
       tl.to({}, { duration: TRANSITION_CONFIG.pauseDuration });
@@ -294,7 +229,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
   }, [router]);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-screen">
+    <div className="fixed inset-0 w-screen h-screen overflow-hidden">
       <div
         ref={folderRef}
         className="relative w-full h-full will-change-[transform,opacity,filter] transform-gpu transform-3d perspective-distant"
@@ -302,7 +237,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         {/* 1. FOND EN PRIMARY (Back cover façon project card avec coin biseauté) */}
         <div
           ref={backCoverRef}
-          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size:60px] origin-bottom bg-[#866B25]"
+          className="pointer-events-none absolute -inset-12 [--corner-size:60px] origin-bottom bg-[#866B25]"
           style={{
             display: "none",
             clipPath: `polygon(
@@ -340,18 +275,20 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
           />
         </div>
 
-        {/* 2. MILIEU : CONTENU DE LA PAGE (comme l'image dans la project card) */}
+        {/* 2. MILIEU : SCROLL CONTAINER DE LA PAGE (géré par Lenis) */}
         <div
-          ref={sheetWrapperRef}
-          className="relative w-full h-full bg-grey-darkest"
+          id="scroll-wrapper"
+          className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-grey-darkest"
         >
-          {children}
+          <div id="scroll-content" className="w-full min-h-full">
+            {children}
+          </div>
         </div>
 
         {/* 3. DEVANT : COUVERTURE EN BLUR (Pochette avant avec découpe onglet et titre) */}
         <div
           ref={flapRef}
-          className="pointer-events-none absolute -inset-12 backdrop-blur-md [--corner-size-x:80px] [--corner-size-y:60px] [--left-size:200px] p-12 flex flex-col justify-end origin-bottom bg-primary"
+          className="pointer-events-none absolute -inset-12 z-50 [--corner-size-x:80px] [--corner-size-y:60px] [--left-size:200px] p-12 flex flex-col justify-end origin-bottom bg-primary"
           style={{
             display: "none",
             clipPath: `polygon(

@@ -57,7 +57,13 @@ export default function LenisProvider({
       window.history.scrollRestoration = "manual";
     }
 
+    const wrapper = document.getElementById("scroll-wrapper") || window;
+    const content = document.getElementById("scroll-content") || undefined;
+    const isCustomWrapper = wrapper !== window;
+
     const lenisInstance = new Lenis({
+      wrapper: wrapper as HTMLElement,
+      content: content as HTMLElement,
       duration: 1.2,
       autoRaf: true,
       anchors: true,
@@ -69,7 +75,11 @@ export default function LenisProvider({
     });
 
     // === Configurer scrollerProxy pour GSAP ScrollTrigger ===
-    ScrollTrigger.scrollerProxy(document.body, {
+    const scrollerTarget = isCustomWrapper
+      ? (wrapper as HTMLElement)
+      : document.body;
+
+    ScrollTrigger.scrollerProxy(scrollerTarget, {
       scrollTop(value) {
         if (typeof value === "number") {
           lenisInstance.scrollTo(value, { immediate: true });
@@ -85,15 +95,34 @@ export default function LenisProvider({
           height: window.innerHeight,
         };
       },
-      pinType: document.body.style.transform ? "transform" : "fixed",
+      pinType: scrollerTarget.style?.transform ? "transform" : "fixed",
     });
+
+    if (isCustomWrapper) {
+      ScrollTrigger.defaults({
+        scroller: scrollerTarget,
+      });
+    }
 
     function updateScrollTrigger() {
       ScrollTrigger.update();
     }
     lenisInstance.on("scroll", updateScrollTrigger);
 
+    // Lenis n'écoute les clics que sur son wrapper (#scroll-wrapper).
+    // On transmet les clics de window à la méthode onClick native de Lenis pour que la Nav (externe) soit prise en compte.
+    const lenisWithClick = lenisInstance as unknown as {
+      onClick: (e: MouseEvent) => void;
+    };
+
+    if (isCustomWrapper && typeof lenisWithClick.onClick === "function") {
+      window.addEventListener("click", lenisWithClick.onClick);
+    }
+
     return () => {
+      if (isCustomWrapper && typeof lenisWithClick.onClick === "function") {
+        window.removeEventListener("click", lenisWithClick.onClick);
+      }
       lenisInstance.off("scroll", updateScrollTrigger);
       lenisInstance.destroy();
       lenisRef.current = null;
