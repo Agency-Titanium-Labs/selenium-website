@@ -5,14 +5,16 @@ import LenisProvider from "@/components/LenisProvider";
 import { ContactModalProvider } from "@/contexts/contact-modal-context";
 import GlobalContactModal from "@/components/global-contact-modal";
 import { Analytics } from "@vercel/analytics/next";
+import Nav from "@/components/nav";
+import FolderTransition from "@/components/folder-transition";
 
 const outfit = localFont({
-  src: "../public/fonts/Outfit-VariableFont_wght.ttf",
+  src: "../../public/fonts/Outfit-VariableFont_wght.ttf",
   variable: "--font-outfit",
 });
 
 const orbitron = localFont({
-  src: "../public/fonts/Orbitron-VariableFont_wght.ttf",
+  src: "../../public/fonts/Orbitron-VariableFont_wght.ttf",
   variable: "--font-orbitron",
 });
 
@@ -108,7 +110,8 @@ export default function RootLayout({
         />
         <ContactModalProvider>
           <LenisProvider>
-            {children}
+            <Nav />
+            <FolderTransition>{children}</FolderTransition>
             <GlobalContactModal />
             <Analytics />
           </LenisProvider>

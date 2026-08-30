@@ -60,14 +60,13 @@
 @source inline("group-hover:to-4-dark");
 
 html {
-  scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
   background: var(--color-grey-darkest);
   color: var(--color-grey-lightest);
   font-family: var(--font-outfit);
-  scrollbar-gutter: stable;
 
   h1,
   h2,

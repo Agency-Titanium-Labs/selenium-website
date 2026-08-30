@@ -400,7 +400,7 @@ export default function Services() {
                 className="grid place-content-start md:place-content-end"
                 style={{
                   gridTemplateColumns: `repeat(${getColumnSpan(
-                    index
+                    index,
                   )}, minmax(0, 1fr))`,
                 }}
               >

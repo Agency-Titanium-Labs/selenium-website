@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "@/components/ui/modal";
 import Button from "@/components/ui/button";
 import Image from "next/image";
@@ -33,14 +33,12 @@ export default function ContactModal({
     Infinity,
   ]);
 
-  const { send, isLoading, isError, error } = useSendContact();
+  const { send, isLoading } = useSendContact();
 
   const [lastStepReached, setLastStepReached] = useState(1);
-  useEffect(() => {
-    if (currentStep > lastStepReached) {
-      setLastStepReached(currentStep);
-    }
-  }, [currentStep, lastStepReached]);
+  if (currentStep > lastStepReached) {
+    setLastStepReached(currentStep);
+  }
 
   const handleClose = () => {
     setCurrentStep(1);
@@ -270,7 +268,7 @@ export default function ContactModal({
               return (
                 <Button
                   variant="outline"
-                  href="https://cal.com/remi-costes-rgl4n1/selenium-studio"
+                  href="https://cal.com/antoine-favereau/selenium-studio-appel-decouverte-de-15-min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gap-2"

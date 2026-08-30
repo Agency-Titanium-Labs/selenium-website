@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import { twMerge } from "tailwind-merge";
 
 const buttonDefaultClasses =
@@ -26,21 +27,22 @@ export default function Button({
   ...props
 }: ButtonProps) {
   return props.href ? (
-    <a
+    <NextLink
       className={twMerge(
         buttonDefaultClasses,
         buttonVariants[variant],
-        className
+        className,
       )}
       {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
-    ></a>
+      href={props.href}
+    ></NextLink>
   ) : (
     <button
       type="button"
       className={twMerge(
         buttonDefaultClasses,
         buttonVariants[variant],
-        className
+        className,
       )}
       {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     ></button>
