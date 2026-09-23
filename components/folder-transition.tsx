@@ -280,7 +280,10 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
           id="scroll-wrapper"
           className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-grey-darkest"
         >
-          <div id="scroll-content" className="w-full min-h-full">
+          <div
+            id="scroll-content"
+            className="relative isolate w-full min-h-full"
+          >
             {children}
           </div>
         </div>

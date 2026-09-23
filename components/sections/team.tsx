@@ -6,7 +6,7 @@ import Image from "next/image";
 import Button from "@/components/ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -322,6 +322,7 @@ export default function Team() {
       ease: "none",
       scrollTrigger: {
         trigger: ref.current,
+        scroller: "#scroll-wrapper",
         start: "top bottom",
         end: "bottom top",
         scrub: true,

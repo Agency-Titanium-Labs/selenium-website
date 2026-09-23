@@ -8,7 +8,7 @@ import { useSendContact } from "@/hook/sendContact";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,6 +35,7 @@ export default function Contact() {
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
+        scroller: "#scroll-wrapper",
         start: "top bottom",
         end: "bottom bottom",
         scrub: true,

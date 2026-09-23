@@ -6,7 +6,7 @@ import Button from "@/components/ui/button";
 import { useContactModal } from "@/contexts/contact-modal-context";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +20,7 @@ export default function Hero() {
       ease: "none",
       scrollTrigger: {
         trigger: backgroundLightTopRef.current,
+        scroller: "#scroll-wrapper",
         start: "top top",
         end: "bottom top",
         scrub: true,
@@ -52,7 +53,9 @@ export default function Hero() {
       </h1>
       <div className="relative grid sm:grid-cols-2 gap-4">
         <Button onClick={() => openModal()}>Nous contacter</Button>
-        <Button variant="outline" href="#services">Nos services</Button>
+        <Button variant="outline" href="#services">
+          Nos services
+        </Button>
       </div>
     </section>
   );

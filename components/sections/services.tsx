@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -337,6 +337,7 @@ export default function Services() {
       ease: "none",
       scrollTrigger: {
         trigger: backgroundShapeRef.current,
+        scroller: "#scroll-wrapper",
         start: "top bottom",
         end: "bottom top",
         scrub: true,
@@ -347,6 +348,7 @@ export default function Services() {
       ease: "none",
       scrollTrigger: {
         trigger: backgroundLightLeftRef.current,
+        scroller: "#scroll-wrapper",
         start: "top bottom",
         end: "bottom top",
         scrub: true,
@@ -418,7 +420,7 @@ export default function Services() {
                     }/10 hover:z-10 transition-all duration-300 ease-in-out cursor-pointer`}
                   >
                     <div
-                      className={`absolute -inset-[1px] -z-1 bg-linear-to-br from-grey-dark via-grey-dark to-grey-dark group-hover:from-primary-lighter group-hover:via-${
+                      className={`absolute -inset-px -z-1 bg-linear-to-br from-grey-dark via-grey-dark to-grey-dark group-hover:from-primary-lighter group-hover:via-${
                         index + 1
                       } group-hover:to-${
                         index + 1
