@@ -4,13 +4,16 @@ import Services from "@/components/sections/services";
 import Projects from "@/components/sections/projects";
 import Contact from "@/components/sections/contact";
 import Footer from "@/components/sections/footer";
+import { getServices } from "@/lib/services";
 
-export default function Home() {
+export default async function Home() {
+  const services = await getServices();
+
   return (
     <>
       <Hero />
       <Team />
-      <Services />
+      <Services services={services} />
       <Projects />
       <Contact />
       <Footer />

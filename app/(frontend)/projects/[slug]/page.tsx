@@ -1,6 +1,7 @@
 import { getProjectBySlug } from "@/lib/projects";
 import ProjectImageSwiper from "@/components/project-image-swiper";
 import Button from "@/components/ui/button";
+import { getCategoryColorInfo } from "@/components/icons/service-icon";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -26,31 +27,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {/* Header */}
         <div>
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className="text-sm font-mono opacity-40">{project.year}</span>
-            <span
-              className="text-xs px-2 py-1 rounded-full font-mono uppercase tracking-wider"
-              style={{
-                backgroundColor: project.accentColor
-                  ? `color-mix(in srgb, ${project.accentColor} 20%, transparent)`
-                  : "rgba(255,255,255,0.1)",
-                color: project.accentColor ?? "white",
-                border: `1px solid ${project.accentColor ? `color-mix(in srgb, ${project.accentColor} 40%, transparent)` : "rgba(255,255,255,0.2)"}`,
-              }}
-            >
-              {project.category}
-            </span>
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-1 rounded font-mono"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                }}
-              >
-                {tag}
-              </span>
-            ))}
+            {project.services?.map((service) => {
+              const colorInfo = getCategoryColorInfo(service.category);
+              return (
+                <span
+                  key={service.slug || service.title}
+                  className="text-xs px-2.5 py-1 rounded-full font-mono transition-colors"
+                  style={{
+                    color: colorInfo.color,
+                    backgroundColor: `color-mix(in srgb, ${colorInfo.color} 15%, transparent)`,
+                    border: `1px solid color-mix(in srgb, ${colorInfo.color} 35%, transparent)`,
+                  }}
+                >
+                  {service.title}
+                </span>
+              );
+            })}
           </div>
           <h1 className="text-5xl font-bold mb-4">{project.title}</h1>
           <p className="text-xl opacity-60 max-w-2xl">{project.description}</p>

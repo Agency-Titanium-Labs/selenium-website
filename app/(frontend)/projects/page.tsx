@@ -1,5 +1,6 @@
 import ProjectCard from "@/components/project-card";
 import { getProjects } from "@/lib/projects";
+import type { Service } from "@/payload-types";
 
 export type Project = {
   title: string;
@@ -12,8 +13,7 @@ export type Project = {
   accentColor?: string;
   lightMode?: boolean;
   year: number;
-  category: string;
-  tags: string[];
+  services: Service[];
   role: string;
   duration?: string;
   client?: string;
