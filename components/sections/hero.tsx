@@ -8,25 +8,33 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useLenis } from "@/components/LenisProvider";
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const backgroundLightTopRef = useRef<HTMLImageElement>(null);
   const { openModal } = useContactModal();
+  const { lenis } = useLenis();
 
-  useGSAP(() => {
-    gsap.to(backgroundLightTopRef.current, {
-      yPercent: 40,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundLightTopRef.current,
-        scroller: "#scroll-wrapper",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, []);
+  useGSAP(
+    () => {
+      if (!lenis) return;
+
+      gsap.to(backgroundLightTopRef.current, {
+        yPercent: 40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: backgroundLightTopRef.current,
+          scroller: "#scroll-wrapper",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { dependencies: [lenis] },
+  );
 
   return (
     <section

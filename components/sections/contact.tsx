@@ -9,10 +9,12 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "@/components/LenisProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
+  const { lenis } = useLenis();
   const [formData, setFormData] = useState<{
     name?: string;
     phone?: string;
@@ -29,19 +31,24 @@ export default function Contact() {
   const backgroundDotsRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    gsap.from(backgroundDotsRef.current, {
-      yPercent: -60,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        scroller: "#scroll-wrapper",
-        start: "top bottom",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
-  }, []);
+  useGSAP(
+    () => {
+      if (!lenis) return;
+
+      gsap.from(backgroundDotsRef.current, {
+        yPercent: -60,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          scroller: "#scroll-wrapper",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: true,
+        },
+      });
+    },
+    { dependencies: [lenis] },
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

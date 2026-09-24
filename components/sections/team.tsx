@@ -7,6 +7,7 @@ import Button from "@/components/ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "@/components/LenisProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -308,6 +309,7 @@ function TeamMemberCard({ member }: { member: (typeof teamMembers)[number] }) {
 }
 
 export default function Team() {
+  const { lenis } = useLenis();
   const backgroundLightRightRef = useRef<HTMLImageElement>(null);
   const backgroundShapeRef = useRef<HTMLImageElement>(null);
   const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
@@ -330,12 +332,17 @@ export default function Team() {
     });
   }
 
-  useGSAP(() => {
-    animateBackground(backgroundLightRightRef, 120);
-    animateBackground(backgroundShapeRef, 70);
-    animateBackground(backgroundLightLeftRef, 100);
-    animateBackground(backgroundShapeOutlineRef, 50);
-  }, []);
+  useGSAP(
+    () => {
+      if (!lenis) return;
+
+      animateBackground(backgroundLightRightRef, 120);
+      animateBackground(backgroundShapeRef, 70);
+      animateBackground(backgroundLightLeftRef, 100);
+      animateBackground(backgroundShapeOutlineRef, 50);
+    },
+    { dependencies: [lenis] },
+  );
 
   return (
     <section

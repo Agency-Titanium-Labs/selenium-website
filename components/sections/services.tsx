@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "@/components/LenisProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -319,6 +320,7 @@ const services = [
 ];
 
 export default function Services() {
+  const { lenis } = useLenis();
   const [hoveredService, setHoveredService] = useState<string>("");
   const backgroundShapeRef = useRef<HTMLImageElement>(null);
   const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
@@ -331,30 +333,35 @@ export default function Services() {
     return Math.ceil(services[categoryIndex].list.length / 3);
   };
 
-  useGSAP(() => {
-    gsap.to(backgroundShapeRef.current, {
-      yPercent: 50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundShapeRef.current,
-        scroller: "#scroll-wrapper",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-    gsap.to(backgroundLightLeftRef.current, {
-      yPercent: 100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundLightLeftRef.current,
-        scroller: "#scroll-wrapper",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, []);
+  useGSAP(
+    () => {
+      if (!lenis) return;
+
+      gsap.to(backgroundShapeRef.current, {
+        yPercent: 50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: backgroundShapeRef.current,
+          scroller: "#scroll-wrapper",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+      gsap.to(backgroundLightLeftRef.current, {
+        yPercent: 100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: backgroundLightLeftRef.current,
+          scroller: "#scroll-wrapper",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { dependencies: [lenis] },
+  );
 
   return (
     <section
