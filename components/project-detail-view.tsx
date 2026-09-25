@@ -57,10 +57,7 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full overflow-x-hidden min-h-screen px-8"
-    >
+    <div ref={containerRef} className="relative w-full overflow-x-hidden px-8">
       <Image
         ref={backgroundLightTopRef}
         src="/background light.svg"
@@ -72,9 +69,9 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
       />
 
       {/* Main Container */}
-      <div className="max-w-6xl mx-auto pt-48 pb-16 flex flex-col">
+      <div className="max-w-6xl mx-auto pb-16 flex flex-col">
         {/* Hero Section */}
-        <section className="flex max-lg:flex-col gap-8 lg:gap-12 xl:gap-16">
+        <section className="min-h-screen lg:h-screen flex flex-col lg:flex-row gap-12 xl:gap-16 pt-48 pb-16">
           {/* Left Column: Content */}
           <div className="flex flex-col justify-between gap-4 flex-1">
             <div className="flex flex-col gap-4">
@@ -117,25 +114,7 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
               <p className="font-outfit text-grey-lighter/90 text-sm leading-relaxed">
                 {project.about}
               </p>
-            </div>
-          </div>
 
-          {/* Colonne droite : Mockup téléphone STICKY */}
-          <div className="flex justify-center items-center lg:sticky lg:top-40 h-[55dvh] lg:h-[calc(100dvh-13rem)]">
-            <PhoneMockup
-              url={project.link}
-              title={project.title}
-              accentColor={project.accentColor}
-            />
-          </div>
-        </section>
-
-        {/* Colonne gauche : Contenu défilant */}
-        <div className="flex flex-col">
-          {/* SCREEN 1 : Première section plein écran */}
-          <div className="min-h-[calc(100dvh-13rem)] pb-8 flex flex-col justify-between">
-            {/* En-tête : Badges, Titre, Description, À propos, CTA */}
-            <div className="flex flex-col justify-center flex-1">
               {/* Boutons d'action */}
               <div className="flex flex-wrap items-center gap-4 mt-6 sm:mt-8">
                 <Button
@@ -150,7 +129,22 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
                 </Button>
               </div>
             </div>
+          </div>
 
+          {/* Colonne droite : Mockup téléphone STICKY */}
+          <div className="flex justify-center items-center lg:sticky lg:top-48 h-[60dvh] lg:h-full">
+            <PhoneMockup
+              url={project.link}
+              title={project.title}
+              accentColor={project.accentColor}
+            />
+          </div>
+        </section>
+
+        {/* Colonne gauche : Contenu défilant */}
+        <div className="flex flex-col">
+          {/* SCREEN 1 : Première section plein écran */}
+          <div className="min-h-[calc(100dvh-13rem)] pb-8 flex flex-col justify-between">
             {/* Ligne de métadonnées en bas du Screen 1 */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 mt-6 border-t border-white/5">
               <div>
