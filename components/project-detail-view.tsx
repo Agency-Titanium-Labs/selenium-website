@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/button";
 import PhoneMockup from "@/components/phone-mockup";
@@ -8,14 +8,44 @@ import ProjectImageSwiper from "@/components/project-image-swiper";
 import { useContactModal } from "@/contexts/contact-modal-context";
 import { getCategoryColorInfo } from "@/components/icons/service-icon";
 import type { Project } from "@/app/(frontend)/projects/page";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { useLenis } from "@/components/LenisProvider";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ProjectDetailViewProps {
   project: Project;
 }
 
 export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const backgroundLightTopRef = useRef<HTMLImageElement>(null);
   const { openModal } = useContactModal();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const { lenis } = useLenis();
+
+  useGSAP(
+    () => {
+      if (!lenis || !backgroundLightTopRef.current || !containerRef.current)
+        return;
+
+      gsap.to(backgroundLightTopRef.current, {
+        yPercent: 80,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          scroller: "#scroll-wrapper",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { dependencies: [lenis] },
+  );
 
   // Normalize images for the 2x2 + 1 tall grid layout
   const rawImages = project.images || [];
@@ -27,15 +57,18 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
   }
 
   return (
-    <div className="relative w-full overflow-x-hidden min-h-screen">
-      {/* Background golden light in top-left */}
+    <div
+      ref={containerRef}
+      className="relative w-full overflow-x-hidden min-h-screen"
+    >
       <Image
+        ref={backgroundLightTopRef}
         src="/background light.svg"
         alt=""
         aria-hidden
         width={800}
         height={800}
-        className="absolute top-0 left-0 w-1/3 max-w-xl h-auto pointer-events-none select-none blur-[10vw] -z-10 opacity-70"
+        className="absolute top-[-25vw] left-[-25vw] w-1/2 h-auto pointer-events-none select-none blur-[10vw] -z-10"
       />
 
       {/* Subtle decorative golden border frame on the right side */}
