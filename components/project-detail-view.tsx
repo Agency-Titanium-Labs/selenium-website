@@ -32,6 +32,7 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
       <Image
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 left-0 w-1/3 max-w-xl h-auto pointer-events-none select-none blur-[10vw] -z-10 opacity-70"

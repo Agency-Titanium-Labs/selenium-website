@@ -84,6 +84,7 @@ export default function Services({ services = [] }: ServicesProps) {
         ref={backgroundShapeRef}
         src="/background shape full.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 right-0 transform translate-y-1/2 w-1/3 md:w-2/7 h-auto opacity-15 pointer-events-none select-none -z-10"
@@ -92,6 +93,7 @@ export default function Services({ services = [] }: ServicesProps) {
         ref={backgroundLightLeftRef}
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute bottom-0 left-0 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
