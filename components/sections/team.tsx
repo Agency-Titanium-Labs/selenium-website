@@ -6,7 +6,8 @@ import Image from "next/image";
 import Button from "@/components/ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "@/components/LenisProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -173,6 +174,7 @@ function TeamMemberCard({ member }: { member: (typeof teamMembers)[number] }) {
       <Image
         src="/background dots.svg"
         alt=""
+        aria-hidden
         width={100}
         height={100}
         className="absolute top-40 left-6 w-16 h-auto pointer-events-none select-none"
@@ -308,6 +310,7 @@ function TeamMemberCard({ member }: { member: (typeof teamMembers)[number] }) {
 }
 
 export default function Team() {
+  const { lenis } = useLenis();
   const backgroundLightRightRef = useRef<HTMLImageElement>(null);
   const backgroundShapeRef = useRef<HTMLImageElement>(null);
   const backgroundLightLeftRef = useRef<HTMLImageElement>(null);
@@ -322,6 +325,7 @@ export default function Team() {
       ease: "none",
       scrollTrigger: {
         trigger: ref.current,
+        scroller: "#scroll-wrapper",
         start: "top bottom",
         end: "bottom top",
         scrub: true,
@@ -329,12 +333,17 @@ export default function Team() {
     });
   }
 
-  useGSAP(() => {
-    animateBackground(backgroundLightRightRef, 120);
-    animateBackground(backgroundShapeRef, 70);
-    animateBackground(backgroundLightLeftRef, 100);
-    animateBackground(backgroundShapeOutlineRef, 50);
-  }, []);
+  useGSAP(
+    () => {
+      if (!lenis) return;
+
+      animateBackground(backgroundLightRightRef, 120);
+      animateBackground(backgroundShapeRef, 70);
+      animateBackground(backgroundLightLeftRef, 100);
+      animateBackground(backgroundShapeOutlineRef, 50);
+    },
+    { dependencies: [lenis] },
+  );
 
   return (
     <section
@@ -345,6 +354,7 @@ export default function Team() {
         ref={backgroundLightRightRef}
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 right-0 transform -translate-y-1/2 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
@@ -353,6 +363,7 @@ export default function Team() {
         ref={backgroundShapeRef}
         src="/background shape full.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 right-0 transform -translate-y-1/3 w-1/3 md:w-1/4 h-auto pointer-events-none select-none -z-10"
@@ -361,6 +372,7 @@ export default function Team() {
         ref={backgroundLightLeftRef}
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute bottom-0 left-0 transform -translate-y-1/2 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
@@ -369,6 +381,7 @@ export default function Team() {
         ref={backgroundShapeOutlineRef}
         src="/background shape outline.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute bottom-0 left-0 w-1/4 md:w-1/5 h-auto pointer-events-none select-none -z-10"

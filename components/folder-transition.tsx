@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface FolderTransitionProps {
   children: React.ReactNode;
@@ -46,6 +47,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
 
     if (!folderRef.current || prefersReducedMotion) {
       isTransitioningRef.current = false;
+      ScrollTrigger.refresh();
       return;
     }
 
@@ -66,6 +68,10 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
         });
 
         isTransitioningRef.current = false;
+
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+        });
       },
     });
 
@@ -280,7 +286,10 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
           id="scroll-wrapper"
           className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-grey-darkest"
         >
-          <div id="scroll-content" className="w-full min-h-full">
+          <div
+            id="scroll-content"
+            className="relative isolate w-full min-h-full"
+          >
             {children}
           </div>
         </div>

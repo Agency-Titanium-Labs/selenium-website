@@ -1,13 +1,17 @@
 import { getPayload } from "payload";
 import configPromise from "@/payload.config";
-import type { Project as PayloadProject, Media } from "@/payload-types";
+import type {
+  Project as PayloadProject,
+  Media,
+  Service,
+} from "@/payload-types";
 import type { Project } from "@/app/(frontend)/projects/page";
 
 function mapPayloadProjectToProject(doc: PayloadProject): Project {
   const images: string[] = (doc.images || [])
     .map((imgItem) => {
       if (typeof imgItem === "object" && imgItem !== null) {
-        const item = (imgItem as unknown) as Record<string, unknown>;
+        const item = imgItem as unknown as Record<string, unknown>;
         if (typeof item.url === "string") return item.url;
         if (typeof item.image === "object" && item.image !== null) {
           const media = item.image as Media;
@@ -20,6 +24,10 @@ function mapPayloadProjectToProject(doc: PayloadProject): Project {
     })
     .filter(Boolean);
 
+  const services: Service[] = (doc.services || []).filter(
+    (s): s is Service => typeof s === "object" && s !== null,
+  );
+
   return {
     title: doc.title,
     slug: doc.slug,
@@ -31,8 +39,7 @@ function mapPayloadProjectToProject(doc: PayloadProject): Project {
     accentColor: doc.accentColor || undefined,
     lightMode: doc.lightMode ?? undefined,
     year: doc.year,
-    category: doc.category,
-    tags: (doc.tags || []).map((t) => t.tag),
+    services,
     role: doc.role,
     duration: doc.duration || undefined,
     client: doc.client || undefined,
@@ -45,7 +52,7 @@ export async function getProjects(): Promise<Project[]> {
   const payload = await getPayload({ config: configPromise });
   const { docs } = await payload.find({
     collection: "projects",
-    depth: 1,
+    depth: 2,
     limit: 100,
   });
 
@@ -61,7 +68,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
         equals: slug,
       },
     },
-    depth: 1,
+    depth: 2,
     limit: 1,
   });
 

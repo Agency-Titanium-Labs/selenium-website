@@ -142,6 +142,7 @@ export default function ContactModal({
       <Image
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className={twMerge(

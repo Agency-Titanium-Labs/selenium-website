@@ -4,7 +4,7 @@ export const Projects: CollectionConfig = {
   slug: "projects",
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "slug", "category", "year"],
+    defaultColumns: ["title", "slug", "year"],
   },
   access: {
     read: () => true,
@@ -76,28 +76,14 @@ export const Projects: CollectionConfig = {
       },
     },
     {
-      name: "category",
-      type: "select",
-      required: true,
-      options: [
-        { label: "Web", value: "web" },
-        { label: "Mobile", value: "mobile" },
-        { label: "Autre", value: "other" },
-      ],
+      name: "services",
+      type: "relationship",
+      relationTo: "services",
+      hasMany: true,
+      label: "Services",
       admin: {
-        position: "sidebar",
+        description: "Services associés à ce projet",
       },
-    },
-    {
-      name: "tags",
-      type: "array",
-      fields: [
-        {
-          name: "tag",
-          type: "text",
-          required: true,
-        },
-      ],
     },
     {
       name: "role",

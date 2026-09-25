@@ -110,6 +110,7 @@ export default function LenisProvider({
       ScrollTrigger.update();
     }
     lenisInstance.on("scroll", updateScrollTrigger);
+    ScrollTrigger.refresh();
 
     // Lenis n'écoute les clics que sur son wrapper (#scroll-wrapper).
     // On transmet les clics de window à la méthode onClick native de Lenis pour que la Nav (externe) soit prise en compte.

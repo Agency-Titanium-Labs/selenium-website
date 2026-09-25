@@ -6,26 +6,35 @@ import Button from "@/components/ui/button";
 import { useContactModal } from "@/contexts/contact-modal-context";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { useLenis } from "@/components/LenisProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const backgroundLightTopRef = useRef<HTMLImageElement>(null);
   const { openModal } = useContactModal();
+  const { lenis } = useLenis();
 
-  useGSAP(() => {
-    gsap.to(backgroundLightTopRef.current, {
-      yPercent: 40,
-      ease: "none",
-      scrollTrigger: {
-        trigger: backgroundLightTopRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, []);
+  useGSAP(
+    () => {
+      if (!lenis) return;
+
+      gsap.to(backgroundLightTopRef.current, {
+        yPercent: 40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: backgroundLightTopRef.current,
+          scroller: "#scroll-wrapper",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { dependencies: [lenis] },
+  );
 
   return (
     <section
@@ -36,6 +45,7 @@ export default function Hero() {
         ref={backgroundLightTopRef}
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 left-8 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
@@ -52,7 +62,9 @@ export default function Hero() {
       </h1>
       <div className="relative grid sm:grid-cols-2 gap-4">
         <Button onClick={() => openModal()}>Nous contacter</Button>
-        <Button variant="outline" href="#services">Nos services</Button>
+        <Button variant="outline" href="#services">
+          Nos services
+        </Button>
       </div>
     </section>
   );
