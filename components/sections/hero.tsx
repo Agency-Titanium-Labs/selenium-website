@@ -45,6 +45,7 @@ export default function Hero() {
         ref={backgroundLightTopRef}
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 left-8 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"

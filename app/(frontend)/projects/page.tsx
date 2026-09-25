@@ -1,5 +1,6 @@
 import ProjectCard from "@/components/project-card";
 import { getProjects } from "@/lib/projects";
+import type { Service } from "@/payload-types";
 
 export type Project = {
   title: string;
@@ -12,8 +13,7 @@ export type Project = {
   accentColor?: string;
   lightMode?: boolean;
   year: number;
-  category: string;
-  tags: string[];
+  services: Service[];
   role: string;
   duration?: string;
   client?: string;
@@ -26,7 +26,7 @@ export default async function Projects() {
 
   return (
     <div className="grid place-items-center px-8 pt-48 pb-16">
-      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <ProjectCard
             key={project.slug || project.title + index}

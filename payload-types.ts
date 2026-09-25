@@ -13,53 +13,53 @@
  * via the `definition` "supportedTimezones".
  */
 export type SupportedTimezones =
-  | 'Pacific/Midway'
-  | 'Pacific/Niue'
-  | 'Pacific/Honolulu'
-  | 'Pacific/Rarotonga'
-  | 'America/Anchorage'
-  | 'Pacific/Gambier'
-  | 'America/Los_Angeles'
-  | 'America/Tijuana'
-  | 'America/Denver'
-  | 'America/Phoenix'
-  | 'America/Chicago'
-  | 'America/Guatemala'
-  | 'America/New_York'
-  | 'America/Bogota'
-  | 'America/Caracas'
-  | 'America/Santiago'
-  | 'America/Buenos_Aires'
-  | 'America/Sao_Paulo'
-  | 'Atlantic/South_Georgia'
-  | 'Atlantic/Azores'
-  | 'Atlantic/Cape_Verde'
-  | 'Europe/London'
-  | 'Europe/Berlin'
-  | 'Africa/Lagos'
-  | 'Europe/Athens'
-  | 'Africa/Cairo'
-  | 'Europe/Moscow'
-  | 'Asia/Riyadh'
-  | 'Asia/Dubai'
-  | 'Asia/Baku'
-  | 'Asia/Karachi'
-  | 'Asia/Tashkent'
-  | 'Asia/Calcutta'
-  | 'Asia/Dhaka'
-  | 'Asia/Almaty'
-  | 'Asia/Jakarta'
-  | 'Asia/Bangkok'
-  | 'Asia/Shanghai'
-  | 'Asia/Singapore'
-  | 'Asia/Tokyo'
-  | 'Asia/Seoul'
-  | 'Australia/Brisbane'
-  | 'Australia/Sydney'
-  | 'Pacific/Guam'
-  | 'Pacific/Noumea'
-  | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
+  | "Pacific/Midway"
+  | "Pacific/Niue"
+  | "Pacific/Honolulu"
+  | "Pacific/Rarotonga"
+  | "America/Anchorage"
+  | "Pacific/Gambier"
+  | "America/Los_Angeles"
+  | "America/Tijuana"
+  | "America/Denver"
+  | "America/Phoenix"
+  | "America/Chicago"
+  | "America/Guatemala"
+  | "America/New_York"
+  | "America/Bogota"
+  | "America/Caracas"
+  | "America/Santiago"
+  | "America/Buenos_Aires"
+  | "America/Sao_Paulo"
+  | "Atlantic/South_Georgia"
+  | "Atlantic/Azores"
+  | "Atlantic/Cape_Verde"
+  | "Europe/London"
+  | "Europe/Berlin"
+  | "Africa/Lagos"
+  | "Europe/Athens"
+  | "Africa/Cairo"
+  | "Europe/Moscow"
+  | "Asia/Riyadh"
+  | "Asia/Dubai"
+  | "Asia/Baku"
+  | "Asia/Karachi"
+  | "Asia/Tashkent"
+  | "Asia/Calcutta"
+  | "Asia/Dhaka"
+  | "Asia/Almaty"
+  | "Asia/Jakarta"
+  | "Asia/Bangkok"
+  | "Asia/Shanghai"
+  | "Asia/Singapore"
+  | "Asia/Tokyo"
+  | "Asia/Seoul"
+  | "Australia/Brisbane"
+  | "Australia/Sydney"
+  | "Pacific/Guam"
+  | "Pacific/Noumea"
+  | "Pacific/Auckland"
+  | "Pacific/Fiji";
 
 export interface Config {
   auth: {
@@ -70,20 +70,28 @@ export interface Config {
     users: User;
     media: Media;
     projects: Project;
-    'payload-kv': PayloadKv;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
+    services: Service;
+    "payload-kv": PayloadKv;
+    "payload-locked-documents": PayloadLockedDocument;
+    "payload-preferences": PayloadPreference;
+    "payload-migrations": PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    "payload-kv": PayloadKvSelect<false> | PayloadKvSelect<true>;
+    "payload-locked-documents":
+      | PayloadLockedDocumentsSelect<false>
+      | PayloadLockedDocumentsSelect<true>;
+    "payload-preferences":
+      | PayloadPreferencesSelect<false>
+      | PayloadPreferencesSelect<true>;
+    "payload-migrations":
+      | PayloadMigrationsSelect<false>
+      | PayloadMigrationsSelect<true>;
   };
   db: {
     defaultIDType: string;
@@ -142,7 +150,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
-  collection: 'users';
+  collection: "users";
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -179,13 +187,7 @@ export interface Project {
   accentColor?: string | null;
   lightMode?: boolean | null;
   year: number;
-  category: 'web' | 'mobile' | 'other';
-  tags?:
-    | {
-        tag: string;
-        id?: string | null;
-      }[]
-    | null;
+  services?: (string | Service)[] | null;
   role: string;
   duration?: string | null;
   client?: string | null;
@@ -201,6 +203,43 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: string;
+  title: string;
+  slug: string;
+  category:
+    | "Web & Applications"
+    | "Consulting & Gestion de projet"
+    | "Design & Branding"
+    | "Automatisation & Data"
+    | "Production visuelle & publicitaire";
+  description: string;
+  icon:
+    | "landing-page"
+    | "b2b-tools"
+    | "crm-erp"
+    | "audit"
+    | "agile"
+    | "coordination"
+    | "design-ux-ui"
+    | "visual-identity"
+    | "automation"
+    | "data-management"
+    | "dashboard"
+    | "photography"
+    | "video"
+    | "motion-design"
+    | "custom";
+  customSvg?: string | null;
+  iconMedia?: (string | null) | Media;
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -229,16 +268,16 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'users';
+        relationTo: "users";
         value: string | User;
       } | null)
     | ({
-        relationTo: 'media';
+        relationTo: "media";
         value: string | Media;
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: 'users';
+    relationTo: "users";
     value: string | User;
   };
   updatedAt: string;
@@ -251,7 +290,7 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: string;
   user: {
-    relationTo: 'users';
+    relationTo: "users";
     value: string | User;
   };
   key?: string | null;
@@ -339,13 +378,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   accentColor?: T;
   lightMode?: T;
   year?: T;
-  category?: T;
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
+  services?: T;
   role?: T;
   duration?: T;
   client?: T;
@@ -361,6 +394,22 @@ export interface ProjectsSelect<T extends boolean = true> {
         challenge?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  category?: T;
+  description?: T;
+  icon?: T;
+  customSvg?: T;
+  iconMedia?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -412,7 +461,7 @@ export interface CollectionsWidget {
   data?: {
     [k: string]: unknown;
   };
-  width: 'full';
+  width: "full";
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -422,7 +471,6 @@ export interface Auth {
   [k: string]: unknown;
 }
 
-
-declare module 'payload' {
+declare module "payload" {
   export interface GeneratedTypes extends Config {}
 }

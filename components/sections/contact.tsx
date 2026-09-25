@@ -81,6 +81,7 @@ export default function Contact() {
         ref={backgroundDotsRef}
         src="/background dots.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute bottom-0 left-0 transform -translate-x-1/3 translate-y-1/3 w-1/4 h-auto pointer-events-none select-none -z-10"

@@ -174,6 +174,7 @@ function TeamMemberCard({ member }: { member: (typeof teamMembers)[number] }) {
       <Image
         src="/background dots.svg"
         alt=""
+        aria-hidden
         width={100}
         height={100}
         className="absolute top-40 left-6 w-16 h-auto pointer-events-none select-none"
@@ -353,6 +354,7 @@ export default function Team() {
         ref={backgroundLightRightRef}
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 right-0 transform -translate-y-1/2 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
@@ -361,6 +363,7 @@ export default function Team() {
         ref={backgroundShapeRef}
         src="/background shape full.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute top-0 right-0 transform -translate-y-1/3 w-1/3 md:w-1/4 h-auto pointer-events-none select-none -z-10"
@@ -369,6 +372,7 @@ export default function Team() {
         ref={backgroundLightLeftRef}
         src="/background light.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute bottom-0 left-0 transform -translate-y-1/2 w-1/4 h-auto pointer-events-none select-none blur-[10vw] -z-10"
@@ -377,6 +381,7 @@ export default function Team() {
         ref={backgroundShapeOutlineRef}
         src="/background shape outline.svg"
         alt=""
+        aria-hidden
         width={800}
         height={800}
         className="absolute bottom-0 left-0 w-1/4 md:w-1/5 h-auto pointer-events-none select-none -z-10"

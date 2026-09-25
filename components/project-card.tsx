@@ -195,6 +195,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                 <Image
                   src={image}
                   alt=""
+                  aria-hidden
                   width={500}
                   height={500}
                   className="relative w-auto h-full rounded"
