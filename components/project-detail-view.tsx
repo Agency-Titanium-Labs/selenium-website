@@ -144,7 +144,7 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
         {/* Colonne gauche : Contenu défilant */}
         <div className="flex flex-col">
           {/* SCREEN 1 : Première section plein écran */}
-          <div className="min-h-[calc(100dvh-13rem)] pb-8 flex flex-col justify-between">
+          <div className="pb-8 flex flex-col justify-between">
             {/* Ligne de métadonnées en bas du Screen 1 */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 mt-6 border-t border-white/5">
               <div>
