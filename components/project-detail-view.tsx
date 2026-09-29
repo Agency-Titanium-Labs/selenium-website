@@ -36,7 +36,7 @@ function ProjectInfoCard({
   return (
     <div
       className={twMerge(
-        "group relative bg-grey-lightest/10 backdrop-blur-md w-full p-6",
+        "group relative bg-grey-lightest/10 backdrop-blur-md w-full p-6 pt-8",
         className,
       )}
       style={
@@ -106,7 +106,81 @@ function ProjectMetaItem({ label, value, className }: ProjectMetaItemProps) {
       <span className="font-orbitron font-bold text-xs sm:text-sm text-grey-medium">
         {label}
       </span>
-      <span className="text-xs sm:text-sm truncate">{value || "—"}</span>
+      <span className="text-xs sm:text-sm">{value || "—"}</span>
+    </div>
+  );
+}
+
+interface ProjectGalleryProps {
+  images?: string[];
+  title: string;
+}
+
+function ProjectGallery({ images = [], title }: ProjectGalleryProps) {
+  const displayImages = images.slice(0, 5);
+  const count = displayImages.length;
+
+  if (count === 0) return null;
+
+  if (count === 1) {
+    return (
+      <Image
+        src={displayImages[0]}
+        alt={`${title} aperçu 1`}
+        width={1920}
+        height={1080}
+        className="relative w-full h-auto bg-grey-darker"
+      />
+    );
+  }
+
+  if (count <= 4) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {displayImages.map((img, idx) => (
+          <div
+            key={idx}
+            className={twMerge(
+              "relative aspect-square bg-grey-darker",
+              count === 3 && idx === 0 && "sm:col-span-2",
+            )}
+          >
+            <Image
+              src={img}
+              alt={`${title} aperçu ${idx + 1}`}
+              fill
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // 5 images : 2x2 à gauche + 1 haute à droite
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {displayImages.slice(0, 4).map((img, idx) => (
+          <div key={idx} className="relative aspect-square bg-grey-darker">
+            <Image
+              src={img}
+              alt={`${title} aperçu ${idx + 1}`}
+              fill
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="relative md:col-span-2 aspect-square bg-grey-darker">
+        <Image
+          src={displayImages[4]}
+          alt={`${title} aperçu 5`}
+          fill
+          className="object-cover"
+        />
+      </div>
     </div>
   );
 }
@@ -189,17 +263,8 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
     { dependencies: [lenis] },
   );
 
-  // Normalize images for the 2x2 + 1 tall grid layout
-  const rawImages = project.images || [];
-  const displayImages: string[] = [];
-  for (let i = 0; i < 5; i++) {
-    if (rawImages.length > 0) {
-      displayImages.push(rawImages[i % rawImages.length]);
-    }
-  }
-
   return (
-    <div ref={containerRef} className="relative w-full px-8">
+    <div ref={containerRef} className="relative w-full px-8 bg-[#0F0F0F]">
       <Image
         ref={backgroundLightTopRef}
         src="/background light.svg"
@@ -207,13 +272,13 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
         aria-hidden
         width={800}
         height={800}
-        className="absolute top-[-25vw] left-[-25vw] w-1/2 h-auto pointer-events-none select-none blur-[10vw] -z-10"
+        className="absolute top-[-25vw] left-[-25vw] w-1/2 h-auto pointer-events-none select-none blur-[10vw]"
       />
 
       {/* Main Container avec 2 colonnes en flex */}
-      <div className="max-w-6xl mx-auto pb-16 flex flex-col lg:flex-row gap-12 xl:gap-16 items-start">
+      <div className="max-w-6xl mx-auto pb-16 flex flex-row gap-12 xl:gap-16 items-start">
         {/* Colonne gauche : Contenu défilant */}
-        <div className="flex flex-col gap-12 flex-1">
+        <div className="flex flex-col gap-32 flex-1">
           {/* En-tête : Badges, Titre, Description, À propos, Boutons */}
           <section className="min-h-screen lg:h-screen pt-48 pb-16 flex flex-col justify-between gap-8">
             <div ref={heroSectionRef} className="flex-1">
@@ -293,72 +358,26 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
             <ProjectMetaItem label="Date de création" value={project.year} />
           </div>
 
-          {/* Suite au défilement (Cartes et Galerie) */}
-          <div className="pb-24 pt-4 sm:pt-8 flex flex-col gap-10">
-            {/* Deux cartes : Fonctionnalités & Défis techniques */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ProjectInfoCard
-                title="Fonctionnalités"
-                items={project.features}
-                emptyText="Aucune fonctionnalité listée"
-              />
-              <ProjectInfoCard
-                title="Défis techniques"
-                items={project.challenges}
-                emptyText="Aucun défi technique listé"
-              />
-            </div>
-
-            {/* Galerie de photos : 4 petites à gauche (2x2) + 1 grande à droite avec bouton */}
-            {displayImages.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Grille 2x2 de miniatures à gauche */}
-                <div className="md:col-span-2 grid grid-cols-2 gap-4">
-                  {displayImages.slice(0, 4).map((img, idx) => (
-                    <div
-                      key={idx}
-                      className="relative aspect-video bg-grey-darker/60 overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group cursor-pointer"
-                    >
-                      <Image
-                        src={img}
-                        alt={`${project.title} miniature ${idx + 1}`}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Grande image à droite avec le bouton "Voir toute les photos" */}
-                <div className="relative md:col-span-1 min-h-64 sm:min-h-72 bg-grey-darker/60 overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group cursor-pointer flex items-end justify-center pb-4 px-3">
-                  {displayImages[4] && (
-                    <Image
-                      src={displayImages[4]}
-                      alt={`${project.title} aperçu principal`}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                  <div className="relative z-10 w-full flex justify-center">
-                    <Button
-                      variant="outline"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                      className="text-xs px-3 py-1.5 w-auto"
-                    >
-                      Voir toute les photos
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
+          {/* Deux cartes : Fonctionnalités & Défis techniques */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <ProjectInfoCard
+              title="Fonctionnalités"
+              items={project.features}
+              emptyText="Aucune fonctionnalité listée"
+            />
+            <ProjectInfoCard
+              title="Défis techniques"
+              items={project.challenges}
+              emptyText="Aucun défi technique listé"
+            />
           </div>
+
+          {/* Galerie d'images adaptative (1 à 5 photos, sans hover ni viewer) */}
+          <ProjectGallery images={project.images} title={project.title} />
         </div>
 
         {/* Colonne droite : Mockup téléphone STICKY */}
-        <div className="flex justify-center items-center lg:sticky lg:top-0 lg:self-start h-[60dvh] lg:h-screen pt-48 pb-16 shrink-0">
+        <div className="max-lg:hidden flex justify-center items-center sticky top-0 self-start h-screen pt-48 pb-16 shrink-0">
           <div
             ref={mockupRef}
             className="h-full flex items-center justify-center"
