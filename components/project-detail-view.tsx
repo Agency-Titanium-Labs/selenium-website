@@ -1,10 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/button";
 import PhoneMockup from "@/components/phone-mockup";
-import ProjectImageSwiper from "@/components/project-image-swiper";
 import { useContactModal } from "@/contexts/contact-modal-context";
 import { getCategoryColorInfo } from "@/components/icons/service-icon";
 import type { Project } from "@/app/(frontend)/projects/page";
@@ -13,6 +12,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { useLenis } from "@/components/LenisProvider";
+import { twMerge } from "tailwind-merge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,11 +20,180 @@ interface ProjectDetailViewProps {
   project: Project;
 }
 
+interface ProjectInfoCardProps {
+  title: string;
+  items?: string[];
+  emptyText?: string;
+  className?: string;
+}
+
+function ProjectInfoCard({
+  title,
+  items,
+  emptyText = "Aucun élément listé",
+  className,
+}: ProjectInfoCardProps) {
+  return (
+    <div
+      className={twMerge(
+        "group relative bg-grey-lightest/10 backdrop-blur-md w-full p-6 pt-8",
+        className,
+      )}
+      style={
+        {
+          "--corner-size": "30px",
+          clipPath: `polygon(
+            var(--corner-size) 0,
+            var(--corner-size) -50%,
+            100% -50%,
+            100% 100%,
+            0 100%,
+            0 var(--corner-size)
+          )`,
+        } as React.CSSProperties
+      }
+    >
+      <div
+        className="absolute inset-0 bg-linear-160 from-primary-lighter/50 via-primary/50 to-primary-dark/50 -z-1"
+        style={
+          {
+            "--corner-size": "30px",
+            "--border-width": "2px",
+            clipPath: `polygon(
+              var(--corner-size) 0,
+              calc(100% - var(--border-width)) 0,
+              calc(100% - var(--border-width)) var(--border-width),
+              calc(var(--corner-size) + var(--border-width) / 2) var(--border-width),
+              var(--border-width) calc(var(--corner-size) + var(--border-width) / 2),
+              var(--border-width) calc(100% - var(--border-width)),
+              calc(100% - var(--border-width)) calc(100% - var(--border-width)),
+              calc(100% - var(--border-width)) 0,
+              100% 0,
+              100% 100%,
+              0 100%,
+              0 var(--corner-size)
+            )`,
+          } as React.CSSProperties
+        }
+      />
+      <p className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-2 py-1 text-sm font-orbitron font-medium bg-primary text-grey-darkest whitespace-nowrap">
+        {title}
+      </p>
+      <ul className="list-disc list-inside text-sm">
+        {items && items.length > 0 ? (
+          items.map((item, idx) => (
+            <li key={idx} className="leading-relaxed">
+              {item}
+            </li>
+          ))
+        ) : (
+          <li className="text-grey-medium list-none">{emptyText}</li>
+        )}
+      </ul>
+    </div>
+  );
+}
+
+interface ProjectMetaItemProps {
+  label: string;
+  value?: string | number | null;
+  className?: string;
+}
+
+function ProjectMetaItem({ label, value, className }: ProjectMetaItemProps) {
+  return (
+    <div className={twMerge("flex flex-col gap-1", className)}>
+      <span className="font-orbitron font-bold text-xs sm:text-sm text-grey-medium">
+        {label}
+      </span>
+      <span className="text-xs sm:text-sm">{value || "—"}</span>
+    </div>
+  );
+}
+
+interface ProjectGalleryProps {
+  images?: string[];
+  title: string;
+}
+
+function ProjectGallery({ images = [], title }: ProjectGalleryProps) {
+  const displayImages = images.slice(0, 5);
+  const count = displayImages.length;
+
+  if (count === 0) return null;
+
+  if (count === 1) {
+    return (
+      <Image
+        src={displayImages[0]}
+        alt={`${title} aperçu 1`}
+        width={1920}
+        height={1080}
+        className="relative w-full h-auto bg-grey-darker"
+      />
+    );
+  }
+
+  if (count <= 4) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {displayImages.map((img, idx) => (
+          <div
+            key={idx}
+            className={twMerge(
+              "relative aspect-square bg-grey-darker",
+              count === 3 && idx === 0 && "sm:col-span-2",
+            )}
+          >
+            <Image
+              src={img}
+              alt={`${title} aperçu ${idx + 1}`}
+              fill
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // 5 images : 2x2 à gauche + 1 haute à droite
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {displayImages.slice(0, 4).map((img, idx) => (
+          <div key={idx} className="relative aspect-square bg-grey-darker">
+            <Image
+              src={img}
+              alt={`${title} aperçu ${idx + 1}`}
+              fill
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="relative md:col-span-2 aspect-square bg-grey-darker">
+        <Image
+          src={displayImages[4]}
+          alt={`${title} aperçu 5`}
+          fill
+          className="object-cover"
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const backgroundLightTopRef = useRef<HTMLImageElement>(null);
+  const heroSectionRef = useRef<HTMLDivElement>(null);
+  const heroHeaderRef = useRef<HTMLDivElement>(null);
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  const heroDescRef = useRef<HTMLParagraphElement>(null);
+  const mockupRef = useRef<HTMLDivElement>(null);
   const { openModal } = useContactModal();
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const { lenis } = useLenis();
 
   useGSAP(
@@ -43,21 +212,59 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
           scrub: true,
         },
       });
+
+      const getHeroScrollTrigger = () => ({
+        trigger: heroSectionRef.current,
+        scroller: "#scroll-wrapper",
+        start: () =>
+          "top " +
+          (heroHeaderRef.current
+            ? window.getComputedStyle(heroHeaderRef.current).top
+            : "12rem"),
+        end: () =>
+          "+=" +
+          Math.max(
+            0,
+            (heroSectionRef.current?.offsetHeight ?? 0) -
+              (heroHeaderRef.current?.offsetHeight ?? 0),
+          ),
+        scrub: true,
+        invalidateOnRefresh: true,
+      });
+
+      if (heroTitleRef.current && heroSectionRef.current) {
+        gsap.to(heroTitleRef.current, {
+          scale: 0.9,
+          transformOrigin: "left top",
+          ease: "power1.out",
+          scrollTrigger: getHeroScrollTrigger(),
+        });
+      }
+
+      if (heroDescRef.current && heroSectionRef.current) {
+        gsap.to(heroDescRef.current, {
+          scale: 0.8,
+          y: -6,
+          transformOrigin: "left top",
+          ease: "power1.out",
+          scrollTrigger: getHeroScrollTrigger(),
+        });
+      }
+
+      if (mockupRef.current && heroSectionRef.current) {
+        gsap.to(mockupRef.current, {
+          scale: 0.8,
+          transformOrigin: "center top",
+          ease: "power1.out",
+          scrollTrigger: getHeroScrollTrigger(),
+        });
+      }
     },
     { dependencies: [lenis] },
   );
 
-  // Normalize images for the 2x2 + 1 tall grid layout
-  const rawImages = project.images || [];
-  const displayImages: string[] = [];
-  for (let i = 0; i < 5; i++) {
-    if (rawImages.length > 0) {
-      displayImages.push(rawImages[i % rawImages.length]);
-    }
-  }
-
   return (
-    <div ref={containerRef} className="relative w-full overflow-x-hidden px-8">
+    <div ref={containerRef} className="relative w-full px-8 bg-[#0F0F0F]">
       <Image
         ref={backgroundLightTopRef}
         src="/background light.svg"
@@ -65,45 +272,57 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
         aria-hidden
         width={800}
         height={800}
-        className="absolute top-[-25vw] left-[-25vw] w-1/2 h-auto pointer-events-none select-none blur-[10vw] -z-10"
+        className="absolute top-[-25vw] left-[-25vw] w-1/2 h-auto pointer-events-none select-none blur-[10vw]"
       />
 
-      {/* Main Container */}
-      <div className="max-w-6xl mx-auto pb-16 flex flex-col">
-        {/* Hero Section */}
-        <section className="min-h-screen lg:h-screen flex flex-col lg:flex-row gap-12 xl:gap-16 pt-48 pb-16">
-          {/* Left Column: Content */}
-          <div className="flex flex-col justify-between gap-4 flex-1">
-            <div className="flex flex-col gap-4">
-              {/* Badges de services */}
-              <div className="flex flex-wrap items-center gap-2.5">
-                {project.services?.map((service) => {
-                  const colorInfo = getCategoryColorInfo(service.category);
-                  return (
-                    <span
-                      key={service.slug || service.title}
-                      className="text-xs px-3.5 py-1 rounded-full font-mono transition-colors"
-                      style={{
-                        color: colorInfo.color,
-                        backgroundColor: `color-mix(in srgb, ${colorInfo.color} 12%, transparent)`,
-                        border: `1px solid color-mix(in srgb, ${colorInfo.color} 40%, transparent)`,
-                      }}
-                    >
-                      {service.title}
-                    </span>
-                  );
-                })}
+      {/* Main Container avec 2 colonnes en flex */}
+      <div className="max-w-6xl mx-auto pb-16 flex flex-row gap-12 xl:gap-16 items-start">
+        {/* Colonne gauche : Contenu défilant */}
+        <div className="flex flex-col gap-32 flex-1">
+          {/* En-tête : Badges, Titre, Description, À propos, Boutons */}
+          <section className="min-h-screen lg:h-screen pt-48 pb-16 flex flex-col justify-between gap-8">
+            <div ref={heroSectionRef} className="flex-1">
+              <div
+                ref={heroHeaderRef}
+                className="sticky top-48 flex flex-col gap-4"
+              >
+                {/* Badges de services */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {project.services?.map((service) => {
+                    const colorInfo = getCategoryColorInfo(service.category);
+                    return (
+                      <span
+                        key={service.slug || service.title}
+                        className="text-xs px-3.5 py-1 rounded-full"
+                        style={{
+                          color: colorInfo.color,
+                          backgroundColor: `color-mix(in srgb, ${colorInfo.color} 12%, transparent)`,
+                          border: `1px solid color-mix(in srgb, ${colorInfo.color} 40%, transparent)`,
+                        }}
+                      >
+                        {service.title}
+                      </span>
+                    );
+                  })}
+                </div>
+
+                {/* Titre et description du projet (dézoomés au scroll) */}
+                <div className="flex flex-col gap-2">
+                  <h1
+                    ref={heroTitleRef}
+                    className="font-orbitron font-bold text-2xl sm:text-3xl md:text-4xl text-grey-lightest"
+                  >
+                    {project.title}
+                  </h1>
+
+                  <p
+                    ref={heroDescRef}
+                    className="text-grey-medium text-lg sm:text-xl"
+                  >
+                    {project.description}
+                  </p>
+                </div>
               </div>
-
-              {/* Titre du projet */}
-              <h1 className="font-orbitron font-bold text-2xl sm:text-3xl md:text-4xl text-grey-lightest tracking-tight leading-tight">
-                {project.title}
-              </h1>
-
-              {/* Sous-titre / Description courte */}
-              <p className="font-outfit text-grey-light text-base sm:text-lg leading-relaxed max-w-xl">
-                {project.description}
-              </p>
             </div>
 
             {/* Section À propos */}
@@ -129,160 +348,45 @@ export default function ProjectDetailView({ project }: ProjectDetailViewProps) {
                 </Button>
               </div>
             </div>
+          </section>
+
+          {/* Ligne de métadonnées */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <ProjectMetaItem label="Client" value={project.client} />
+            <ProjectMetaItem label="Rôle" value={project.role} />
+            <ProjectMetaItem label="Durée" value={project.duration} />
+            <ProjectMetaItem label="Date de création" value={project.year} />
           </div>
 
-          {/* Colonne droite : Mockup téléphone STICKY */}
-          <div className="flex justify-center items-center lg:sticky lg:top-48 h-[60dvh] lg:h-full">
+          {/* Deux cartes : Fonctionnalités & Défis techniques */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <ProjectInfoCard
+              title="Fonctionnalités"
+              items={project.features}
+              emptyText="Aucune fonctionnalité listée"
+            />
+            <ProjectInfoCard
+              title="Défis techniques"
+              items={project.challenges}
+              emptyText="Aucun défi technique listé"
+            />
+          </div>
+
+          {/* Galerie d'images adaptative (1 à 5 photos, sans hover ni viewer) */}
+          <ProjectGallery images={project.images} title={project.title} />
+        </div>
+
+        {/* Colonne droite : Mockup téléphone STICKY */}
+        <div className="max-lg:hidden flex justify-center items-center sticky top-0 self-start h-screen pt-48 pb-16 shrink-0">
+          <div
+            ref={mockupRef}
+            className="h-full flex items-center justify-center"
+          >
             <PhoneMockup
               url={project.link}
               title={project.title}
               accentColor={project.accentColor}
             />
-          </div>
-        </section>
-
-        {/* Colonne gauche : Contenu défilant */}
-        <div className="flex flex-col">
-          {/* SCREEN 1 : Première section plein écran */}
-          <div className="pb-8 flex flex-col justify-between">
-            {/* Ligne de métadonnées en bas du Screen 1 */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 mt-6 border-t border-white/5">
-              <div>
-                <span className="font-orbitron font-bold text-xs sm:text-sm text-grey-lightest block mb-1">
-                  Client
-                </span>
-                <span className="font-outfit text-xs sm:text-sm text-grey-light block truncate">
-                  {project.client || "—"}
-                </span>
-              </div>
-              <div>
-                <span className="font-orbitron font-bold text-xs sm:text-sm text-grey-lightest block mb-1">
-                  Rôle
-                </span>
-                <span className="font-outfit text-xs sm:text-sm text-grey-light block truncate">
-                  {project.role || "—"}
-                </span>
-              </div>
-              <div>
-                <span className="font-orbitron font-bold text-xs sm:text-sm text-grey-lightest block mb-1">
-                  Durée
-                </span>
-                <span className="font-outfit text-xs sm:text-sm text-grey-light block truncate">
-                  {project.duration || "—"}
-                </span>
-              </div>
-              <div>
-                <span className="font-orbitron font-bold text-xs sm:text-sm text-grey-lightest block mb-1">
-                  Date de création
-                </span>
-                <span className="font-outfit text-xs sm:text-sm text-grey-light block truncate">
-                  {project.year || "—"}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* SCREEN 2 : Suite au défilement (Cartes et Galerie) */}
-          <div className="pb-24 pt-4 sm:pt-8 flex flex-col gap-10">
-            {/* Deux cartes : Fonctionnalités & Défis techniques */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Carte Fonctionnalités */}
-              <div className="relative pt-3">
-                <div className="inline-block bg-primary text-grey-darkest font-orbitron font-bold text-xs px-4 py-1.5 [clip-path:polygon(8px_0,100%_0,100%_100%,0_100%,0_8px)] ml-4 z-10 relative">
-                  Fonctionnalités
-                </div>
-                <div className="bg-grey-darker/35 backdrop-blur-xs border border-primary/30 p-6 pt-7 -mt-2.5 [clip-path:polygon(18px_0,100%_0,100%_100%,0_100%,0_18px)]">
-                  <ul className="space-y-2.5 text-sm text-grey-lighter font-outfit">
-                    {project.features && project.features.length > 0 ? (
-                      project.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
-                          <span>{feature}</span>
-                        </li>
-                      ))
-                    ) : (
-                      <li className="text-grey-medium">
-                        Aucune fonctionnalité listée
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Carte Défis techniques */}
-              <div className="relative pt-3">
-                <div className="inline-block bg-primary text-grey-darkest font-orbitron font-bold text-xs px-4 py-1.5 [clip-path:polygon(8px_0,100%_0,100%_100%,0_100%,0_8px)] ml-4 z-10 relative">
-                  Défis techniques
-                </div>
-                <div className="bg-grey-darker/35 backdrop-blur-xs border border-primary/30 p-6 pt-7 -mt-2.5 [clip-path:polygon(18px_0,100%_0,100%_100%,0_100%,0_18px)]">
-                  <ul className="space-y-2.5 text-sm text-grey-lighter font-outfit">
-                    {project.challenges && project.challenges.length > 0 ? (
-                      project.challenges.map((challenge, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
-                          <span>{challenge}</span>
-                        </li>
-                      ))
-                    ) : (
-                      <li className="text-grey-medium">
-                        Aucun défi technique listé
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Galerie de photos : 4 petites à gauche (2x2) + 1 grande à droite avec bouton */}
-            {displayImages.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Grille 2x2 de miniatures à gauche */}
-                <div className="md:col-span-2 grid grid-cols-2 gap-4">
-                  {displayImages.slice(0, 4).map((img, idx) => (
-                    <div
-                      key={idx}
-                      className="relative aspect-video bg-grey-darker/60 overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group cursor-pointer"
-                      onClick={() => setIsGalleryOpen(true)}
-                    >
-                      <Image
-                        src={img}
-                        alt={`${project.title} miniature ${idx + 1}`}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Grande image à droite avec le bouton "Voir toute les photos" */}
-                <div
-                  className="relative md:col-span-1 min-h-64 sm:min-h-72 bg-grey-darker/60 overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group cursor-pointer flex items-end justify-center pb-4 px-3"
-                  onClick={() => setIsGalleryOpen(true)}
-                >
-                  {displayImages[4] && (
-                    <Image
-                      src={displayImages[4]}
-                      alt={`${project.title} aperçu principal`}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                  <div className="relative z-10 w-full flex justify-center">
-                    <Button
-                      variant="outline"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setIsGalleryOpen(true);
-                      }}
-                      className="text-xs px-3 py-1.5 w-auto"
-                    >
-                      Voir toute les photos
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
