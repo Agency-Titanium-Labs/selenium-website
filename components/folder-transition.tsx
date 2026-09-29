@@ -294,7 +294,7 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
           </div>
         </div>
 
-        {/* 3. DEVANT : COUVERTURE EN BLUR (Pochette avant avec découpe onglet et titre) */}
+        {/* 3. DEVANT : COUVERTURE EN BLUR (Pochette avant avec découpe onglet, titre et loading) */}
         <div
           ref={flapRef}
           className="pointer-events-none absolute -inset-12 z-50 [--corner-size-x:80px] [--corner-size-y:60px] [--left-size:200px] p-12 flex flex-col justify-end origin-bottom bg-primary"
@@ -311,12 +311,20 @@ export default function FolderTransition({ children }: FolderTransitionProps) {
             )`,
           }}
         >
-          <h2
-            ref={titleTextRef}
-            className="font-orbitron font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-grey-darkest"
-          >
-            {coverTitle}
-          </h2>
+          <div className="flex flex-col gap-8">
+            {/* Titre de la page */}
+            <h2
+              ref={titleTextRef}
+              className="font-orbitron font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-grey-darkest"
+            >
+              {coverTitle}
+            </h2>
+
+            {/* Barre de progression cyber */}
+            <div className="w-full h-2 bg-grey-darkest/20 rounded-full overflow-hidden relative">
+              <div className="absolute inset-y-0 left-0 bg-grey-darkest rounded-full animate-progress-indeterminate" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
