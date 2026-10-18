@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 
 export const Projects: CollectionConfig = {
@@ -8,6 +9,43 @@ export const Projects: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      ({ doc, previousDoc }) => {
+        try {
+          revalidatePath("/");
+          revalidatePath("/projects");
+          if (doc?.slug) {
+            revalidatePath(`/projects/${doc.slug}`);
+          }
+          if (previousDoc?.slug && previousDoc.slug !== doc?.slug) {
+            revalidatePath(`/projects/${previousDoc.slug}`);
+          }
+        } catch (error) {
+          console.error(
+            "Error revalidating project paths after change:",
+            error,
+          );
+        }
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        try {
+          revalidatePath("/");
+          revalidatePath("/projects");
+          if (doc?.slug) {
+            revalidatePath(`/projects/${doc.slug}`);
+          }
+        } catch (error) {
+          console.error(
+            "Error revalidating project paths after delete:",
+            error,
+          );
+        }
+      },
+    ],
   },
   fields: [
     {
