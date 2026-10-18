@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 
 export const Services: CollectionConfig = {
@@ -8,6 +9,34 @@ export const Services: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        try {
+          revalidatePath("/");
+          revalidatePath("/projects");
+        } catch (error) {
+          console.error(
+            "Error revalidating service paths after change:",
+            error,
+          );
+        }
+      },
+    ],
+    afterDelete: [
+      () => {
+        try {
+          revalidatePath("/");
+          revalidatePath("/projects");
+        } catch (error) {
+          console.error(
+            "Error revalidating service paths after delete:",
+            error,
+          );
+        }
+      },
+    ],
   },
   fields: [
     {
